@@ -28,12 +28,10 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
-
     public constructor() {
         super();
         this.createView();
     }
-
     private textField: egret.TextField;
 
     private createView(): void {
@@ -48,4 +46,6 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
     public onProgress(current: number, total: number): void {
         this.textField.text = `Loading...${current}/${total}`;
     }
+
+    
 }

@@ -8,10 +8,17 @@
 		"libs/modules/promise/promise.js"
 	],
 	"game": [
+		"bin-debug/Spring/MainScene.js",
 		"bin-debug/AssetAdapter.js",
-		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
-		"bin-debug/ThemeAdapter.js"
+		"bin-debug/ThemeAdapter.js",
+		"bin-debug/Spring/GameScene.js",
+		"bin-debug/LoadingUI.js",
+		"bin-debug/Spring/RankScene.js",
+		"bin-debug/Spring/RecordScene.js",
+		"bin-debug/Spring/RuleScene.js",
+		"bin-debug/Spring/SceneManager.js",
+		"bin-debug/Spring/StoreScene.js"
 	]
 }

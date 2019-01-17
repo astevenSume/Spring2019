@@ -1,0 +1,56 @@
+{
+  "16859c444f2": {
+    "path": "Spring\\MainScene.ts",
+    "class": "MainScene",
+    "parentPath": "",
+    "bindingDataTestObj": [],
+    "guideLinesEnabled": true,
+    "backgroundX": 0,
+    "backgroundY": 0,
+    "backgroundWidth": -1,
+    "backgroundHeight": -1,
+    "useBgImage": true,
+    "useBgColor": true,
+    "backgroundAlpha": 100
+  },
+  "16859c78d2d": {
+    "path": "Spring\\PlayingScene.ts",
+    "class": "PlayingScene",
+    "parentPath": ""
+  },
+  "16859c7cb62": {
+    "path": "..\\resource\\skins\\RuleScene.ts",
+    "class": "RuleScene",
+    "parentPath": ""
+  },
+  "16859c847c5": {
+    "path": "..\\resource\\skins\\StoreScene.ts",
+    "class": "StoreScene",
+    "parentPath": ""
+  },
+  "16859c911e3": {
+    "path": "Spring\\RuleScene.ts",
+    "class": "RuleScene",
+    "parentPath": ""
+  },
+  "16859c96120": {
+    "path": "Spring\\StoreScene.ts",
+    "class": "StoreScene",
+    "parentPath": ""
+  },
+  "16859c9bd6d": {
+    "path": "Spring\\RankScene.ts",
+    "class": "RankScene",
+    "parentPath": ""
+  },
+  "16859cb9058": {
+    "path": "Spring\\RecordScene.ts",
+    "class": "RecordScene",
+    "parentPath": ""
+  },
+  "global": {
+    "globalBindingDataTestObj": [],
+    "globalAdsorbEnable": false,
+    "globalRulerEnable": true
+  }
+}
