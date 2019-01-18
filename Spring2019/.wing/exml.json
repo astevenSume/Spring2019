@@ -4,7 +4,7 @@
     "class": "MainScene",
     "parentPath": "",
     "bindingDataTestObj": [],
-    "guideLinesEnabled": true,
+    "guideLinesEnabled": false,
     "backgroundX": 0,
     "backgroundY": 0,
     "backgroundWidth": -1,
@@ -51,6 +51,22 @@
   "global": {
     "globalBindingDataTestObj": [],
     "globalAdsorbEnable": false,
-    "globalRulerEnable": true
+    "globalRulerEnable": true,
+    "globalAutoLayerMarkEnable": false
+  },
+  "1685e8d774e": {
+    "path": "Spring\\PlayScene.ts",
+    "class": "PlayScene",
+    "parentPath": ""
+  },
+  "1685f8c4662": {
+    "bindingDataTestObj": [],
+    "backgroundX": 0,
+    "backgroundY": 0,
+    "backgroundWidth": -1,
+    "backgroundHeight": -1,
+    "useBgImage": true,
+    "useBgColor": true,
+    "backgroundAlpha": 100
   }
 }

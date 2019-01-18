@@ -18,6 +18,37 @@ var StoreScene = (function (_super) {
     };
     StoreScene.prototype.childrenCreated = function () {
         _super.prototype.childrenCreated.call(this);
+        var listArr = [
+            { 'image1': 'resource/act/pig_goods/word_double.png', 'image2': 'resource/act/pig_goods/Coin_double.png', 'label': '￥20', 'label1': 'sbjb' },
+            { 'image1': 'resource/act/pig_goods/word_life.png', 'image2': 'resource/act/pig_goods/buy_Heart_life.png', 'label': '￥40', 'label1': 'fhzx' },
+            { 'image1': 'resource/act/pig_goods/word_ss.png', 'image2': 'resource/act/pig_goods/buy_ss.png', 'label': '￥10', 'label1': 'jhys' },
+            { 'image1': 'resource/act/pig_goods/word_sj.png', 'image2': 'resource/act/pig_goods/dj_sj.png', 'label': '￥20', 'label1': 'zcls' },
+            { 'image1': 'resource/act/pig_goods/word_dp.png', 'image2': 'resource/act/pig_goods/buy_dp.png', 'label': '￥5', 'label1': 'shzd' },
+        ];
+        this.store_list.dataProvider = new eui.ArrayCollection(listArr);
+        this.scr_shop.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+            if (e.target instanceof eui.Button) {
+                console.log(e.target.name);
+                switch (e.target.name) {
+                    case 'sbjb':
+                        break;
+                    case 'fhzx':
+                        break;
+                    case 'jhys':
+                        break;
+                    case 'zcls':
+                        break;
+                    case 'shzd':
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }, this);
+        this.sbtn_return.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            SceneManager.toMainScene();
+            SceneManager.instance.mainScene.toggleBtn(0);
+        }, this);
     };
     return StoreScene;
 }(eui.Component));

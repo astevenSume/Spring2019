@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PlayingSceneSkin" width="375" height="667" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
-	<w:Config id="16859c78d2d" ></w:Config>
+<e:Skin class="PlaySceneSkin" width="375" height="667" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="1685e8d774e" ></w:Config>
 	<e:Image width="100%" height="100%" left="0" top="0" source="bg_play_jpg"/>
 	<e:Image width="100%" height="65" left="0" top="0" source="top_bg_png"/>
-	<e:Image width="100%" height="140" bottom="0" left="0" source="down_play_png"/>
+	<e:Image width="100%" height="140" left="0" source="down_play_png" bottom="0"/>
 	<e:Image width="91" height="102" y="503" source="pig_png" horizontalCenter="0"/>
-	<e:Group id="group_play" width="100%" height="46" anchorOffsetY="0" left="0" bottom="0">
-		<e:Button id="playYaoshui" label="" width="44" height="44" top="2" left="53">
+	<e:Group id="group_play" width="100%" height="48" anchorOffsetY="0" left="0" bottom="0">
+		<e:Button id="playYaoshui" label="" width="44" height="44" left="53" top="0">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">
 				<e:Image width="100%" height="100%" source="dj_ss88_png" source.down="dj_ss88_png"/>
@@ -14,7 +14,7 @@
 				</e:Skin>
 			</e:skinName>
 		</e:Button>
-		<e:Button id="playShied" label="" width="44" height="44" top="0" left="128">
+		<e:Button id="playShied" label="" width="44" height="44" left="128" top="0">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">
 				<e:Image width="100%" height="100%" source="dj_sh88_png" source.down="dj_sh88_png"/>
@@ -22,7 +22,7 @@
 				</e:Skin>
 			</e:skinName>
 		</e:Button>
-		<e:Button id="playerGoldcoin" label="" height="44" left="203" width="44" top="2">
+		<e:Button id="playerGoldcoin" label="" height="44" left="203" width="44" top="0">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">
 				<e:Image width="100%" height="100%" source="dj_double_png" source.down="dj_double_png"/>
@@ -30,7 +30,7 @@
 				</e:Skin>
 			</e:skinName>
 		</e:Button>
-		<e:Button id="playTimer" label="" width="44" height="44" top="2" left="278">
+		<e:Button id="playTimer" label="" width="44" height="44" left="278" top="0">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">
 				<e:Image width="100%" height="100%" source="dj_time88_png" source.down="dj_time88_png"/>
@@ -45,6 +45,14 @@
 			<e:Image width="100%" height="100%" source="dj_life88_png" source.down="dj_life88_png"/>
 			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
 		</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="pbtn_return" label="" width="33.3" height="33.3" top="8" left="15">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="90%" height="90%" width.down="100%" height.down="100%" source="icon_back60_png" source.down="icon_back60_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
 		</e:skinName>
 	</e:Button>
 </e:Skin>

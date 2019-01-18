@@ -18,7 +18,8 @@
 		"RuleScene": "resource/skins/RuleScene.exml",
 		"StoreScene": "resource/skins/StoreScene.exml",
 		"RankScene": "resource/skins/RankScene.exml",
-		"RecordScene": "resource/skins/RecordScene.exml"
+		"RecordScene": "resource/skins/RecordScene.exml",
+		"PlayScene": "resource/skins/PlayScene.exml"
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
@@ -36,7 +37,12 @@
 		"resource/eui_skins/VScrollBarSkin.exml",
 		"resource/eui_skins/VSliderSkin.exml",
 		"resource/skins/GameScene.exml",
+		"resource/skins/item-skins/btn_return.exml",
+		"resource/skins/item-skins/golden_coin.exml",
+		"resource/skins/item-skins/goods_item.exml",
+		"resource/skins/item-skins/records_item.exml",
 		"resource/skins/MainScene.exml",
+		"resource/skins/PlayScene.exml",
 		"resource/skins/RankScene.exml",
 		"resource/skins/RecordScene.exml",
 		"resource/skins/RuleScene.exml",

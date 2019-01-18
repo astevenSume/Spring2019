@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="records_item" width="329" height="74" xmlns:e="http://ns.egret.com/eui">
+	<e:Image width="800" height="200" x="-198" y="-67" source="bg_list_w_png"/>
+	<e:Image width="32" height="32" x="20" source="NO1_png" verticalCenter="0"/>
+	<e:Label text="冬日的暖阳" x="106" y="23" textColor="0x333333" size="15" fontFamily="Microsoft YaHei" bold="true"/>
+	<e:Label text="02-04  14-22" x="106" y="41" textColor="0x666666" size="11" fontFamily="Microsoft YaHei"/>
+	<e:Button label="" x="223" width="26" height="26" skinName="golden_coin" verticalCenter="0"/>
+	<e:Label text="+1354万" x="249" y="28" textColor="0xe1b40e" size="15" fontFamily="Microsoft YaHei" bold="true"/>
+</e:Skin>

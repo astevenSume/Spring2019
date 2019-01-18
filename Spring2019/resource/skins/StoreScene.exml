@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="StoreSceneSkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+<e:Skin class="StoreSceneSkin" width="375" height="667" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
 	<w:Config id="16859c96120" ></w:Config>
+	<e:Image width="100%" height="100%" left="0" top="0" source="bg_play_jpg"/>
+	<e:Image width="340" height="425" horizontalCenter="0.5" top="95" source="img_shop_png"/>
+	<e:Scroller id="scr_shop" width="316" height="240" x="31" anchorOffsetX="0" top="241" horizontalScrollBar="false" scrollPolicyH="on" scrollPolicyV="off">
+		<e:List id="store_list" itemRendererSkinName="goods_item" y="1" anchorOffsetY="0" height="180" x="0">
+			<e:layout>
+				<e:HorizontalLayout paddingLeft="20"/>
+			</e:layout>
+		</e:List>
+	</e:Scroller>
+	<e:Button id="sbtn_return" label="" x="326" y="138" skinName="btn_return"/>	
 </e:Skin>

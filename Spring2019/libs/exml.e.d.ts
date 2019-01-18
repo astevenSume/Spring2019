@@ -52,7 +52,17 @@ declare module skins{
 }
 declare class PlayingSceneSkin extends eui.Skin{
 }
+declare class btn_return extends eui.Skin{
+}
+declare class golden_coin extends eui.Skin{
+}
+declare class goods_item extends eui.Skin{
+}
+declare class records_item extends eui.Skin{
+}
 declare class MainSceneSkin extends eui.Skin{
+}
+declare class PlaySceneSkin extends eui.Skin{
 }
 declare class RankSceneSkin extends eui.Skin{
 }

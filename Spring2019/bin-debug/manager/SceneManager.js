@@ -14,6 +14,7 @@ var SceneManager = (function (_super) {
         var _this = _super.call(this) || this;
         _this.mainScene = new MainScene();
         _this.gameScene = new GameScene();
+        _this.playScene = new PlayScene();
         _this.ruleScene = new RuleScene();
         _this.storeScene = new StoreScene();
         _this.rankScene = new RankScene();
@@ -34,16 +35,34 @@ var SceneManager = (function (_super) {
         this._stage = s;
     };
     SceneManager.toMainScene = function () {
-        var mainScene = SceneManager.instance.mainScene;
-        console.log(mainScene);
+        var mainScene = this.instance.mainScene;
         if (!mainScene.parent) {
-            SceneManager.instance._stage.addChild(mainScene);
+            this.instance._stage.addChild(mainScene);
         }
         SceneManager.instance.removeOther(mainScene);
     };
+    SceneManager.toPlayScene = function () {
+        var playScene = this.instance.playScene;
+        this.instance.mainScene.addChild(playScene);
+    };
+    SceneManager.toRuleScene = function () {
+        var ruleScene = this.instance.ruleScene;
+        this.instance.removeOther(ruleScene);
+        this.instance.mainScene.addChild(ruleScene);
+    };
+    SceneManager.toStoreScene = function () {
+        var storeScene = this.instance.storeScene;
+        this.instance.removeOther(storeScene);
+        this.instance.mainScene.addChild(storeScene);
+    };
+    SceneManager.toRankScene = function () {
+        var rankScene = this.instance.rankScene;
+        this.instance.removeOther(rankScene);
+        this.instance.mainScene.addChild(rankScene);
+    };
     SceneManager.prototype.removeOther = function (scene) {
         var _this = this;
-        var sceneArr = [this.gameScene, this.ruleScene, this.storeScene, this.rankScene, this.recordScene];
+        var sceneArr = [this.playScene, this.ruleScene, this.storeScene, this.rankScene, this.recordScene];
         sceneArr.forEach(function (item) {
             if (scene === item)
                 return;

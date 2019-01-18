@@ -17,7 +17,56 @@ var MainScene = (function (_super) {
         _super.prototype.partAdded.call(this, partName, instance);
     };
     MainScene.prototype.childrenCreated = function () {
+        var _this = this;
         _super.prototype.childrenCreated.call(this);
+        this.group_mbtn.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+            if (e.target.numElements) {
+                console.log('未点到按钮！');
+                return;
+            }
+            var pbtn = e.target;
+            if (pbtn.selected) {
+                _this.toggleBtn(pbtn);
+            }
+            else {
+                pbtn.selected = true;
+            }
+        }, this);
+        this.mbtn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            SceneManager.toPlayScene();
+        }, this);
+    };
+    MainScene.prototype.toggleBtn = function (pbtn) {
+        this.group_mbtn.$children.forEach(function (toggleBtn) {
+            if (pbtn === toggleBtn) {
+                return;
+            }
+            else {
+                pbtn = pbtn;
+                toggleBtn.selected = false;
+            }
+        });
+        if (pbtn === 0) {
+            console.log('back');
+            return;
+        }
+        var btnindex = this.group_mbtn.getChildIndex(pbtn);
+        switch (btnindex) {
+            case 0:
+                SceneManager.toRuleScene();
+                this.setChildIndex(this.group_mbtn, this.numChildren);
+                break;
+            case 1:
+                SceneManager.toStoreScene();
+                this.setChildIndex(this.group_mbtn, this.numChildren);
+                break;
+            case 2:
+                SceneManager.toRankScene();
+                this.setChildIndex(this.group_mbtn, this.numChildren);
+                break;
+            default:
+                break;
+        }
     };
     return MainScene;
 }(eui.Component));

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="golden_coin" width="26" height="26" xmlns:e="http://ns.egret.com/eui">
+<e:Image width="26" height="26" source="icon_gold52_png" left="0" top="0"/>
+</e:Skin>
