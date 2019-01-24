@@ -1,17 +1,17 @@
 class SceneManager extends egret.Sprite {
-    private _stage: eui.UILayer
+    public _stage: eui.UILayer
     public mainScene: MainScene
-    public gameScene: GameScene
     public playScene: PlayScene
     public ruleScene: RuleScene
     public storeScene: StoreScene
     public rankScene: RankScene
     public recordScene: RecordScene
+    public static _width: number
+    public static _height: number
 
     public constructor() {
         super()
         this.mainScene = new MainScene()
-        this.gameScene = new GameScene()
         this.playScene = new PlayScene()
         this.ruleScene = new RuleScene()
         this.storeScene = new StoreScene()
@@ -29,6 +29,8 @@ class SceneManager extends egret.Sprite {
 
     public setStage(s:eui.UILayer) {
         this._stage = s
+        SceneManager._width = s.width
+        SceneManager._height = s.height
     }
 
     static toMainScene() {
@@ -41,7 +43,8 @@ class SceneManager extends egret.Sprite {
     }
     static toPlayScene() {
         let playScene = this.instance.playScene
-        this.instance.mainScene.addChild(playScene)
+        this.instance._stage.addChild(playScene)
+        // this.instance.mainScene.addChild(playScene)
     }
     static toRuleScene() {
         let ruleScene = this.instance.ruleScene
@@ -58,6 +61,11 @@ class SceneManager extends egret.Sprite {
         let rankScene = this.instance.rankScene
         this.instance.removeOther(rankScene)
         this.instance.mainScene.addChild(rankScene)
+    }
+    static toRecordScene() {
+        let recordScene = this.instance.recordScene
+        this.instance.removeOther(recordScene)
+        this.instance.mainScene.addChild(recordScene)
     }
 
     private removeOther(scene) {

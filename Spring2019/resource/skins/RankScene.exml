@@ -10,8 +10,8 @@
 		<e:Label text="最高赚钱记录" x="225" textColor="0x666666" size="12" top="0"/>
 	</e:Group>
 	<e:Image width="330" height="60" y="58" source="bg_mine_png" horizontalCenter="0.5"/>
-	<e:Button id="rbtn_return" label="" x="333" y="129" skinName="btn_return"/>
-	<e:Group width="330" height="60" y="58" horizontalCenter="0">
+	<e:Button id="rbtn_close" label="" x="333" y="129" skinName="btn_close"/>
+	<e:Group id="rinf_group" width="330" height="60" y="58" horizontalCenter="0">
 		<e:Label text="999+" x="17" y="14" textColor="0x333333" size="14" fontFamily="Microsoft YaHei"/>
 		<e:Label text="排名" x="26" y="34" textColor="0x666666" size="11" fontFamily="Microsoft YaHei"/>
 		<e:Label text="遇安" x="120" y="12" textColor="0x333333" fontFamily="Microsoft YaHei" bold="true" size="14" height="14"/>
@@ -19,6 +19,7 @@
 		<e:Label text="+2019亿" x="237" y="22" textColor="0xe1b40e" fontFamily="Microsoft YaHei" size="15" bold="true"/>
 		<e:Image width="14" height="22" x="314" source="icon_enter_png" verticalCenter="0"/>
 		<e:Button label="" x="207" y="17" width="26" height="26" skinName="golden_coin"/>
+		<e:Image id="rimg_avatar" width="40" height="40" anchorOffsetX="0" anchorOffsetY="0" left="72" top="10" source=""/>
 	</e:Group>
 	<e:Scroller width="329" height="285" x="23" y="236" anchorOffsetX="0" anchorOffsetY="0">
 		<e:List itemRendererSkinName="records_item"/>

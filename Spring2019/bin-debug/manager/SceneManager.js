@@ -13,7 +13,6 @@ var SceneManager = (function (_super) {
     function SceneManager() {
         var _this = _super.call(this) || this;
         _this.mainScene = new MainScene();
-        _this.gameScene = new GameScene();
         _this.playScene = new PlayScene();
         _this.ruleScene = new RuleScene();
         _this.storeScene = new StoreScene();
@@ -33,6 +32,8 @@ var SceneManager = (function (_super) {
     });
     SceneManager.prototype.setStage = function (s) {
         this._stage = s;
+        SceneManager._width = s.width;
+        SceneManager._height = s.height;
     };
     SceneManager.toMainScene = function () {
         var mainScene = this.instance.mainScene;
@@ -43,7 +44,8 @@ var SceneManager = (function (_super) {
     };
     SceneManager.toPlayScene = function () {
         var playScene = this.instance.playScene;
-        this.instance.mainScene.addChild(playScene);
+        this.instance._stage.addChild(playScene);
+        // this.instance.mainScene.addChild(playScene)
     };
     SceneManager.toRuleScene = function () {
         var ruleScene = this.instance.ruleScene;
@@ -59,6 +61,11 @@ var SceneManager = (function (_super) {
         var rankScene = this.instance.rankScene;
         this.instance.removeOther(rankScene);
         this.instance.mainScene.addChild(rankScene);
+    };
+    SceneManager.toRecordScene = function () {
+        var recordScene = this.instance.recordScene;
+        this.instance.removeOther(recordScene);
+        this.instance.mainScene.addChild(recordScene);
     };
     SceneManager.prototype.removeOther = function (scene) {
         var _this = this;

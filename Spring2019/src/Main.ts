@@ -29,12 +29,12 @@
 
 class Main extends eui.UILayer {
 
-
     protected createChildren(): void {
         super.createChildren();
 
         egret.lifecycle.addLifecycleListener((context) => {
             // custom lifecycle plugin
+
         })
 
         egret.lifecycle.onPause = () => {
@@ -74,6 +74,7 @@ class Main extends eui.UILayer {
             this.stage.addChild(loadingView);
             await RES.loadConfig("resource/default.res.json", "resource/");
             await this.loadTheme();
+            await RES.loadGroup("playing")
             await RES.loadGroup("preload", 0, loadingView);
             this.stage.removeChild(loadingView);
         }
@@ -100,13 +101,9 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected createGameScene(): void {
-        // let mainScene = new MainScene()
-        // this.addChild(mainScene)
         SceneManager.instance.setStage(this)
-        SceneManager.toMainScene()
-
-        // console.log(this.stage.stageWidth)
-        // console.log(this.stage.stageHeight)
+        SceneManager.toPlayScene()
+        // SceneManager.toMainScene()
 
 
         // let sky = this.createBitmapByName("bg_jpg");
@@ -115,56 +112,6 @@ class Main extends eui.UILayer {
         // let stageH = this.stage.stageHeight;
         // sky.width = stageW;
         // sky.height = stageH;
-
-        // let topMask = new egret.Shape();
-        // topMask.graphics.beginFill(0x000000, 0.5);
-        // topMask.graphics.drawRect(0, 0, stageW, 172);
-        // topMask.graphics.endFill();
-        // topMask.y = 33;
-        // this.addChild(topMask);
-
-        // let icon: egret.Bitmap = this.createBitmapByName("egret_icon_png");
-        // this.addChild(icon);
-        // icon.x = 26;
-        // icon.y = 33;
-
-        // let line = new egret.Shape();
-        // line.graphics.lineStyle(2, 0xffffff);
-        // line.graphics.moveTo(0, 0);
-        // line.graphics.lineTo(0, 117);
-        // line.graphics.endFill();
-        // line.x = 172;
-        // line.y = 61;
-        // this.addChild(line);
-
-
-        // let colorLabel = new egret.TextField();
-        // colorLabel.textColor = 0xffffff;
-        // colorLabel.width = stageW - 172;
-        // colorLabel.textAlign = "center";
-        // colorLabel.text = "Hello Egret";
-        // colorLabel.size = 24;
-        // colorLabel.x = 172;
-        // colorLabel.y = 80;
-        // this.addChild(colorLabel);
-
-        // let textfield = new egret.TextField();
-        // this.addChild(textfield);
-        // textfield.alpha = 0;
-        // textfield.width = stageW - 172;
-        // textfield.textAlign = egret.HorizontalAlign.CENTER;
-        // textfield.size = 24;
-        // textfield.textColor = 0xffffff;
-        // textfield.x = 172;
-        // textfield.y = 135;
-        // this.textfield = textfield;
-
-        // let button = new eui.Button();
-        // button.label = "Click!";
-        // button.horizontalCenter = 0;
-        // button.verticalCenter = 0;
-        // this.addChild(button);
-        // button.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
     }
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
@@ -173,8 +120,10 @@ class Main extends eui.UILayer {
     private createBitmapByName(name: string): egret.Bitmap {
         let result = new egret.Bitmap();
         let texture: egret.Texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
+        result.texture = texture
+        
+        
+        return result
     }
     /**
      * 描述文件加载成功，开始播放动画
@@ -188,6 +137,8 @@ class Main extends eui.UILayer {
         let count = -1;
         let change = () => {
             count++;
+
+            console.log('start animation : ' + count);
             if (count >= textflowArr.length) {
                 count = 0;
             }

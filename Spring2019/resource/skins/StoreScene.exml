@@ -10,5 +10,5 @@
 			</e:layout>
 		</e:List>
 	</e:Scroller>
-	<e:Button id="sbtn_return" label="" x="326" y="138" skinName="btn_return"/>	
+	<e:Button id="sbtn_return" label="" x="326" y="138" skinName="btn_close"/>	
 </e:Skin>

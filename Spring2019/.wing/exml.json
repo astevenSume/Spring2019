@@ -46,13 +46,17 @@
   "16859cb9058": {
     "path": "Spring\\RecordScene.ts",
     "class": "RecordScene",
-    "parentPath": ""
+    "parentPath": "",
+    "guideLinesEnabled": true
   },
   "global": {
     "globalBindingDataTestObj": [],
     "globalAdsorbEnable": false,
     "globalRulerEnable": true,
-    "globalAutoLayerMarkEnable": false
+    "globalAutoLayerMarkEnable": true,
+    "gridColor": 8421504,
+    "gridEnabled": false,
+    "gridSize": 20
   },
   "1685e8d774e": {
     "path": "Spring\\PlayScene.ts",

@@ -50,7 +50,7 @@ declare module skins{
 	class VSliderSkin extends eui.Skin{
 	}
 }
-declare class PlayingSceneSkin extends eui.Skin{
+declare class btn_close extends eui.Skin{
 }
 declare class btn_return extends eui.Skin{
 }
@@ -59,6 +59,8 @@ declare class golden_coin extends eui.Skin{
 declare class goods_item extends eui.Skin{
 }
 declare class records_item extends eui.Skin{
+}
+declare class scores extends eui.Skin{
 }
 declare class MainSceneSkin extends eui.Skin{
 }
