@@ -17,7 +17,7 @@ class DoubleCoin extends Enemy{
 	}
 
 	public onStatus(ps:PlayScene, emy:Enemy) {
-		
+		ps.showPositiveBar("dj_double_png")
 	}
 
 	public skill(ps:PlayScene, emy:Enemy) {

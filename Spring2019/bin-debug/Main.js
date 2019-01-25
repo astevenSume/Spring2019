@@ -167,7 +167,8 @@ var Main = (function (_super) {
      */
     Main.prototype.createGameScene = function () {
         SceneManager.instance.setStage(this);
-        SceneManager.toPlayScene();
+        SceneManager.toMainScene();
+        // SceneManager.toPlayScene()
         // SceneManager.toMainScene()
         // let sky = this.createBitmapByName("bg_jpg");
         // this.addChild(sky);

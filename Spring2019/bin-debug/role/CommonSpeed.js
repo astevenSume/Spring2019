@@ -18,12 +18,15 @@ var CommonSpeed = (function (_super) {
         return _this;
     }
     CommonSpeed.prototype.creatShape = function () {
-        this.btm_tool = PlayScene.getToolBitmap("dj_ss114_png");
+        this.btm_tool = new egret.Bitmap();
+        this.btm_tool = PlayScene.getToolBitmap("dj_time114_png");
         this.addChild(this.btm_tool);
     };
     CommonSpeed.prototype.onStatus = function (ps, emy) {
+        ps.showPositiveBar("dj_time88_png");
     };
     CommonSpeed.prototype.skill = function (ps, emy) {
+        ps.down_speed = 3;
     };
     return CommonSpeed;
 }(Enemy));

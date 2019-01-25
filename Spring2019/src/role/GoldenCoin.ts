@@ -14,29 +14,28 @@ class GoldenCoin extends Enemy{
 		this.creatShape(val)
 	}
 
-	public creatShape(val: number) {
-		this.btm_tool = new egret.Bitmap()
-		this.btm_tool.texture = RES.getRes("dj_glod_10_png")
-
-		switch(val) {
+	public creatShape(num:number) {		
+		switch(num) {
 			case 10:
-				this.btm_tool.texture = RES.getRes("dj_glod_10_png")
+				this.btm_tool = PlayScene.getToolBitmap("dj_glod_10_png")
+			break
+			case 100:
+				this.btm_tool = PlayScene.getToolBitmap("gold_bai_png")
+			break
+			case 1000:
+				this.btm_tool = PlayScene.getToolBitmap("gold_qian_png")
+			break
+			case 10000:
+				this.btm_tool = PlayScene.getToolBitmap("gold_yy_png")
 			break
 			case 100000:
-				this.btm_tool.texture = RES.getRes("dj_gold_yi_png")
-			break
-			default:				
+				this.btm_tool = PlayScene.getToolBitmap("gold_sy_png")
+			break;
+			default:
 			break
 		}
 		this.addChild(this.btm_tool)
 
-		//  Math.floor(Math.random() * SceneManager._width)
-
-		let rdm_x = PlayScene.getRandomX()
-		this.btm_tool.width = 57
-		this.btm_tool.height = 57
-		this.btm_tool.x = rdm_x
-		this.btm_tool.y = 0
 	}
 
 	public onStatus(ps:PlayScene, emy:Enemy) {
@@ -44,15 +43,22 @@ class GoldenCoin extends Enemy{
 	}
 
 	public skill(ps:PlayScene, emy:Enemy) {
-		//增加金币
-		ps.score += emy.val
+		let score = emy.val		
+		//增益效果 
+		if (ps.positive_status == true) {			
+			if (ps.positive_name == 'dj_double_png')score = emy.val * 2	
+		}
+
+		//骷髅效果
+		if (ps.nagetive_status[Ns.SkullCoin] == true)score = 0
+			
+		ps.score += score
 		// ps.score += 10001 //测试用
 		if (ps.score>9999) {
-			ps.p_score.text = '+' + ps.score/10000 + '亿'
+			ps.p_score.text = ps.score/10000 + '亿'
 		} else {
-			ps.p_score.text = '+' + ps.score + '万'
-		}
-		
+			ps.p_score.text = ps.score + '万'
+		}		
 	}
 
 

@@ -55,6 +55,7 @@ class Main extends eui.UILayer {
         this.runGame().catch(e => {
             console.log(e);
         })
+        
     }
 
     private async runGame() {
@@ -102,7 +103,10 @@ class Main extends eui.UILayer {
      */
     protected createGameScene(): void {
         SceneManager.instance.setStage(this)
-        SceneManager.toPlayScene()
+        SceneManager.toMainScene()
+
+        
+        // SceneManager.toPlayScene()
         // SceneManager.toMainScene()
 
 

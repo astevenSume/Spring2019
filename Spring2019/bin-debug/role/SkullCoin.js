@@ -18,13 +18,15 @@ var SkullCoin = (function (_super) {
         return _this;
     }
     SkullCoin.prototype.creatShape = function () {
-        this.btm_tool = PlayScene.getToolBitmap("dj_dj114_png");
+        this.btm_tool = PlayScene.getToolBitmap("gold_cod_png");
         this.addChild(this.btm_tool);
     };
     SkullCoin.prototype.onStatus = function (ps, emy) {
+        if (ps.onShield)
+            return;
         ps.nagetive_status[Ns.SkullCoin] = true;
         ps.nagetive_index[Ns.SkullCoin] = 0;
-        ps.nagetive_group.addChild(ps.nagetive_shape[Ns.SkullCoin]);
+        ps.nagetive_group.addChild(ps.nagetive_shapes[Ns.SkullCoin]);
         if (!ps.nicon_skullcoin.visible)
             ps.nicon_skullcoin.visible = true;
         if (ps.per_name.visible)

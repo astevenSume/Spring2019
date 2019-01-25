@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "word_list_png,word_earn_png,word_zn_png,bg_list_w_png,btn_buy_png,btn_left_png,btn_list_png,btn_right_png,btn_rule_png,btn_shop_png,default_ph_png,btn_start_png,pro_double_png,pro_dp_png,pro_sj_png,pro_sm_png,pro_ss_png,shop_png,theme_jznf_png,theme_gold_pig_png,title_list_png,title_mine_png,top_bg_png,bg_home_jpg,bg_list_jpg,bg_mine_jpg,bg_shop_jpg,bg_play_jpg,icon_back60_png,bg_mine_png,buy_dp_png,buy_Heart_life_png,buy_ss_png,Coin_double_png,dj_bg_png,dj_sj_png,word_double_png,word_dp_png,word_life_png,word_sj_png,word_ss_png,X1_png,img_shop_png",
+			"keys": "word_list_png,word_earn_png,word_zn_png,bg_list_w_png,btn_buy_png,btn_left_png,btn_list_png,btn_right_png,btn_rule_png,btn_shop_png,default_ph_png,btn_start_png,pro_double_png,pro_dp_png,pro_sj_png,pro_sm_png,pro_ss_png,shop_png,theme_jznf_png,theme_gold_pig_png,title_list_png,title_mine_png,top_bg_png,bg_home_jpg,bg_list_jpg,bg_mine_jpg,bg_shop_jpg,bg_play_jpg,icon_back60_png,bg_mine_png,buy_dp_png,buy_Heart_life_png,buy_ss_png,Coin_double_png,dj_bg_png,dj_sj_png,word_double_png,word_dp_png,word_life_png,word_sj_png,word_ss_png,X1_png,img_shop_png,icon_endclose_png,pop_result_png,btn_again_png,gold_bai_png,gold_cod_png,gold_qian_png,gold_sy_png,gold_yi_png,gold_yy_png",
 			"name": "preload"
 		},
 		{
@@ -503,6 +503,51 @@
 			"name": "img_shop_png",
 			"type": "image",
 			"url": "act/pig_goods/img_shop.png"
+		},
+		{
+			"name": "icon_endclose_png",
+			"type": "image",
+			"url": "act/pig_goods/icon_endclose.png"
+		},
+		{
+			"name": "pop_result_png",
+			"type": "image",
+			"url": "act/pig_goods/pop_result.png"
+		},
+		{
+			"name": "btn_again_png",
+			"type": "image",
+			"url": "act/pig_goods/btn_again.png"
+		},
+		{
+			"name": "gold_bai_png",
+			"type": "image",
+			"url": "act/pig_goods/gold_bai.png"
+		},
+		{
+			"name": "gold_cod_png",
+			"type": "image",
+			"url": "act/pig_goods/gold_cod.png"
+		},
+		{
+			"name": "gold_qian_png",
+			"type": "image",
+			"url": "act/pig_goods/gold_qian.png"
+		},
+		{
+			"name": "gold_sy_png",
+			"type": "image",
+			"url": "act/pig_goods/gold_sy.png"
+		},
+		{
+			"name": "gold_yi_png",
+			"type": "image",
+			"url": "act/pig_goods/gold_yi.png"
+		},
+		{
+			"name": "gold_yy_png",
+			"type": "image",
+			"url": "act/pig_goods/gold_yy.png"
 		}
 	]
 }

@@ -19,15 +19,8 @@ var Cleansing = (function (_super) {
         return _this;
     }
     Cleansing.prototype.creatShape = function (val) {
-        this.btm_tool = new egret.Bitmap();
-        this.btm_tool.texture = RES.getRes("dj_ss114_png");
+        this.btm_tool = PlayScene.getToolBitmap("dj_ss114_png");
         this.addChild(this.btm_tool);
-        //  Math.floor(Math.random() * SceneManager._width)
-        var rdm_x = PlayScene.getRandomX();
-        this.btm_tool.width = 57;
-        this.btm_tool.height = 57;
-        this.btm_tool.x = rdm_x;
-        this.btm_tool.y = 0;
     };
     Cleansing.prototype.onStatus = function (ps, emy) {
         ps.nagetive_status.forEach(function (data, key) {

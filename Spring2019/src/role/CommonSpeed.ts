@@ -12,15 +12,16 @@ class CommonSpeed extends Enemy{
 	}
 
 	public creatShape() {
-		this.btm_tool = PlayScene.getToolBitmap("dj_ss114_png")
+		this.btm_tool = new egret.Bitmap()
+		this.btm_tool = PlayScene.getToolBitmap("dj_time114_png")
 		this.addChild(this.btm_tool)	
 	}
 
 	public onStatus(ps:PlayScene, emy:Enemy) {
-		
+		ps.showPositiveBar("dj_time88_png")
 	}
 
 	public skill(ps:PlayScene, emy:Enemy) {
-
+		ps.down_speed = 3
 	}
 }

@@ -17,10 +17,10 @@ class Shield extends Enemy{
 	}
 
 	public onStatus(ps:PlayScene, emy:Enemy) {
-		
+		ps.showPositiveBar("dj_sh88_png")
 	}
 
 	public skill(ps:PlayScene, emy:Enemy) {
-
+		ps.onShield = true
 	}
 }

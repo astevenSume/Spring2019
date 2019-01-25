@@ -32,8 +32,6 @@ var SceneManager = (function (_super) {
     });
     SceneManager.prototype.setStage = function (s) {
         this._stage = s;
-        SceneManager._width = s.width;
-        SceneManager._height = s.height;
     };
     SceneManager.toMainScene = function () {
         var mainScene = this.instance.mainScene;
@@ -78,6 +76,6 @@ var SceneManager = (function (_super) {
         });
     };
     return SceneManager;
-}(egret.Sprite));
+}(eui.UILayer));
 __reflect(SceneManager.prototype, "SceneManager");
 //# sourceMappingURL=SceneManager.js.map

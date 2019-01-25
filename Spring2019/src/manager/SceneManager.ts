@@ -1,4 +1,4 @@
-class SceneManager extends egret.Sprite {
+class SceneManager extends eui.UILayer {
     public _stage: eui.UILayer
     public mainScene: MainScene
     public playScene: PlayScene
@@ -16,7 +16,8 @@ class SceneManager extends egret.Sprite {
         this.ruleScene = new RuleScene()
         this.storeScene = new StoreScene()
         this.rankScene = new RankScene()
-        this.recordScene = new RecordScene()    
+        this.recordScene = new RecordScene()  
+
     }
 
     static sceneManager: SceneManager
@@ -29,8 +30,6 @@ class SceneManager extends egret.Sprite {
 
     public setStage(s:eui.UILayer) {
         this._stage = s
-        SceneManager._width = s.width
-        SceneManager._height = s.height
     }
 
     static toMainScene() {

@@ -22,8 +22,10 @@ var Shield = (function (_super) {
         this.addChild(this.btm_tool);
     };
     Shield.prototype.onStatus = function (ps, emy) {
+        ps.showPositiveBar("dj_sh88_png");
     };
     Shield.prototype.skill = function (ps, emy) {
+        ps.onShield = true;
     };
     return Shield;
 }(Enemy));

@@ -22,15 +22,18 @@ var Lightning = (function (_super) {
         this.addChild(this.btm_tool);
     };
     Lightning.prototype.onStatus = function (ps, emy) {
+        if (ps.onShield)
+            return;
         ps.nagetive_status[Ns.Lightning] = true;
         ps.nagetive_index[Ns.Lightning] = 0;
-        ps.nagetive_group.addChild(ps.nagetive_shape[Ns.Lightning]);
+        ps.nagetive_group.addChild(ps.nagetive_shapes[Ns.Lightning]);
         if (!ps.nicon_lightning.visible)
             ps.nicon_lightning.visible = true;
         if (ps.per_name.visible)
             ps.per_name.visible = false;
     };
     Lightning.prototype.skill = function (ps, emy) {
+        ps.down_speed = ps.current_speed + 6;
     };
     return Lightning;
 }(Enemy));

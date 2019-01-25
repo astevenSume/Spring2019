@@ -22,9 +22,11 @@ var Lock = (function (_super) {
         this.addChild(this.btm_tool);
     };
     Lock.prototype.onStatus = function (ps, emy) {
+        if (ps.onShield)
+            return;
         ps.nagetive_status[Ns.Lock] = true;
         ps.nagetive_index[Ns.Lock] = 0;
-        ps.nagetive_group.addChild(ps.nagetive_shape[Ns.Lock]);
+        ps.nagetive_group.addChild(ps.nagetive_shapes[Ns.Lock]);
         if (!ps.nicon_lock.visible)
             ps.nicon_lock.visible = true;
         if (ps.per_name.visible)

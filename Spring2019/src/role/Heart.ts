@@ -21,6 +21,6 @@ class Heart extends Enemy{
 	}
 	
 	public skill(ps:PlayScene, emy:Enemy) {
-
+		ps.p_heart_num.text = 'x' + (parseInt(ps.p_heart_num.text.slice(1)) + 1)
 	}
 }

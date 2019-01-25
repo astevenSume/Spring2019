@@ -22,6 +22,7 @@ var DoubleCoin = (function (_super) {
         this.addChild(this.btm_tool);
     };
     DoubleCoin.prototype.onStatus = function (ps, emy) {
+        ps.showPositiveBar("dj_double_png");
     };
     DoubleCoin.prototype.skill = function (ps, emy) {
     };

@@ -17,9 +17,10 @@ class Lock extends Enemy{
 	}
 
 	public onStatus(ps:PlayScene, emy:Enemy) {
+		if (ps.onShield)return
 		ps.nagetive_status[Ns.Lock]  = true
 		ps.nagetive_index[Ns.Lock] = 0
-		ps.nagetive_group.addChild(ps.nagetive_shape[Ns.Lock])
+		ps.nagetive_group.addChild(ps.nagetive_shapes[Ns.Lock])
 		if(!ps.nicon_lock.visible)ps.nicon_lock.visible = true
 		if(ps.per_name.visible)ps.per_name.visible = false
 	}
