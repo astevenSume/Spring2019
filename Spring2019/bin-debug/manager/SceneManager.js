@@ -41,26 +41,31 @@ var SceneManager = (function (_super) {
         SceneManager.instance.removeOther(mainScene);
     };
     SceneManager.toPlayScene = function () {
+        this.instance.playScene = new PlayScene();
         var playScene = this.instance.playScene;
         this.instance._stage.addChild(playScene);
-        // this.instance.mainScene.addChild(playScene)
+        this.instance.mainScene.addChild(playScene);
     };
     SceneManager.toRuleScene = function () {
+        this.instance.ruleScene = new RuleScene;
         var ruleScene = this.instance.ruleScene;
         this.instance.removeOther(ruleScene);
         this.instance.mainScene.addChild(ruleScene);
     };
     SceneManager.toStoreScene = function () {
+        this.instance.storeScene = new StoreScene;
         var storeScene = this.instance.storeScene;
         this.instance.removeOther(storeScene);
         this.instance.mainScene.addChild(storeScene);
     };
     SceneManager.toRankScene = function () {
+        this.instance.rankScene = new RankScene;
         var rankScene = this.instance.rankScene;
         this.instance.removeOther(rankScene);
         this.instance.mainScene.addChild(rankScene);
     };
     SceneManager.toRecordScene = function () {
+        this.instance.recordScene = new RecordScene();
         var recordScene = this.instance.recordScene;
         this.instance.removeOther(recordScene);
         this.instance.mainScene.addChild(recordScene);
@@ -68,11 +73,12 @@ var SceneManager = (function (_super) {
     SceneManager.prototype.removeOther = function (scene) {
         var _this = this;
         var sceneArr = [this.playScene, this.ruleScene, this.storeScene, this.rankScene, this.recordScene];
-        sceneArr.forEach(function (item) {
+        sceneArr.forEach(function (item, k) {
             if (scene === item)
                 return;
-            if (item.parent)
+            if (item.parent) {
                 _this.mainScene.removeChild(item);
+            }
         });
     };
     return SceneManager;

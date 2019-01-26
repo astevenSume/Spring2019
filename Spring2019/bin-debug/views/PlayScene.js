@@ -29,12 +29,20 @@ var PlayScene = (function (_super) {
         _this._oneDegree = Math.PI / 180;
         _this.golden_coin_rate = 50;
         _this.eatedFlag = false;
-        _this.game_init();
+        _this.game_init(true);
         return _this;
     }
-    PlayScene.prototype.game_init = function () {
+    PlayScene.prototype.game_init = function (first) {
+        var _this = this;
         this._findex = 0;
+        if (this.enemy_list.length > 0) {
+            this.enemy_list.forEach(function (emy) {
+                if (emy.parent)
+                    _this.removeChild(emy);
+            });
+        }
         this.enemy_list = [];
+        this.score = 0;
         this._create_tool_speed = 15;
         this._create_tool_base_speed = 15; //初始50
         this.down_speed = this.current_speed = 10; //初始3
@@ -48,7 +56,12 @@ var PlayScene = (function (_super) {
         this.nagetive_shapes = [new egret.Shape(), new egret.Shape(), new egret.Shape()];
         this._nagetive_radius = 15;
         this.onShield = false;
-        this.isPause = false;
+        if (first)
+            this.isPause = false;
+        if (!first) {
+            if (this.relife_group.visible)
+                this.relife_group.visible = false;
+        }
     };
     Object.defineProperty(PlayScene.prototype, "score", {
         get: function () {
@@ -69,7 +82,7 @@ var PlayScene = (function (_super) {
         this.group_tool.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickToolGroup, this);
         this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
         //初始创建
-        this.randomGetTool(87);
+        this.randomGetTool();
     };
     PlayScene.prototype.partAdded = function (partName, instance) {
         _super.prototype.partAdded.call(this, partName, instance);
@@ -89,11 +102,36 @@ var PlayScene = (function (_super) {
         }, this);
         this._progress_bar_width = this.icon_progressbar.width;
     };
+    PlayScene.prototype.enoughPositive = function (tool_name) {
+        var label_tool;
+        if (tool_name == 'yaoshui') {
+            label_tool = eval('this.cleansing_num');
+        }
+        else if (tool_name == 'dj_sh88_png') {
+            label_tool = eval('this.shield_num');
+        }
+        else if (tool_name == 'dj_double_png') {
+            label_tool = eval('this.double_num');
+        }
+        else if (tool_name == 'dj_time88_png') {
+            label_tool = eval('this.common_num');
+        }
+        var num_str = label_tool.text;
+        var c_num = parseInt(num_str.slice(1));
+        if (c_num == 0)
+            return false;
+        console.log('c_num : ' + c_num);
+        label_tool.text = 'x' + (c_num - 1);
+        return true;
+    };
     PlayScene.prototype.clickToolGroup = function (evt) {
         if (evt.target.numElements) {
             console.log('点到空白处...');
             return;
         }
+        var enoughNum = this.enoughPositive(evt.target.name);
+        if (!enoughNum)
+            return;
         if (evt.target.name == 'yaoshui') {
             this.cleanAllNagetive();
             return;
@@ -108,7 +146,8 @@ var PlayScene = (function (_super) {
     };
     //删除
     PlayScene.prototype.removeEnemy = function (emy) {
-        this.removeChild(emy);
+        if (emy.parent)
+            this.removeChild(emy);
         this.enemy_list.splice(this.enemy_list.indexOf(emy), 1);
         emy = null;
     };
@@ -142,8 +181,8 @@ var PlayScene = (function (_super) {
         var skull_coin_rate = lightning_rate + 5; //71
         var lock_rate = skull_coin_rate + 10; //81
         var shield_rate = lock_rate + 4; //85
-        var bomb_rate = shield_rate + 6; //91
-        var cleansing = bomb_rate + 1; //92		
+        var bomb_rate = shield_rate + 12; //97
+        var cleansing = bomb_rate + 1; //98		
         // console.log(commom_speed_rate)
         // console.log(double_coin_rate)
         // console.log(heart_rate)
@@ -237,6 +276,7 @@ var PlayScene = (function (_super) {
         if (this.eatedFlag === true) {
             tool.onStatus(this, emy);
             tool.skill(this, emy);
+            // if (emy.name == 'bomb')return
             this.removeEnemy(emy);
         }
     };

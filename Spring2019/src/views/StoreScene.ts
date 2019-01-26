@@ -51,8 +51,8 @@ class StoreScene extends eui.Component implements  eui.UIComponent {
 
 
 		this.sbtn_return.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=> {
-			SceneManager.toMainScene()
-			SceneManager.instance.mainScene.toggleBtn(0)
+			// SceneManager.instance.mainScene.toggleBtn(0)
+			SceneManager.toMainScene()	
 		}, this)
 
 	}

@@ -15,12 +15,20 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 	public nagetive_group: eui.Group
 	public p_heart_num: eui.Label
 
+	public cleansing_num: eui.Label
+	public shield_num: eui.Label
+	public double_num: eui.Label
+	public common_num: eui.Label
+
 	//结束显示
 	public over_group: eui.Group
 	public res_score: eui.Label
 	public res_unit: eui.Label
 	public btn_again: eui.Button
 	public icon_endclose: eui.Button
+	public relife_group: eui.Group
+	public pbtn_relife : eui.Button
+	public pbtn_over_now : eui.Button
 
 	public nicon_skullcoin: eui.Image
 	public nicon_lightning: eui.Image
@@ -58,12 +66,20 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 
 	public constructor() {
 		super();
-		this.game_init()
+		this.game_init(true)
 
 	}
-	public game_init () {
+	public game_init (first?: boolean) {
 		this._findex = 0
+
+		if (this.enemy_list.length>0) {
+			this.enemy_list.forEach((emy)=>{
+				if (emy.parent)this.removeChild(emy)
+			})
+		}
 		this.enemy_list = []
+		this.score = 0
+
 
 		this._create_tool_speed = 15
 		this._create_tool_base_speed = 15    //初始50
@@ -77,12 +93,15 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 
 		this._nagetive_time = 90								//影响时间
 		this.nagetive_status = [false,false,false]				//是否开启
-		this.nagetive_index = [0,0,0]					
+		this.nagetive_index = [0,0,0]
 		this.nagetive_shapes = [new egret.Shape(), new egret.Shape(), new egret.Shape()]
 
 		this._nagetive_radius = 15
 		this.onShield = false
-		this.isPause = false
+		if(first)this.isPause = false
+		if(!first) {
+			if (this.relife_group.visible)this.relife_group.visible = false
+		}
 	}
 
 	public get score() {
@@ -107,7 +126,7 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this)
 		
 		//初始创建
-		this.randomGetTool(87)
+		this.randomGetTool()
 	}
 
 	protected partAdded(partName:string,instance:any):void
@@ -132,13 +151,41 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		this._progress_bar_width = this.icon_progressbar.width
 	}
 
+	private enoughPositive(tool_name: string):boolean {
+		
+		let label_tool:eui.Label
+		if (tool_name == 'yaoshui') {
+			label_tool = eval('this.cleansing_num')
+		} else if (tool_name == 'dj_sh88_png') {
+			label_tool = eval('this.shield_num')
+		} else if (tool_name == 'dj_double_png') {
+			label_tool = eval('this.double_num')
+		} else if (tool_name == 'dj_time88_png') {
+			label_tool = eval('this.common_num')
+		}
+		
+
+		let num_str = label_tool.text
+		let c_num = parseInt(num_str.slice(1))
+		if (c_num == 0)return false
+		console.log('c_num : ' + c_num)
+		label_tool.text = 'x' + (c_num-1)
+
+
+		return true
+	}
+
 	private clickToolGroup(evt) {
 		if (evt.target.numElements)	{	
 			console.log('点到空白处...')
 			return
 		}
 
+		let enoughNum = this.enoughPositive(evt.target.name)
+		if(!enoughNum)return
+
 		if (evt.target.name == 'yaoshui') {
+
 			this.cleanAllNagetive()
 			return
 		} 
@@ -154,10 +201,10 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 	}
 
 	//删除
-	private removeEnemy(emy:Enemy) {	
-		this.removeChild(emy)
+	private removeEnemy(emy:Enemy) {
+		if(emy.parent)this.removeChild(emy)
 		this.enemy_list.splice(this.enemy_list.indexOf(emy), 1)					
-		emy=null	
+		emy=null
 	}
 
 	/*
@@ -189,8 +236,8 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		let skull_coin_rate = lightning_rate + 5 			//71
 		let lock_rate = skull_coin_rate + 10 				//81
 		let shield_rate = lock_rate + 4 					//85
-		let bomb_rate = shield_rate + 6 					//91
-		let cleansing = bomb_rate + 1 						//92		
+		let bomb_rate = shield_rate + 12 					//97
+		let cleansing = bomb_rate + 1 						//98		
 		// console.log(commom_speed_rate)
 		// console.log(double_coin_rate)
 		// console.log(heart_rate)
@@ -230,6 +277,7 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		}
 		//todo负效果时，只出现金币和其它负效果
 
+
 		let tool = eval(`new ${show_tool}`)
 		this.enemy_list.push(tool)
 		this.addChild(tool)
@@ -261,6 +309,8 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 	}
 	public cleanAllNagetive() {
 		console.log('使用了净化药水。。。')
+
+
 		//effected净化
 		this.down_speed = this.current_speed
 
@@ -278,12 +328,14 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 	//检测吃到道具并施放技能
 	private toolEated<T extends Enemy>(tool: T, emy: Enemy) : void {		
 		this.eatedFlag = this.pig.hitTestPoint(tool.btm_tool.x+28.5, emy.y+57)
-		if (this.eatedFlag === true) {	
+		if (this.eatedFlag === true) {			
 			tool.onStatus(this, emy)
 			tool.skill(this, emy)
-			this.removeEnemy(emy)
+			// if (emy.name == 'bomb')return
+			this.removeEnemy(emy)	
 		}
 	}
+
 
 	private onEnterFrame(evt) {
 		if(this.isPause)return

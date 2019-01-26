@@ -19,6 +19,7 @@ class RecordScene extends eui.Component implements  eui.UIComponent {
 		super.childrenCreated();
 
 		this.sbtn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=> {
+			SceneManager.instance.mainScene.toggleBtn(0)
 			SceneManager.toMainScene()
 		}, this)
 

@@ -52,10 +52,9 @@ class RankScene extends eui.Component implements  eui.UIComponent {
 		}, event)
 		imageLoader.load(avatar)
 
-
 		this.rinf_group.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
-			SceneManager.toRecordScene()
 			SceneManager.instance.mainScene.toggleBtn(0)
+			SceneManager.toRecordScene()
 		}, this)
 
 

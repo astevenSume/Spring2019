@@ -19,6 +19,7 @@ class Cleansing extends Enemy{
 	}
 
 	public onStatus(ps:PlayScene, emy:Enemy) {
+
 		ps.nagetive_status.forEach((data,key)=>{			
 			ps.nagetive_status[key] = false
 		})

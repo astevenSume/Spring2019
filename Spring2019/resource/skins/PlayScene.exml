@@ -38,6 +38,10 @@
 				</e:Skin>
 			</e:skinName>
 		</e:Button>
+		<e:Label id="cleansing_num" text="x3" x="96" textColor="0xff0000" size="14" fontFamily="Microsoft YaHei" bold="true" top="26" strokeColor="0xffffff" stroke="2"/>
+		<e:Label id="shield_num" text="x1" x="172" anchorOffsetX="0" width="19" anchorOffsetY="0" height="15" size="14" fontFamily="Microsoft YaHei" bold="true" top="26" borderColor="0xff0000" stroke="2" strokeColor="0xffffff" textColor="0xff0000"/>
+		<e:Label id="double_num" text="x1" x="246" textColor="0xff0000" size="14" fontFamily="Microsoft YaHei" stroke="2" strokeColor="0xffffff" bold="true" top="26"/>
+		<e:Label id="common_num" text="x1" x="322" y="25" textColor="0xff0000" size="14" fontFamily="Microsoft YaHei" bold="true" height="14" strokeColor="0xffffff" stroke="2"/>
 	</e:Group>
 	<e:Button id="pbtn_return" label="" width="33.3" height="33.3" top="8" left="15">
 		<e:skinName>
@@ -88,6 +92,28 @@
 				</e:Skin>
 			</e:skinName>
 		</e:Button>
+	</e:Group>
+	<e:Group id="relife_group" width="100%" height="100%" left="0" top="0" visible="false">
+		<e:Image width="240" height="285" source="fhzi_bg_png" horizontalCenter="0" verticalCenter="0" x="68" y="191" scaleX="1" scaleY="1"/>
+		<e:Label text="&quot;发财猪&quot;急需一颗复活" y="359" textColor="0x666666" size="14" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+		<e:Label text="之心复活再战哦" y="381" textColor="0x006666" size="14" fontFamily="Microsoft YaHei" horizontalCenter="0.5"/>
+		<e:Button id="pbtn_relife" label="" x="202" width="85" height="39" top="415">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="btn_fuhuo_png" source.down="btn_fuhuo_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="pbtn_over_now" label="" x="94" width="85" height="39" top="415">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="btn_nofuhuo_png" source.down="btn_nofuhuo_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Image width="101.5" height="96.5" y="246" source="use_fhzx_png" horizontalCenter="0.5"/>
 	</e:Group>
 	
 </e:Skin>

@@ -46,8 +46,8 @@ var StoreScene = (function (_super) {
             }
         }, this);
         this.sbtn_return.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            // SceneManager.instance.mainScene.toggleBtn(0)
             SceneManager.toMainScene();
-            SceneManager.instance.mainScene.toggleBtn(0);
         }, this);
     };
     return StoreScene;

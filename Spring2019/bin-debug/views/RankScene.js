@@ -44,8 +44,8 @@ var RankScene = (function (_super) {
         }, event);
         imageLoader.load(avatar);
         this.rinf_group.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            SceneManager.toRecordScene();
             SceneManager.instance.mainScene.toggleBtn(0);
+            SceneManager.toRecordScene();
         }, this);
     };
     RankScene.prototype.postComplete = function (data) {

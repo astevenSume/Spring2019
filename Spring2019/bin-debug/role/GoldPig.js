@@ -31,8 +31,8 @@ var GoldPig = (function (_super) {
         if (p_role.x + offset_x < -15) {
             p_role.x = -15;
         }
-        else if (p_role.x + offset_x >= SceneManager._width - p_role.width + 15) {
-            p_role.x = SceneManager._width - p_role.width + 15;
+        else if (p_role.x + offset_x >= SceneManager.instance._stage.stage.stageWidth - p_role.width + 15) {
+            p_role.x = SceneManager.instance._stage.stage.stageWidth - p_role.width + 15;
         }
         else {
             p_role.x += offset_x;

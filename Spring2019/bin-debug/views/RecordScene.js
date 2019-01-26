@@ -20,6 +20,7 @@ var RecordScene = (function (_super) {
         var _this = this;
         _super.prototype.childrenCreated.call(this);
         this.sbtn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            SceneManager.instance.mainScene.toggleBtn(0);
             SceneManager.toMainScene();
         }, this);
         var avatar = 'http://thirdwx.qlogo.cn/mmopen/vi_32/jXMuUZyWicI88gYicC9E32bagIQT0fPzVzXWFn8biaMWmSQWIh19FSXHRXpwVYxFhuhvYvxazLITGNyjYbSA7SBMA/132';

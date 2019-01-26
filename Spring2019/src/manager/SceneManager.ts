@@ -41,27 +41,32 @@ class SceneManager extends eui.UILayer {
         SceneManager.instance.removeOther(mainScene)
     }
     static toPlayScene() {
+        this.instance.playScene = new PlayScene()
         let playScene = this.instance.playScene
         this.instance._stage.addChild(playScene)
-        // this.instance.mainScene.addChild(playScene)
+        this.instance.mainScene.addChild(playScene)
     }
     static toRuleScene() {
+        this.instance.ruleScene = new RuleScene
         let ruleScene = this.instance.ruleScene
         this.instance.removeOther(ruleScene)
         this.instance.mainScene.addChild(ruleScene)
     }
     static toStoreScene() {
+        this.instance.storeScene = new StoreScene
         let storeScene = this.instance.storeScene
         this.instance.removeOther(storeScene)
         this.instance.mainScene.addChild(storeScene)
     }
 
     static toRankScene() {
+        this.instance.rankScene = new RankScene
         let rankScene = this.instance.rankScene
         this.instance.removeOther(rankScene)
         this.instance.mainScene.addChild(rankScene)
     }
     static toRecordScene() {
+        this.instance.recordScene = new RecordScene()
         let recordScene = this.instance.recordScene
         this.instance.removeOther(recordScene)
         this.instance.mainScene.addChild(recordScene)
@@ -70,9 +75,11 @@ class SceneManager extends eui.UILayer {
     private removeOther(scene) {
         let sceneArr:any[] = [this.playScene, this.ruleScene, this.storeScene, this.rankScene, this.recordScene];
 
-        sceneArr.forEach((item)=>{
-            if (scene===item)return 
-            if (item.parent)this.mainScene.removeChild(item)        
+        sceneArr.forEach((item, k)=>{
+            if (scene===item)return
+            if (item.parent) {
+                this.mainScene.removeChild(item)
+            }
         })
     }
 
