@@ -10,7 +10,7 @@ window.skins={};
                 window.generateEUI = {};
                 generateEUI.paths = {};
                 generateEUI.styles = undefined;
-                generateEUI.skins = {"eui.Button":"resource/eui_skins/ButtonSkin.exml","eui.CheckBox":"resource/eui_skins/CheckBoxSkin.exml","eui.HScrollBar":"resource/eui_skins/HScrollBarSkin.exml","eui.HSlider":"resource/eui_skins/HSliderSkin.exml","eui.Panel":"resource/eui_skins/PanelSkin.exml","eui.TextInput":"resource/eui_skins/TextInputSkin.exml","eui.ProgressBar":"resource/eui_skins/ProgressBarSkin.exml","eui.RadioButton":"resource/eui_skins/RadioButtonSkin.exml","eui.Scroller":"resource/eui_skins/ScrollerSkin.exml","eui.ToggleSwitch":"resource/eui_skins/ToggleSwitchSkin.exml","eui.VScrollBar":"resource/eui_skins/VScrollBarSkin.exml","eui.VSlider":"resource/eui_skins/VSliderSkin.exml","eui.ItemRenderer":"resource/eui_skins/ItemRendererSkin.exml","MainScene":"resource/skins/MainScene.exml","PlayingScene":"resource/skins/PlayingScene.exml","RuleScene":"resource/skins/RuleScene.exml","StoreScene":"resource/skins/StoreScene.exml","RankScene":"resource/skins/RankScene.exml","RecordScene":"resource/skins/RecordScene.exml","PlayScene":"resource/skins/PlayScene.exml"};generateEUI.paths['resource/eui_skins/ButtonSkin.exml'] = window.skins.ButtonSkin = (function (_super) {
+                generateEUI.skins = {"eui.Button":"resource/eui_skins/ButtonSkin.exml","eui.CheckBox":"resource/eui_skins/CheckBoxSkin.exml","eui.HScrollBar":"resource/eui_skins/HScrollBarSkin.exml","eui.HSlider":"resource/eui_skins/HSliderSkin.exml","eui.Panel":"resource/eui_skins/PanelSkin.exml","eui.TextInput":"resource/eui_skins/TextInputSkin.exml","eui.ProgressBar":"resource/eui_skins/ProgressBarSkin.exml","eui.RadioButton":"resource/eui_skins/RadioButtonSkin.exml","eui.Scroller":"resource/eui_skins/ScrollerSkin.exml","eui.ToggleSwitch":"resource/eui_skins/ToggleSwitchSkin.exml","eui.VScrollBar":"resource/eui_skins/VScrollBarSkin.exml","eui.VSlider":"resource/eui_skins/VSliderSkin.exml","eui.ItemRenderer":"resource/eui_skins/ItemRendererSkin.exml","MainScene":"resource/skins/MainScene.exml","PlayingScene":"resource/skins/PlayingScene.exml","RuleScene":"resource/skins/RuleScene.exml","StoreScene":"resource/skins/StoreScene.exml","RankScene":"resource/skins/RankScene.exml","RecordScene":"resource/skins/RecordScene.exml","PlayScene":"resource/skins/PlayScene.exml","loadingMe":"resource/skins/loadingMe.exml","LoadingMe":"resource/skins/LoadingMe.exml"};generateEUI.paths['resource/eui_skins/ButtonSkin.exml'] = window.skins.ButtonSkin = (function (_super) {
 	__extends(ButtonSkin, _super);
 	function ButtonSkin() {
 		_super.call(this);
@@ -989,6 +989,28 @@ window.skins={};
 		return t;
 	};
 	return scores;
+})(eui.Skin);generateEUI.paths['resource/skins/LoadingMe.exml'] = window.LoadingMeSkin = (function (_super) {
+	__extends(LoadingMeSkin, _super);
+	function LoadingMeSkin() {
+		_super.call(this);
+		this.skinParts = [];
+		
+		this.height = 300;
+		this.width = 400;
+		this.elementsContent = [this._Image1_i()];
+	}
+	var _proto = LoadingMeSkin.prototype;
+
+	_proto._Image1_i = function () {
+		var t = new eui.Image();
+		t.height = 100;
+		t.source = "bg_home_jpg";
+		t.width = 100;
+		t.x = 121;
+		t.y = 78;
+		return t;
+	};
+	return LoadingMeSkin;
 })(eui.Skin);generateEUI.paths['resource/skins/MainScene.exml'] = window.MainSceneSkin = (function (_super) {
 	__extends(MainSceneSkin, _super);
 	var MainSceneSkin$Skin2 = 	(function (_super) {
@@ -1508,13 +1530,181 @@ window.skins={};
 		return PlaySceneSkin$Skin10;
 	})(eui.Skin);
 
+	var PlaySceneSkin$Skin11 = 	(function (_super) {
+		__extends(PlaySceneSkin$Skin11, _super);
+		function PlaySceneSkin$Skin11() {
+			_super.call(this);
+			this.skinParts = ["labelDisplay"];
+			
+			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
+			this.states = [
+				new eui.State ("up",
+					[
+					])
+				,
+				new eui.State ("down",
+					[
+						new eui.SetProperty("_Image1","source","btn_again_png")
+					])
+				,
+				new eui.State ("disabled",
+					[
+					])
+			];
+		}
+		var _proto = PlaySceneSkin$Skin11.prototype;
+
+		_proto._Image1_i = function () {
+			var t = new eui.Image();
+			this._Image1 = t;
+			t.percentHeight = 100;
+			t.source = "btn_again_png";
+			t.percentWidth = 100;
+			return t;
+		};
+		_proto.labelDisplay_i = function () {
+			var t = new eui.Label();
+			this.labelDisplay = t;
+			t.horizontalCenter = 0;
+			t.verticalCenter = 0;
+			return t;
+		};
+		return PlaySceneSkin$Skin11;
+	})(eui.Skin);
+
+	var PlaySceneSkin$Skin12 = 	(function (_super) {
+		__extends(PlaySceneSkin$Skin12, _super);
+		function PlaySceneSkin$Skin12() {
+			_super.call(this);
+			this.skinParts = ["labelDisplay"];
+			
+			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
+			this.states = [
+				new eui.State ("up",
+					[
+					])
+				,
+				new eui.State ("down",
+					[
+						new eui.SetProperty("_Image1","source","icon_endclose_png")
+					])
+				,
+				new eui.State ("disabled",
+					[
+					])
+			];
+		}
+		var _proto = PlaySceneSkin$Skin12.prototype;
+
+		_proto._Image1_i = function () {
+			var t = new eui.Image();
+			this._Image1 = t;
+			t.percentHeight = 100;
+			t.source = "icon_endclose_png";
+			t.percentWidth = 100;
+			return t;
+		};
+		_proto.labelDisplay_i = function () {
+			var t = new eui.Label();
+			this.labelDisplay = t;
+			t.horizontalCenter = 0;
+			t.verticalCenter = 0;
+			return t;
+		};
+		return PlaySceneSkin$Skin12;
+	})(eui.Skin);
+
+	var PlaySceneSkin$Skin13 = 	(function (_super) {
+		__extends(PlaySceneSkin$Skin13, _super);
+		function PlaySceneSkin$Skin13() {
+			_super.call(this);
+			this.skinParts = ["labelDisplay"];
+			
+			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
+			this.states = [
+				new eui.State ("up",
+					[
+					])
+				,
+				new eui.State ("down",
+					[
+						new eui.SetProperty("_Image1","source","btn_fuhuo_png")
+					])
+				,
+				new eui.State ("disabled",
+					[
+					])
+			];
+		}
+		var _proto = PlaySceneSkin$Skin13.prototype;
+
+		_proto._Image1_i = function () {
+			var t = new eui.Image();
+			this._Image1 = t;
+			t.percentHeight = 100;
+			t.source = "btn_fuhuo_png";
+			t.percentWidth = 100;
+			return t;
+		};
+		_proto.labelDisplay_i = function () {
+			var t = new eui.Label();
+			this.labelDisplay = t;
+			t.horizontalCenter = 0;
+			t.verticalCenter = 0;
+			return t;
+		};
+		return PlaySceneSkin$Skin13;
+	})(eui.Skin);
+
+	var PlaySceneSkin$Skin14 = 	(function (_super) {
+		__extends(PlaySceneSkin$Skin14, _super);
+		function PlaySceneSkin$Skin14() {
+			_super.call(this);
+			this.skinParts = ["labelDisplay"];
+			
+			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
+			this.states = [
+				new eui.State ("up",
+					[
+					])
+				,
+				new eui.State ("down",
+					[
+						new eui.SetProperty("_Image1","source","btn_nofuhuo_png")
+					])
+				,
+				new eui.State ("disabled",
+					[
+					])
+			];
+		}
+		var _proto = PlaySceneSkin$Skin14.prototype;
+
+		_proto._Image1_i = function () {
+			var t = new eui.Image();
+			this._Image1 = t;
+			t.percentHeight = 100;
+			t.source = "btn_nofuhuo_png";
+			t.percentWidth = 100;
+			return t;
+		};
+		_proto.labelDisplay_i = function () {
+			var t = new eui.Label();
+			this.labelDisplay = t;
+			t.horizontalCenter = 0;
+			t.verticalCenter = 0;
+			return t;
+		};
+		return PlaySceneSkin$Skin14;
+	})(eui.Skin);
+
 	function PlaySceneSkin() {
 		_super.call(this);
-		this.skinParts = ["my_pig","playYaoshui","playShield","playerGoldcoin","playTimer","group_tool","pbtn_return","p_score","p_heart_num","per_name","pig","nicon_skullcoin","nicon_lightning","nicon_lock","nagetive_group","p_role","icon_progressbar","tool_icon","positive_group"];
+		this.skinParts = ["my_pig","playYaoshui","playShield","playerGoldcoin","playTimer","cleansing_num","shield_num","double_num","common_num","group_tool","pbtn_return","p_score","p_heart_num","per_name","pig","nicon_skullcoin","nicon_lightning","nicon_lock","nagetive_group","p_role","icon_progressbar","tool_icon","positive_group","intro_score","res_score","btn_again","res_unit","icon_endclose","over_group","pbtn_relife","pbtn_over_now","relife_group"];
 		
 		this.height = 667;
 		this.width = 375;
-		this.elementsContent = [this._Image1_i(),this._Image2_i(),this._Image3_i(),this.my_pig_i(),this.group_tool_i(),this.pbtn_return_i(),this._Button1_i(),this._Image4_i(),this.p_score_i(),this.p_heart_num_i(),this.p_role_i(),this.positive_group_i()];
+		this.elementsContent = [this._Image1_i(),this._Image2_i(),this._Image3_i(),this.my_pig_i(),this.group_tool_i(),this.pbtn_return_i(),this._Button1_i(),this._Image4_i(),this.p_score_i(),this.p_heart_num_i(),this.p_role_i(),this.positive_group_i(),this.over_group_i(),this.relife_group_i()];
 	}
 	var _proto = PlaySceneSkin.prototype;
 
@@ -1523,7 +1713,7 @@ window.skins={};
 		t.percentHeight = 100;
 		t.left = 0;
 		t.source = "bg_play_jpg";
-		t.top = 0;
+		t.top = -1;
 		t.percentWidth = 100;
 		return t;
 	};
@@ -1564,7 +1754,7 @@ window.skins={};
 		t.height = 48;
 		t.left = 0;
 		t.percentWidth = 100;
-		t.elementsContent = [this.playYaoshui_i(),this.playShield_i(),this.playerGoldcoin_i(),this.playTimer_i()];
+		t.elementsContent = [this.playYaoshui_i(),this.playShield_i(),this.playerGoldcoin_i(),this.playTimer_i(),this.cleansing_num_i(),this.shield_num_i(),this.double_num_i(),this.common_num_i()];
 		return t;
 	};
 	_proto.playYaoshui_i = function () {
@@ -1615,6 +1805,68 @@ window.skins={};
 		t.skinName = PlaySceneSkin$Skin9;
 		return t;
 	};
+	_proto.cleansing_num_i = function () {
+		var t = new eui.Label();
+		this.cleansing_num = t;
+		t.bold = true;
+		t.fontFamily = "Microsoft YaHei";
+		t.size = 14;
+		t.stroke = 2;
+		t.strokeColor = 0xffffff;
+		t.text = "x3";
+		t.textColor = 0xff0000;
+		t.top = 26;
+		t.x = 96;
+		return t;
+	};
+	_proto.shield_num_i = function () {
+		var t = new eui.Label();
+		this.shield_num = t;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.bold = true;
+		t.borderColor = 0xff0000;
+		t.fontFamily = "Microsoft YaHei";
+		t.height = 15;
+		t.size = 14;
+		t.stroke = 2;
+		t.strokeColor = 0xffffff;
+		t.text = "x1";
+		t.textColor = 0xff0000;
+		t.top = 26;
+		t.width = 19;
+		t.x = 172;
+		return t;
+	};
+	_proto.double_num_i = function () {
+		var t = new eui.Label();
+		this.double_num = t;
+		t.bold = true;
+		t.fontFamily = "Microsoft YaHei";
+		t.size = 14;
+		t.stroke = 2;
+		t.strokeColor = 0xffffff;
+		t.text = "x1";
+		t.textColor = 0xff0000;
+		t.top = 26;
+		t.x = 246;
+		return t;
+	};
+	_proto.common_num_i = function () {
+		var t = new eui.Label();
+		this.common_num = t;
+		t.bold = true;
+		t.fontFamily = "Microsoft YaHei";
+		t.height = 14;
+		t.size = 14;
+		t.stroke = 2;
+		t.strokeColor = 0xffffff;
+		t.text = "x1";
+		t.textColor = 0xff0000;
+		t.x = 322;
+		t.y = 25;
+		return t;
+	};
 	_proto.pbtn_return_i = function () {
 		var t = new eui.Button();
 		this.pbtn_return = t;
@@ -1649,7 +1901,7 @@ window.skins={};
 		t.bold = true;
 		t.fontFamily = "Microsoft YaHei";
 		t.size = 14;
-		t.text = "+0万";
+		t.text = "0万";
 		t.textColor = 0xe1b40e;
 		t.x = 178;
 		t.y = 15;
@@ -1714,7 +1966,7 @@ window.skins={};
 		this.nicon_skullcoin = t;
 		t.height = 30;
 		t.left = 0;
-		t.source = "dj_dj114_png";
+		t.source = "gold_cod_png";
 		t.top = 0;
 		t.visible = false;
 		t.width = 30;
@@ -1781,6 +2033,203 @@ window.skins={};
 		t.verticalCenter = 0;
 		t.width = 42;
 		t.x = 18;
+		return t;
+	};
+	_proto.over_group_i = function () {
+		var t = new eui.Group();
+		this.over_group = t;
+		t.percentHeight = 100;
+		t.left = 0;
+		t.top = 0;
+		t.visible = false;
+		t.percentWidth = 100;
+		t.elementsContent = [this._Rect1_i(),this._Image6_i(),this._Label1_i(),this.intro_score_i(),this.res_score_i(),this.btn_again_i(),this.res_unit_i(),this.icon_endclose_i()];
+		return t;
+	};
+	_proto._Rect1_i = function () {
+		var t = new eui.Rect();
+		t.fillAlpha = 0.8;
+		t.percentHeight = 100;
+		t.left = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.top = 0;
+		t.percentWidth = 100;
+		t.x = -22;
+		t.y = -47;
+		return t;
+	};
+	_proto._Image6_i = function () {
+		var t = new eui.Image();
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.height = 358;
+		t.horizontalCenter = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.source = "pop_result_png";
+		t.verticalCenter = 0;
+		t.width = 320;
+		t.x = 6;
+		t.y = 108;
+		return t;
+	};
+	_proto._Label1_i = function () {
+		var t = new eui.Label();
+		t.bold = true;
+		t.fontFamily = "Microsoft YaHei";
+		t.horizontalCenter = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.text = "恭 喜 您";
+		t.verticalCenter = 0;
+		t.x = 112;
+		t.y = 272;
+		return t;
+	};
+	_proto.intro_score_i = function () {
+		var t = new eui.Label();
+		this.intro_score = t;
+		t.fontFamily = "Microsoft YaHei";
+		t.horizontalCenter = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.size = 14;
+		t.text = "本次游戏您最终获得了";
+		t.verticalCenter = 34.5;
+		t.y = 314;
+		return t;
+	};
+	_proto.res_score_i = function () {
+		var t = new eui.Label();
+		this.res_score = t;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.fontFamily = "Microsoft YaHei";
+		t.height = 43;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.size = 42;
+		t.text = "88";
+		t.textAlign = "center";
+		t.textColor = 0xffff00;
+		t.width = 119;
+		t.x = 125;
+		t.y = 381;
+		return t;
+	};
+	_proto.btn_again_i = function () {
+		var t = new eui.Button();
+		this.btn_again = t;
+		t.height = 48;
+		t.horizontalCenter = 0.5;
+		t.label = "";
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.verticalCenter = 136.5;
+		t.width = 168;
+		t.x = 82;
+		t.y = 399;
+		t.skinName = PlaySceneSkin$Skin11;
+		return t;
+	};
+	_proto.res_unit_i = function () {
+		var t = new eui.Label();
+		this.res_unit = t;
+		t.fontFamily = "Microsoft YaHei";
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.size = 14;
+		t.text = "万";
+		t.textColor = 0xffff00;
+		t.x = 238;
+		t.y = 402;
+		return t;
+	};
+	_proto.icon_endclose_i = function () {
+		var t = new eui.Button();
+		this.icon_endclose = t;
+		t.height = 35;
+		t.horizontalCenter = 0;
+		t.label = "";
+		t.width = 35;
+		t.y = 529;
+		t.skinName = PlaySceneSkin$Skin12;
+		return t;
+	};
+	_proto.relife_group_i = function () {
+		var t = new eui.Group();
+		this.relife_group = t;
+		t.percentHeight = 100;
+		t.left = 0;
+		t.top = 0;
+		t.visible = false;
+		t.percentWidth = 100;
+		t.elementsContent = [this._Image7_i(),this._Label2_i(),this._Label3_i(),this.pbtn_relife_i(),this.pbtn_over_now_i(),this._Image8_i()];
+		return t;
+	};
+	_proto._Image7_i = function () {
+		var t = new eui.Image();
+		t.height = 285;
+		t.horizontalCenter = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.source = "fhzi_bg_png";
+		t.verticalCenter = 0;
+		t.width = 240;
+		t.x = 68;
+		t.y = 191;
+		return t;
+	};
+	_proto._Label2_i = function () {
+		var t = new eui.Label();
+		t.fontFamily = "Microsoft YaHei";
+		t.horizontalCenter = 0;
+		t.size = 14;
+		t.text = "\"发财猪\"急需一颗复活";
+		t.textColor = 0x666666;
+		t.y = 359;
+		return t;
+	};
+	_proto._Label3_i = function () {
+		var t = new eui.Label();
+		t.fontFamily = "Microsoft YaHei";
+		t.horizontalCenter = 0.5;
+		t.size = 14;
+		t.text = "之心复活再战哦";
+		t.textColor = 0x006666;
+		t.y = 381;
+		return t;
+	};
+	_proto.pbtn_relife_i = function () {
+		var t = new eui.Button();
+		this.pbtn_relife = t;
+		t.height = 39;
+		t.label = "";
+		t.top = 415;
+		t.width = 85;
+		t.x = 202;
+		t.skinName = PlaySceneSkin$Skin13;
+		return t;
+	};
+	_proto.pbtn_over_now_i = function () {
+		var t = new eui.Button();
+		this.pbtn_over_now = t;
+		t.height = 39;
+		t.label = "";
+		t.top = 415;
+		t.width = 85;
+		t.x = 94;
+		t.skinName = PlaySceneSkin$Skin14;
+		return t;
+	};
+	_proto._Image8_i = function () {
+		var t = new eui.Image();
+		t.height = 96.5;
+		t.horizontalCenter = 0.5;
+		t.source = "use_fhzx_png";
+		t.width = 101.5;
+		t.y = 246;
 		return t;
 	};
 	return PlaySceneSkin;

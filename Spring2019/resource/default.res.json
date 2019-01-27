@@ -1,15 +1,15 @@
 {
 	"groups": [
 		{
-			"keys": "word_list_png,word_earn_png,word_zn_png,bg_list_w_png,btn_buy_png,btn_left_png,btn_list_png,btn_right_png,btn_rule_png,btn_shop_png,default_ph_png,btn_start_png,pro_double_png,pro_dp_png,pro_sj_png,pro_sm_png,pro_ss_png,shop_png,theme_jznf_png,theme_gold_pig_png,title_list_png,title_mine_png,top_bg_png,bg_home_jpg,bg_list_jpg,bg_mine_jpg,bg_shop_jpg,bg_play_jpg,icon_back60_png,bg_mine_png,buy_dp_png,buy_Heart_life_png,buy_ss_png,Coin_double_png,dj_bg_png,dj_sj_png,word_double_png,word_dp_png,word_life_png,word_sj_png,word_ss_png,X1_png,img_shop_png,icon_endclose_png,pop_result_png,btn_again_png,gold_bai_png,gold_cod_png,gold_qian_png,gold_sy_png,gold_yi_png,gold_yy_png,dada_bg_png,btn_nofuhuo_png,btn_fuhuo_png,icon_question_png,recharge_bg_png,use_fhzx_png,fhzi_bg_png",
+			"keys": "word_list_png,word_earn_png,word_zn_png,bg_list_w_png,btn_buy_png,btn_left_png,btn_list_png,btn_right_png,btn_rule_png,btn_shop_png,default_ph_png,btn_start_png,pro_double_png,pro_dp_png,pro_sj_png,pro_sm_png,pro_ss_png,shop_png,theme_jznf_png,theme_gold_pig_png,title_list_png,title_mine_png,top_bg_png,bg_home_jpg,bg_list_jpg,bg_mine_jpg,bg_shop_jpg,bg_play_jpg,icon_back60_png,bg_mine_png,buy_dp_png,buy_Heart_life_png,buy_ss_png,Coin_double_png,dj_bg_png,dj_sj_png,word_double_png,word_dp_png,word_life_png,word_sj_png,word_ss_png,X1_png,img_shop_png,icon_endclose_png,pop_result_png,btn_again_png,gold_bai_png,gold_cod_png,gold_qian_png,gold_sy_png,gold_yi_png,gold_yy_png,dada_bg_png,btn_nofuhuo_png,btn_fuhuo_png,icon_question_png,recharge_bg_png,use_fhzx_png,fhzi_bg_png,three_png,btn_recharge_png",
 			"name": "preload"
 		},
 		{
-			"keys": "",
-			"name": "laoding"
+			"keys": "bg_home_jpg",
+			"name": "loading"
 		},
 		{
-			"keys": "dj_sh88_png,dj_lightening114_png,dj_sh114_png,dj_ss88_png,dj_ss114_png,dj_time88_png,dj_life114_png,dj_time114_png,dj_lock114_png,gold_num_png,icon_gold52_png,dj_zd114_png,down_play_png,icon_list_inside_png,icon_rule_inside_png,jdt_bg_png,dj_dj114_png,dj_double_png,jdt_png,dj_gold_double_png,dj_gold_yi_png,dj_life88_png,dj_glod_10_png,pig_png",
+			"keys": "dj_sh88_png,dj_lightening114_png,dj_sh114_png,dj_ss88_png,dj_ss114_png,dj_time88_png,dj_life114_png,dj_time114_png,dj_lock114_png,gold_num_png,icon_gold52_png,dj_zd114_png,down_play_png,icon_list_inside_png,icon_rule_inside_png,jdt_bg_png,dj_dj114_png,dj_double_png,jdt_png,dj_gold_double_png,dj_gold_yi_png,dj_life88_png,dj_glod_10_png,pig_png,one_png,two_png,go_png",
 			"name": "playing"
 		}
 	],
@@ -435,154 +435,179 @@
 			"name": "icon_back60_png"
 		},
 		{
-			"name": "bg_mine_png",
+			"url": "act/pig_goods/bg_mine.png",
 			"type": "image",
-			"url": "act/pig_goods/bg_mine.png"
+			"name": "bg_mine_png"
 		},
 		{
-			"name": "buy_dp_png",
+			"url": "act/pig_goods/buy_dp.png",
 			"type": "image",
-			"url": "act/pig_goods/buy_dp.png"
+			"name": "buy_dp_png"
 		},
 		{
-			"name": "buy_Heart_life_png",
+			"url": "act/pig_goods/buy_Heart_life.png",
 			"type": "image",
-			"url": "act/pig_goods/buy_Heart_life.png"
+			"name": "buy_Heart_life_png"
 		},
 		{
-			"name": "buy_ss_png",
+			"url": "act/pig_goods/buy_ss.png",
 			"type": "image",
-			"url": "act/pig_goods/buy_ss.png"
+			"name": "buy_ss_png"
 		},
 		{
-			"name": "Coin_double_png",
+			"url": "act/pig_goods/Coin_double.png",
 			"type": "image",
-			"url": "act/pig_goods/Coin_double.png"
+			"name": "Coin_double_png"
 		},
 		{
-			"name": "dj_bg_png",
+			"url": "act/pig_goods/dj_bg.png",
 			"type": "image",
-			"url": "act/pig_goods/dj_bg.png"
+			"name": "dj_bg_png"
 		},
 		{
-			"name": "dj_sj_png",
+			"url": "act/pig_goods/dj_sj.png",
 			"type": "image",
-			"url": "act/pig_goods/dj_sj.png"
+			"name": "dj_sj_png"
 		},
 		{
-			"name": "word_double_png",
+			"url": "act/pig_goods/word_double.png",
 			"type": "image",
-			"url": "act/pig_goods/word_double.png"
+			"name": "word_double_png"
 		},
 		{
-			"name": "word_dp_png",
+			"url": "act/pig_goods/word_dp.png",
 			"type": "image",
-			"url": "act/pig_goods/word_dp.png"
+			"name": "word_dp_png"
 		},
 		{
-			"name": "word_life_png",
+			"url": "act/pig_goods/word_life.png",
 			"type": "image",
-			"url": "act/pig_goods/word_life.png"
+			"name": "word_life_png"
 		},
 		{
-			"name": "word_sj_png",
+			"url": "act/pig_goods/word_sj.png",
 			"type": "image",
-			"url": "act/pig_goods/word_sj.png"
+			"name": "word_sj_png"
 		},
 		{
-			"name": "word_ss_png",
+			"url": "act/pig_goods/word_ss.png",
 			"type": "image",
-			"url": "act/pig_goods/word_ss.png"
+			"name": "word_ss_png"
 		},
 		{
-			"name": "X1_png",
+			"url": "act/pig_goods/X1.png",
 			"type": "image",
-			"url": "act/pig_goods/X1.png"
+			"name": "X1_png"
 		},
 		{
-			"name": "img_shop_png",
+			"url": "act/pig_goods/img_shop.png",
 			"type": "image",
-			"url": "act/pig_goods/img_shop.png"
+			"name": "img_shop_png"
 		},
 		{
-			"name": "icon_endclose_png",
+			"url": "act/pig_goods/icon_endclose.png",
 			"type": "image",
-			"url": "act/pig_goods/icon_endclose.png"
+			"name": "icon_endclose_png"
 		},
 		{
-			"name": "pop_result_png",
+			"url": "act/pig_goods/pop_result.png",
 			"type": "image",
-			"url": "act/pig_goods/pop_result.png"
+			"name": "pop_result_png"
 		},
 		{
-			"name": "btn_again_png",
+			"url": "act/pig_goods/btn_again.png",
 			"type": "image",
-			"url": "act/pig_goods/btn_again.png"
+			"name": "btn_again_png"
 		},
 		{
-			"name": "gold_bai_png",
+			"url": "act/pig_goods/gold_bai.png",
 			"type": "image",
-			"url": "act/pig_goods/gold_bai.png"
+			"name": "gold_bai_png"
 		},
 		{
-			"name": "gold_cod_png",
+			"url": "act/pig_goods/gold_cod.png",
 			"type": "image",
-			"url": "act/pig_goods/gold_cod.png"
+			"name": "gold_cod_png"
 		},
 		{
-			"name": "gold_qian_png",
+			"url": "act/pig_goods/gold_qian.png",
 			"type": "image",
-			"url": "act/pig_goods/gold_qian.png"
+			"name": "gold_qian_png"
 		},
 		{
-			"name": "gold_sy_png",
+			"url": "act/pig_goods/gold_sy.png",
 			"type": "image",
-			"url": "act/pig_goods/gold_sy.png"
+			"name": "gold_sy_png"
 		},
 		{
-			"name": "gold_yi_png",
+			"url": "act/pig_goods/gold_yi.png",
 			"type": "image",
-			"url": "act/pig_goods/gold_yi.png"
+			"name": "gold_yi_png"
 		},
 		{
-			"name": "gold_yy_png",
+			"url": "act/pig_goods/gold_yy.png",
 			"type": "image",
-			"url": "act/pig_goods/gold_yy.png"
+			"name": "gold_yy_png"
 		},
 		{
-			"name": "dada_bg_png",
+			"url": "act/pig_goods/dada_bg.png",
 			"type": "image",
-			"url": "act/pig_goods/dada_bg.png"
+			"name": "dada_bg_png"
 		},
 		{
-			"name": "btn_nofuhuo_png",
+			"url": "act/pig_goods/btn_nofuhuo.png",
 			"type": "image",
-			"url": "act/pig_goods/btn_nofuhuo.png"
+			"name": "btn_nofuhuo_png"
 		},
 		{
-			"name": "btn_fuhuo_png",
+			"url": "act/pig_goods/btn_fuhuo.png",
 			"type": "image",
-			"url": "act/pig_goods/btn_fuhuo.png"
+			"name": "btn_fuhuo_png"
 		},
 		{
-			"name": "icon_question_png",
+			"url": "act/pig_goods/icon_question.png",
 			"type": "image",
-			"url": "act/pig_goods/icon_question.png"
+			"name": "icon_question_png"
 		},
 		{
-			"name": "recharge_bg_png",
+			"url": "act/pig_goods/recharge_bg.png",
 			"type": "image",
-			"url": "act/pig_goods/recharge_bg.png"
+			"name": "recharge_bg_png"
 		},
 		{
-			"name": "use_fhzx_png",
+			"url": "act/pig_goods/use_fhzx.png",
 			"type": "image",
-			"url": "act/pig_goods/use_fhzx.png"
+			"name": "use_fhzx_png"
 		},
 		{
-			"name": "fhzi_bg_png",
+			"url": "act/pig_goods/fhzi_bg.png",
 			"type": "image",
-			"url": "act/pig_goods/fhzi_bg.png"
+			"name": "fhzi_bg_png"
+		},
+		{
+			"url": "act/pig_goods/one.png",
+			"type": "image",
+			"name": "one_png"
+		},
+		{
+			"url": "act/pig_goods/two.png",
+			"type": "image",
+			"name": "two_png"
+		},
+		{
+			"url": "act/pig_goods/go.png",
+			"type": "image",
+			"name": "go_png"
+		},
+		{
+			"url": "act/pig_goods/three.png",
+			"type": "image",
+			"name": "three_png"
+		},
+		{
+			"name": "btn_recharge_png",
+			"type": "image",
+			"url": "act/pig_goods/btn_recharge.png"
 		}
 	]
 }

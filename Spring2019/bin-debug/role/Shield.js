@@ -25,6 +25,7 @@ var Shield = (function (_super) {
         ps.showPositiveBar("dj_sh88_png");
     };
     Shield.prototype.skill = function (ps, emy) {
+        console.log('吃到 护盾');
         ps.onShield = true;
     };
     return Shield;

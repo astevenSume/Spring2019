@@ -19,7 +19,9 @@
 		"StoreScene": "resource/skins/StoreScene.exml",
 		"RankScene": "resource/skins/RankScene.exml",
 		"RecordScene": "resource/skins/RecordScene.exml",
-		"PlayScene": "resource/skins/PlayScene.exml"
+		"PlayScene": "resource/skins/PlayScene.exml",
+		"loadingMe": "resource/skins/loadingMe.exml",
+		"LoadingMe": "resource/skins/LoadingMe.exml"
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
@@ -42,6 +44,7 @@
 		"resource/skins/item-skins/goods_item.exml",
 		"resource/skins/item-skins/records_item.exml",
 		"resource/skins/item-skins/scores.exml",
+		"resource/skins/LoadingMe.exml",
 		"resource/skins/MainScene.exml",
 		"resource/skins/PlayScene.exml",
 		"resource/skins/RankScene.exml",

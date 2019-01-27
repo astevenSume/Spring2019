@@ -115,5 +115,6 @@
 		</e:Button>
 		<e:Image width="101.5" height="96.5" y="246" source="use_fhzx_png" horizontalCenter="0.5"/>
 	</e:Group>
+	<e:Image id="pre_start" width="210" height="210" horizontalCenter="0" verticalCenter="0" source="three_png" visible="false"/>
 	
 </e:Skin>

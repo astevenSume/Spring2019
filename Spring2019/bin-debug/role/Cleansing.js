@@ -23,15 +23,19 @@ var Cleansing = (function (_super) {
         this.addChild(this.btm_tool);
     };
     Cleansing.prototype.onStatus = function (ps, emy) {
-        ps.nagetive_status.forEach(function (data, key) {
-            ps.nagetive_status[key] = false;
-        });
-        ps.nagetive_index.forEach(function (data, key) {
-            ps.nagetive_index[key] = 0;
-        });
+        ps.cleanAllNagetive();
+        // ps.nagetive_status.forEach((data,key)=>{			
+        // 	ps.nagetive_status[key] = false
+        // 	if (ps.nagetive_shapes[key].parent)ps.nagetive_group.removeChild(ps.nagetive_shapes[key])			
+        // 	if (ps.nagetive_icons[key].visible)ps.nagetive_icons[key].visible = false
+        // 	if (!ps.per_name.visible)ps.per_name.visible = true
+        // })
+        // ps.nagetive_index.forEach((data,key)=>{		
+        // 	ps.nagetive_index[key] = 0			
+        // })
     };
     Cleansing.prototype.skill = function (ps, emy) {
-        //
+        console.log('吃到 净化');
     };
     return Cleansing;
 }(Enemy));

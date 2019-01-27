@@ -62,6 +62,8 @@ declare class records_item extends eui.Skin{
 }
 declare class scores extends eui.Skin{
 }
+declare class LoadingMeSkin extends eui.Skin{
+}
 declare class MainSceneSkin extends eui.Skin{
 }
 declare class PlaySceneSkin extends eui.Skin{

@@ -62,6 +62,7 @@ class RankScene extends eui.Component implements  eui.UIComponent {
 
 	}
 	private postComplete(data){
+		
 		console.log(data)
 	}
 

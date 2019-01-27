@@ -43,6 +43,7 @@ class GoldenCoin extends Enemy{
 	}
 
 	public skill(ps:PlayScene, emy:Enemy) {
+		console.log('吃到 金币')
 		let score = emy.val		
 		//增益效果 
 		if (ps.positive_status == true) {			

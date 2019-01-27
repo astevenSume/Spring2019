@@ -33,6 +33,7 @@ var Lock = (function (_super) {
             ps.per_name.visible = false;
     };
     Lock.prototype.skill = function (ps, emy) {
+        console.log('吃到 锁');
     };
     return Lock;
 }(Enemy));

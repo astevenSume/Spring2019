@@ -63,10 +63,13 @@ var Bomb = (function (_super) {
         ps.res_score.text = score;
         ps.p_score.text = '0万';
         ps.setChildIndex(ps.over_group, ps.numChildren);
-        ps.game_init(false); //初始化游戏
         ps.btn_again.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            console.log('再来一次..');
             ps.over_group.visible = false;
             ps.isPause = false;
+            ps.speed_index = 0;
+            ps.speed_level = 0;
+            ps.game_init(false); //初始化游戏
         }, this);
         ps.icon_endclose.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             SceneManager.instance.mainScene.toggleBtn(0);
@@ -81,6 +84,7 @@ var Bomb = (function (_super) {
             return __generator(this, function (_a) {
                 if (ps.onShield)
                     return [2 /*return*/];
+                ps.cleanAllNagetive();
                 ps.isPause = true;
                 heart_num_str = ps.p_heart_num.text;
                 heart_num = parseInt(heart_num_str.slice(1));
@@ -91,11 +95,14 @@ var Bomb = (function (_super) {
                     ps.relife_group.visible = true;
                     ps.setChildIndex(ps.relife_group, ps.numChildren);
                     ps.pbtn_relife.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+                        console.log('复活了..');
                         ps.p_heart_num.text = 'x' + (heart_num - 1);
                         ps.isPause = false;
                         ps.relife_group.visible = false;
+                        ps.nagetive_status[Ns.Lock] = false;
                     }, this);
                     ps.pbtn_over_now.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+                        _this.settleAccounts(ps);
                         _this.isAgain(ps);
                     }, this);
                 }
@@ -104,6 +111,24 @@ var Bomb = (function (_super) {
         });
     };
     Bomb.prototype.skill = function (ps, emy) {
+        console.log('吃到 炸弹');
+        if (!ps.onShield)
+            ps.nagetive_status[Ns.Lock] = true;
+    };
+    Bomb.prototype.settleAccounts = function (ps) {
+        var uid = localStorage.getItem('uid');
+        var score = ps.score;
+        var heart = parseInt(ps.p_heart_num.text.slice(1));
+        var clean = parseInt(ps.cleansing_num.text.slice(1));
+        var shield = parseInt(ps.shield_num.text.slice(1));
+        var double = parseInt(ps.double_num.text.slice(1));
+        var speed = parseInt(ps.common_num.text.slice(1));
+        var params = "way=settleAccounts&uid=" + uid + "&score=" + score + "&heart=" + heart + "&clean=" + clean + "&shield=" + shield + "&double=" + double + "&speed=" + speed;
+        // console.log(params)
+        HttpServerSo.requestPost(params, this.postComplete);
+    };
+    Bomb.prototype.postComplete = function (data) {
+        console.log('data : ' + data);
     };
     return Bomb;
 }(Enemy));

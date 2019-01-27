@@ -33,6 +33,7 @@ var SkullCoin = (function (_super) {
             ps.per_name.visible = false;
     };
     SkullCoin.prototype.skill = function (ps, emy) {
+        console.log('吃到 骷髅');
     };
     return SkullCoin;
 }(Enemy));

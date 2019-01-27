@@ -21,6 +21,6 @@ class DoubleCoin extends Enemy{
 	}
 
 	public skill(ps:PlayScene, emy:Enemy) {
-
+		console.log('吃到 双倍')
 	}
 }

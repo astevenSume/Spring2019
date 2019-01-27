@@ -23,29 +23,33 @@ var PlayScene = (function (_super) {
     __extends(PlayScene, _super);
     function PlayScene() {
         var _this = _super.call(this) || this;
+        _this.start_index = 1;
+        _this.start_flag = false;
         _this._score = 0;
         _this.enemy_list = [];
         _this._PI = Math.PI;
         _this._oneDegree = Math.PI / 180;
-        _this.golden_coin_rate = 50;
+        _this.common_speed_flag = false; //true时为正常流速
+        _this.golden_coin_rate = 0;
         _this.eatedFlag = false;
+        _this.level_seconds = 2; //每几秒一档
+        _this.temp_level = 0; //临时记档
         _this.game_init(true);
         return _this;
     }
     PlayScene.prototype.game_init = function (first) {
         var _this = this;
         this._findex = 0;
+        console.log(this.enemy_list);
         if (this.enemy_list.length > 0) {
             this.enemy_list.forEach(function (emy) {
-                if (emy.parent)
-                    _this.removeChild(emy);
+                _this.removeEnemy(emy);
             });
         }
-        this.enemy_list = [];
         this.score = 0;
-        this._create_tool_speed = 15;
-        this._create_tool_base_speed = 15; //初始50
-        this.down_speed = this.current_speed = 10; //初始3
+        //速度初始化
+        this.create_tool_speed = 30;
+        this.down_speed = 3;
         this.positive_status = false;
         this._positive_time = 90;
         this._positive_index = 0;
@@ -56,8 +60,11 @@ var PlayScene = (function (_super) {
         this.nagetive_shapes = [new egret.Shape(), new egret.Shape(), new egret.Shape()];
         this._nagetive_radius = 15;
         this.onShield = false;
-        if (first)
+        if (first) {
             this.isPause = false;
+            this.speed_index = 0;
+            this.speed_level = 0;
+        }
         if (!first) {
             if (this.relife_group.visible)
                 this.relife_group.visible = false;
@@ -74,15 +81,36 @@ var PlayScene = (function (_super) {
         configurable: true
     });
     PlayScene.prototype.childrenCreated = function () {
+        var _this = this;
         _super.prototype.childrenCreated.call(this);
         this.init_me();
         this.pbtn_return.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            _this.isPause = true;
             SceneManager.toMainScene();
         }, this);
         this.group_tool.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickToolGroup, this);
-        this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
-        //初始创建
-        this.randomGetTool();
+        //倒计时
+        var timer = new egret.Timer(1000, 4);
+        this.pre_start.visible = true;
+        timer.addEventListener(egret.TimerEvent.TIMER, function () {
+            _this.start_index++;
+            if (_this.start_index == 2) {
+                _this.pre_start.texture = RES.getRes("two_png");
+            }
+            else if (_this.start_index == 3) {
+                _this.pre_start.texture = RES.getRes("one_png");
+            }
+            else if (_this.start_index == 4) {
+                _this.pre_start.texture = RES.getRes("go_png");
+            }
+            else if (_this.start_index == 5) {
+                _this.pre_start.visible = false;
+                _this.addEventListener(egret.Event.ENTER_FRAME, _this.onEnterFrame, _this);
+                //初始创建
+                _this.randomGetTool();
+            }
+        }, this);
+        timer.start();
     };
     PlayScene.prototype.partAdded = function (partName, instance) {
         _super.prototype.partAdded.call(this, partName, instance);
@@ -137,11 +165,17 @@ var PlayScene = (function (_super) {
             return;
         }
         this.showPositiveBar(evt.target.name);
-        if (evt.target.name == 'dj_sh88_png')
+        if (evt.target.name == 'dj_sh88_png') {
             this.onShield = true;
+        }
+        else {
+            this.onShield = false;
+        }
         if (evt.target.name == 'dj_time88_png') {
-            this.current_speed = this.down_speed;
+            console.log('匀速药水...');
             this.down_speed = 3;
+            this.create_tool_speed = 30;
+            this.common_speed_flag = true;
         }
     };
     //删除
@@ -174,15 +208,15 @@ var PlayScene = (function (_super) {
     };
     PlayScene.prototype.randomGetTool = function (rate) {
         var show_tool;
-        var commom_speed_rate = this.golden_coin_rate + 3; //53
-        var double_coin_rate = commom_speed_rate + 3; //56
-        var heart_rate = double_coin_rate + 1; //57
-        var lightning_rate = heart_rate + 9; //66
-        var skull_coin_rate = lightning_rate + 5; //71
-        var lock_rate = skull_coin_rate + 10; //81
-        var shield_rate = lock_rate + 4; //85
-        var bomb_rate = shield_rate + 12; //97
-        var cleansing = bomb_rate + 1; //98		
+        var commom_speed_rate = this.golden_coin_rate + 6;
+        var double_coin_rate = commom_speed_rate + 3;
+        var heart_rate = double_coin_rate + 1;
+        var lightning_rate = heart_rate + 4;
+        var skull_coin_rate = lightning_rate + 5;
+        var lock_rate = skull_coin_rate + 10;
+        var shield_rate = lock_rate + 4;
+        var bomb_rate = shield_rate + 12;
+        var cleansing = bomb_rate + 1;
         // console.log(commom_speed_rate)
         // console.log(double_coin_rate)
         // console.log(heart_rate)
@@ -229,6 +263,16 @@ var PlayScene = (function (_super) {
         else {
             show_tool = this.getGoldencoin();
         }
+        // let dmx = Math.random()
+        // if (dmx < 0.2) {
+        // 	show_tool = 'Shield()'
+        // } else if (dmx < 0.4) {
+        // 	show_tool = 'DoubleCoin()'
+        // } else if (dmx < 0.6) {
+        // 	show_tool = 'Lock()'
+        // } else if (dmx < 0.9) {
+        // 	// show_tool = 'Cleansing()'
+        // }
         //todo负效果时，只出现金币和其它负效果
         var tool = eval("new " + show_tool);
         this.enemy_list.push(tool);
@@ -240,14 +284,19 @@ var PlayScene = (function (_super) {
         this.positive_status = true;
         this.positive_name = name;
         this.tool_icon.texture = RES.getRes(name);
+        if (this.positive_name == 'dj_double_png' || this.positive_name == 'dj_time88_png') {
+            this.onShield = false;
+            this.common_speed_flag = false;
+        }
     };
     PlayScene.prototype.closePositive = function () {
         this.group_tool.visible = true;
         this.positive_group.visible = false;
         this.positive_status = false;
         this._positive_index = 0;
-        if (this.positive_name == 'dj_time88_png')
-            this.down_speed = this.current_speed;
+        if (this.positive_name == 'dj_time88_png') {
+            this.common_speed_flag = false;
+        }
         if (this.positive_name == 'dj_sh88_png')
             this.onShield = false;
         this.positive_name = 'none';
@@ -256,8 +305,8 @@ var PlayScene = (function (_super) {
     PlayScene.prototype.cleanAllNagetive = function () {
         var _this = this;
         console.log('使用了净化药水。。。');
-        //effected净化
-        this.down_speed = this.current_speed;
+        //effected净化	
+        // this.common_speed_flag = false
         //显示净化
         this.nagetive_status.forEach(function (v, k) {
             _this.nagetive_status[k] = false;
@@ -280,11 +329,54 @@ var PlayScene = (function (_super) {
             this.removeEnemy(emy);
         }
     };
+    //每秒一档速度
+    PlayScene.prototype.setSpeed = function () {
+        this.speed_index += 1;
+        this.temp_level = Math.floor(this.speed_index / (30 * this.level_seconds));
+        this.speed_level = this.temp_level;
+        this.down_speed = 3 + this.speed_level;
+        if (this.down_speed < 10) {
+            this.create_tool_speed = 30;
+        }
+        else if (this.down_speed < 20) {
+            this.create_tool_speed = 10;
+        }
+        else if (this.down_speed < 30) {
+            this.create_tool_speed = 4;
+        }
+        else if (this.down_speed < 40) {
+            this.create_tool_speed = 2;
+        } //50速判断不出hit事件
+        else {
+            this.down_speed = 40;
+            this.create_tool_speed = 2;
+        }
+    };
     PlayScene.prototype.onEnterFrame = function (evt) {
+        // this.start_index += 1
+        // if (this.start_index < 10) {
+        // 	this.start_flag = true
+        // 	this.pre_start.visible = true
+        // } else if (this.start_index < 40) {
+        // 	this.pre_start.texture = RES.getRes("two_png")
+        // } else if (this.start_index < 70) {
+        // 	this.pre_start.texture = RES.getRes("one_png")
+        // } else if (this.start_index < 80) {
+        // 	this.pre_start.texture = RES.getRes("go_png")
+        // } else {
+        // 	this.start_flag = false
+        // 	this.pre_start.visible = false
+        // }
         var _this = this;
+        // if(this.start_flag)return
         if (this.isPause)
             return;
         this._findex += 1;
+        // console.log('档位：' + this.speed_level)
+        // console.log('速度：' + this.down_speed)
+        // console.log('间隔: ' + this.create_tool_speed)
+        if (!this.common_speed_flag)
+            this.setSpeed();
         //增益道具的使用
         if (this.positive_status) {
             this._positive_index++;
@@ -324,13 +416,11 @@ var PlayScene = (function (_super) {
             });
         }
         //创建道具
-        if (this._findex > this._create_tool_speed) {
+        if (this._findex > this.create_tool_speed) {
             this._findex = 0;
             this.randomGetTool();
-            if (Math.random() > 0.5)
-                this._create_tool_speed = this._create_tool_base_speed + 5 * Math.random();
-            else
-                this._create_tool_speed = this._create_tool_base_speed - 5 * Math.random();
+            // if (Math.random()>0.5)this.create_tool_speed = this._create_tool_base_speed + 5*Math.random()	
+            // else this.create_tool_speed = this._create_tool_base_speed - 5*Math.random()
         }
         //判断是否吃到道具		
         this.enemy_list.forEach(function (emy) {
@@ -395,6 +485,7 @@ var PlayScene = (function (_super) {
             rdm_x = SceneManager.instance._stage.stage.stageWidth - 57;
         bitmap.width = 57;
         bitmap.height = 57;
+        // bitmap.x = SceneManager.instance._stage.stage.stageWidth/2
         bitmap.x = rdm_x;
         bitmap.y = 0;
         return bitmap;

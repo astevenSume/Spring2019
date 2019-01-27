@@ -1,76 +1,86 @@
 {
-  "16859c444f2": {
-    "path": "Spring\\MainScene.ts",
-    "class": "MainScene",
-    "parentPath": "",
-    "bindingDataTestObj": [],
-    "guideLinesEnabled": false,
-    "backgroundX": 0,
-    "backgroundY": 0,
-    "backgroundWidth": -1,
-    "backgroundHeight": -1,
-    "useBgImage": true,
-    "useBgColor": true,
-    "backgroundAlpha": 100
-  },
-  "16859c78d2d": {
-    "path": "Spring\\PlayingScene.ts",
-    "class": "PlayingScene",
-    "parentPath": ""
-  },
-  "16859c7cb62": {
-    "path": "..\\resource\\skins\\RuleScene.ts",
-    "class": "RuleScene",
-    "parentPath": ""
-  },
-  "16859c847c5": {
-    "path": "..\\resource\\skins\\StoreScene.ts",
-    "class": "StoreScene",
-    "parentPath": ""
-  },
-  "16859c911e3": {
-    "path": "Spring\\RuleScene.ts",
-    "class": "RuleScene",
-    "parentPath": ""
-  },
-  "16859c96120": {
-    "path": "Spring\\StoreScene.ts",
-    "class": "StoreScene",
-    "parentPath": ""
-  },
-  "16859c9bd6d": {
-    "path": "Spring\\RankScene.ts",
-    "class": "RankScene",
-    "parentPath": ""
-  },
-  "16859cb9058": {
-    "path": "Spring\\RecordScene.ts",
-    "class": "RecordScene",
-    "parentPath": "",
-    "guideLinesEnabled": true
-  },
-  "global": {
-    "globalBindingDataTestObj": [],
-    "globalAdsorbEnable": false,
-    "globalRulerEnable": true,
-    "globalAutoLayerMarkEnable": true,
-    "gridColor": 8421504,
-    "gridEnabled": false,
-    "gridSize": 20
-  },
-  "1685e8d774e": {
-    "path": "Spring\\PlayScene.ts",
-    "class": "PlayScene",
-    "parentPath": ""
-  },
-  "1685f8c4662": {
-    "bindingDataTestObj": [],
-    "backgroundX": 0,
-    "backgroundY": 0,
-    "backgroundWidth": -1,
-    "backgroundHeight": -1,
-    "useBgImage": true,
-    "useBgColor": true,
-    "backgroundAlpha": 100
-  }
+    "16859c444f2": {
+        "path": "Spring\\MainScene.ts",
+        "class": "MainScene",
+        "parentPath": "",
+        "bindingDataTestObj": [],
+        "guideLinesEnabled": false,
+        "backgroundX": 0,
+        "backgroundY": 0,
+        "backgroundWidth": -1,
+        "backgroundHeight": -1,
+        "useBgImage": true,
+        "useBgColor": true,
+        "backgroundAlpha": 100
+    },
+    "16859c78d2d": {
+        "path": "Spring\\PlayingScene.ts",
+        "class": "PlayingScene",
+        "parentPath": ""
+    },
+    "16859c7cb62": {
+        "path": "..\\resource\\skins\\RuleScene.ts",
+        "class": "RuleScene",
+        "parentPath": ""
+    },
+    "16859c847c5": {
+        "path": "..\\resource\\skins\\StoreScene.ts",
+        "class": "StoreScene",
+        "parentPath": ""
+    },
+    "16859c911e3": {
+        "path": "Spring\\RuleScene.ts",
+        "class": "RuleScene",
+        "parentPath": ""
+    },
+    "16859c96120": {
+        "path": "Spring\\StoreScene.ts",
+        "class": "StoreScene",
+        "parentPath": ""
+    },
+    "16859c9bd6d": {
+        "path": "Spring\\RankScene.ts",
+        "class": "RankScene",
+        "parentPath": ""
+    },
+    "16859cb9058": {
+        "path": "Spring\\RecordScene.ts",
+        "class": "RecordScene",
+        "parentPath": "",
+        "guideLinesEnabled": true
+    },
+    "global": {
+        "globalBindingDataTestObj": [],
+        "globalAdsorbEnable": false,
+        "globalRulerEnable": true,
+        "globalAutoLayerMarkEnable": true,
+        "gridColor": 8421504,
+        "gridEnabled": false,
+        "gridSize": 20
+    },
+    "1685e8d774e": {
+        "path": "Spring\\PlayScene.ts",
+        "class": "PlayScene",
+        "parentPath": ""
+    },
+    "1685f8c4662": {
+        "bindingDataTestObj": [],
+        "backgroundX": 0,
+        "backgroundY": 0,
+        "backgroundWidth": -1,
+        "backgroundHeight": -1,
+        "useBgImage": true,
+        "useBgColor": true,
+        "backgroundAlpha": 100
+    },
+    "1688d5a8f93": {
+        "path": "views\\loadingMe.ts",
+        "class": "loadingMe",
+        "parentPath": ""
+    },
+    "1688d5dc36a": {
+        "path": "views\\LoadingMe.ts",
+        "class": "LoadingMe",
+        "parentPath": ""
+    }
 }

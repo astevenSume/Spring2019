@@ -17,6 +17,7 @@ var StoreScene = (function (_super) {
         _super.prototype.partAdded.call(this, partName, instance);
     };
     StoreScene.prototype.childrenCreated = function () {
+        var _this = this;
         _super.prototype.childrenCreated.call(this);
         var listArr = [
             { 'image1': 'resource/act/pig_goods/word_double.png', 'image2': 'resource/act/pig_goods/Coin_double.png', 'label': '￥5', 'label1': 'sbjb' },
@@ -25,30 +26,59 @@ var StoreScene = (function (_super) {
             { 'image1': 'resource/act/pig_goods/word_sj.png', 'image2': 'resource/act/pig_goods/dj_sj.png', 'label': '￥5', 'label1': 'zcls' },
             { 'image1': 'resource/act/pig_goods/word_dp.png', 'image2': 'resource/act/pig_goods/buy_dp.png', 'label': '￥10', 'label1': 'shzd' },
         ];
+        // this.group_non.visible = true
         this.store_list.dataProvider = new eui.ArrayCollection(listArr);
         this.scr_shop.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
             if (e.target instanceof eui.Button) {
-                console.log(e.target.name);
+                var money = 0;
+                var uid = localStorage.getItem('uid');
+                // let uid = 24576 //ceshi
+                var tname = '';
                 switch (e.target.name) {
                     case 'sbjb':
+                        tname = 'tool_dbcoin';
+                        money = 10;
                         break;
                     case 'fhzx':
+                        tname = 'tool_revive';
+                        money = 11;
                         break;
                     case 'jhys':
+                        tname = 'tool_drug';
+                        money = 12;
                         break;
                     case 'zcls':
+                        tname = 'tool_regular_speed';
+                        money = 13;
                         break;
                     case 'shzd':
+                        tname = 'tool_shield';
+                        money = 14;
                         break;
                     default:
                         break;
                 }
+                var params = "way=buy&uid=" + uid + "&tname=" + tname + "&expend=" + money;
+                HttpServerSo.requestPost(params, _this.postComplete, { that: _this, tname: e.target.name });
             }
         }, this);
-        this.sbtn_return.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+        this.sbtn_return.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
             // SceneManager.instance.mainScene.toggleBtn(0)
             SceneManager.toMainScene();
         }, this);
+    };
+    StoreScene.prototype.postComplete = function (data, obj) {
+        console.log('data : ' + obj);
+        if (data == 'ok') {
+        }
+        else {
+            // console.log()
+            obj.that.group_non.visible = true;
+            // this.group_non.visible = true
+            obj.that.btn_recharge.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+                console.log('aaa' + obj.tname);
+            }, obj.that);
+        }
     };
     return StoreScene;
 }(eui.Component));

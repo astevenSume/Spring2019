@@ -25,6 +25,7 @@ var DoubleCoin = (function (_super) {
         ps.showPositiveBar("dj_double_png");
     };
     DoubleCoin.prototype.skill = function (ps, emy) {
+        console.log('吃到 双倍');
     };
     return DoubleCoin;
 }(Enemy));

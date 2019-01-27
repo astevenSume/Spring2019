@@ -43,6 +43,7 @@ var GoldenCoin = (function (_super) {
     GoldenCoin.prototype.onStatus = function (ps, emy) {
     };
     GoldenCoin.prototype.skill = function (ps, emy) {
+        console.log('吃到 金币');
         var score = emy.val;
         //增益效果 
         if (ps.positive_status == true) {

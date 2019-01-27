@@ -31,20 +31,34 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
     public constructor() {
         super();
         this.createView();
+        
     }
-    private textField: egret.TextField;
+    private textField: egret.TextField
+    private btn: eui.Button
 
     private createView(): void {
-        this.textField = new egret.TextField();
-        this.addChild(this.textField);
-        this.textField.y = 100;
-        this.textField.width = 480;
-        this.textField.height = 100;
-        // this.textField.textAlign = "center";
+        
+        this.btn = new eui.Button()
+        this.btn.skinName = "resource/skins/LoadingMe.exml"
+        this.addChild(this.btn)
+
+        this.textField = new egret.TextField()
+        this.addChild(this.textField)
+        this.textField.width = 300
+        this.textField.height = 50
+        // console.log('width ' + this.width)
+        // console.log('textField.width ' + this.textField.width)
+        this.textField.x = 375/2-this.textField.width/2
+        this.textField.y = 667 * 0.8
+        this.textField.size = 18
+        
+        
+        this.textField.textAlign = "center"
     }
 
     public onProgress(current: number, total: number): void {
-        this.textField.text = `Loading...${current}/${total}`;
+        let percent = Math.floor(current/total*100)
+        this.textField.text = `${percent}%`;
     }
 
     

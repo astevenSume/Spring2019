@@ -4,15 +4,15 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var HttpServerSo = (function () {
     function HttpServerSo() {
     }
-    HttpServerSo.requestPost = function (params, callbackNow) {
+    HttpServerSo.requestPost = function (params, callbackNow, obj) {
         var request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
-        request.open("http://localhost:9090/index.st/Demo/getRecord", egret.HttpMethod.POST);
+        request.open("http://localhost:9090/index.st/User/vgame", egret.HttpMethod.POST);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.send(params);
         request.addEventListener(egret.Event.COMPLETE, function (event) {
             var res = event.currentTarget;
-            callbackNow(res.response);
+            callbackNow(res.response, obj);
         }, this);
         request.addEventListener(egret.IOErrorEvent.IO_ERROR, function (e) { }, this);
         request.addEventListener(egret.ProgressEvent.PROGRESS, function (e) { }, this);

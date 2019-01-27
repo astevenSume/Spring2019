@@ -25,11 +25,16 @@ class Bomb extends Enemy{
 		ps.p_score.text = '0万'
 
 		ps.setChildIndex(ps.over_group, ps.numChildren)
-		ps.game_init(false) //初始化游戏
 
-		ps.btn_again.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{			
+		ps.btn_again.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{	
+			console.log('再来一次..')		
 			ps.over_group.visible = false
 			ps.isPause = false
+			ps.speed_index = 0
+			ps.speed_level = 0			
+
+			
+			ps.game_init(false) //初始化游戏
 		}, this)
 
 		ps.icon_endclose.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
@@ -42,6 +47,7 @@ class Bomb extends Enemy{
 	public async onStatus(ps:PlayScene, emy:Enemy) {
 		if (ps.onShield)return
 
+		ps.cleanAllNagetive()
 		ps.isPause = true
 		//是否复活
 		let heart_num_str = ps.p_heart_num.text 
@@ -49,21 +55,22 @@ class Bomb extends Enemy{
 		if (heart_num == 0) {
 			this.isAgain(ps)
 		} else {
+			
 			ps.relife_group.visible = true
 			ps.setChildIndex(ps.relife_group, ps.numChildren)
 			ps.pbtn_relife.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-			ps.p_heart_num.text = 'x' + (heart_num-1)
-				ps.isPause = false			
+				console.log('复活了..')
+				ps.p_heart_num.text = 'x' + (heart_num-1)
+				ps.isPause = false
 				ps.relife_group.visible = false
+				ps.nagetive_status[Ns.Lock] = false
 			}, this)
 
 			ps.pbtn_over_now.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+				this.settleAccounts(ps)
 				this.isAgain(ps)
 			}, this)
-		}
-
-		
-		
+		}		
 
 		
 		// egret.ticker.pause()
@@ -73,6 +80,24 @@ class Bomb extends Enemy{
 	}
 
 	public skill(ps:PlayScene, emy:Enemy) {
+		console.log('吃到 炸弹')
+		if(!ps.onShield)ps.nagetive_status[Ns.Lock]=true
+	}
 
+	private settleAccounts(ps:PlayScene) {
+		let uid = localStorage.getItem('uid')
+		let score = ps.score
+		let heart = parseInt(ps.p_heart_num.text.slice(1))
+		let clean = parseInt(ps.cleansing_num.text.slice(1))
+		let shield = parseInt(ps.shield_num.text.slice(1))
+		let double = parseInt(ps.double_num.text.slice(1))
+		let speed = parseInt(ps.common_num.text.slice(1))
+		
+		var params = `way=settleAccounts&uid=${uid}&score=${score}&heart=${heart}&clean=${clean}&shield=${shield}&double=${double}&speed=${speed}`	
+		// console.log(params)
+		HttpServerSo.requestPost(params, this.postComplete)
+	}
+	private postComplete(data) {
+		console.log('data : ' + data)
 	}
 }

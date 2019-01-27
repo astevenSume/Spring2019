@@ -31,8 +31,10 @@ var Lightning = (function (_super) {
             ps.nicon_lightning.visible = true;
         if (ps.per_name.visible)
             ps.per_name.visible = false;
+        ps.current_speed = ps.down_speed;
     };
     Lightning.prototype.skill = function (ps, emy) {
+        console.log('吃到 闪电');
         ps.down_speed = ps.current_speed + 6;
     };
     return Lightning;

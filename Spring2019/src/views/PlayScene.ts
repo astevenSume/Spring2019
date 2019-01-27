@@ -2,6 +2,10 @@ enum Ns {SkullCoin,Lightning,Lock} //负面状态
 enum NonSustain {bomb,goldencoin} //非持续技能，比如吃金币
 class PlayScene extends eui.Component implements  eui.UIComponent {
 
+	private start_index: number = 1
+	private pre_start: eui.Image
+	private start_flag : boolean = false
+
 	public p_role: eui.Group
 	public pig: eui.Image
 	public gold_pig: GoldPig //金猪实例
@@ -35,10 +39,9 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 	public nicon_lock: eui.Image
 
 	private _findex:number 						//基础计数
-	private _create_tool_base_speed:number 		//基础速度
-	private _create_tool_speed:number  			//创建道具的速度 
+	public create_tool_speed:number  			//创建道具的速度 
 	public down_speed:number    				//道具下落速度
-	public current_speed:number					//记录当前速度
+	public current_speed:number					//记录当前速度 ,只有加速时使用
 	
 	private _score:number = 0
 	public enemy_list: Enemy[] =[]
@@ -63,6 +66,11 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 	public onShield:boolean //是否有盾
 	public isPause:boolean  //是否停止游戏
 
+	//速度调
+	public speed_index: number
+	public speed_level: number
+	public create_speed_level: number
+	public max_speed_ok: boolean //是否达到最高速
 
 	public constructor() {
 		super();
@@ -72,18 +80,19 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 	public game_init (first?: boolean) {
 		this._findex = 0
 
+		console.log(this.enemy_list)
 		if (this.enemy_list.length>0) {
-			this.enemy_list.forEach((emy)=>{
-				if (emy.parent)this.removeChild(emy)
+			this.enemy_list.forEach((emy)=>{				
+				this.removeEnemy(emy)
 			})
 		}
-		this.enemy_list = []
+
 		this.score = 0
 
+		//速度初始化
+		this.create_tool_speed = 30
+		this.down_speed = 3
 
-		this._create_tool_speed = 15
-		this._create_tool_base_speed = 15    //初始50
-		this.down_speed = this.current_speed = 10				 //初始3
 		
 		this.positive_status = false
 
@@ -98,10 +107,15 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 
 		this._nagetive_radius = 15
 		this.onShield = false
-		if(first)this.isPause = false
-		if(!first) {
-			if (this.relife_group.visible)this.relife_group.visible = false
+		if (first) {
+			this.isPause = false
+			this.speed_index = 0
+			this.speed_level = 0
 		}
+		if (!first) {
+			if (this.relife_group.visible)this.relife_group.visible = false	
+		}
+
 	}
 
 	public get score() {
@@ -118,15 +132,31 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		this.init_me()		
 
 		this.pbtn_return.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=> {
+			this.isPause = true
 			SceneManager.toMainScene()
 		}, this)
 
 		this.group_tool.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickToolGroup, this)
 
-		this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this)
-		
-		//初始创建
-		this.randomGetTool()
+		//倒计时
+		var timer: egret.Timer = new egret.Timer(1000,4)
+		this.pre_start.visible = true
+		timer.addEventListener(egret.TimerEvent.TIMER, () => {
+			this.start_index++
+			if (this.start_index == 2) {
+				this.pre_start.texture = RES.getRes("two_png")
+			} else if (this.start_index == 3) {
+				this.pre_start.texture = RES.getRes("one_png")
+			} else if (this.start_index == 4) {
+				this.pre_start.texture = RES.getRes("go_png")
+			} else if (this.start_index == 5) {
+				this.pre_start.visible = false
+				this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this)		
+				//初始创建
+				this.randomGetTool()
+			}
+		}, this)
+		timer.start()		
 	}
 
 	protected partAdded(partName:string,instance:any):void
@@ -175,6 +205,7 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		return true
 	}
 
+	public common_speed_flag = false //true时为正常流速
 	private clickToolGroup(evt) {
 		if (evt.target.numElements)	{	
 			console.log('点到空白处...')
@@ -191,17 +222,24 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		} 
 
 		this.showPositiveBar(evt.target.name)
-		if (evt.target.name== 'dj_sh88_png')this.onShield=true
+
+		if (evt.target.name== 'dj_sh88_png'){
+			this.onShield=true
+		} else {
+			this.onShield=false
+		}
 		if (evt.target.name== 'dj_time88_png') {
-			this.current_speed = this.down_speed
+			console.log('匀速药水...')			
 			this.down_speed = 3
+			this.create_tool_speed = 30
+			this.common_speed_flag = true
 		}
 		
 
 	}
 
 	//删除
-	private removeEnemy(emy:Enemy) {
+	public removeEnemy(emy:Enemy) {
 		if(emy.parent)this.removeChild(emy)
 		this.enemy_list.splice(this.enemy_list.indexOf(emy), 1)					
 		emy=null
@@ -225,19 +263,19 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		}		
 		return coin
 	}
-	private golden_coin_rate = 50	
+	private golden_coin_rate = 0	
 	private randomGetTool(rate?: number): void {
 		let show_tool: string
 		
-		let commom_speed_rate = this.golden_coin_rate + 3 	//53
-		let double_coin_rate = commom_speed_rate + 3 		//56
-		let heart_rate = double_coin_rate + 1  				//57
-		let lightning_rate = heart_rate + 9 				//66
-		let skull_coin_rate = lightning_rate + 5 			//71
-		let lock_rate = skull_coin_rate + 10 				//81
-		let shield_rate = lock_rate + 4 					//85
-		let bomb_rate = shield_rate + 12 					//97
-		let cleansing = bomb_rate + 1 						//98		
+		let commom_speed_rate = this.golden_coin_rate + 6 	
+		let double_coin_rate = commom_speed_rate + 3		
+		let heart_rate = double_coin_rate + 1  				
+		let lightning_rate = heart_rate + 4 			
+		let skull_coin_rate = lightning_rate + 5 			
+		let lock_rate = skull_coin_rate + 10 				
+		let shield_rate = lock_rate + 4 					
+		let bomb_rate = shield_rate + 12 					
+		let cleansing = bomb_rate + 1 								
 		// console.log(commom_speed_rate)
 		// console.log(double_coin_rate)
 		// console.log(heart_rate)
@@ -252,7 +290,7 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		let rdm_num = Math.random()*100
 		if (rate>0)rdm_num=rate
 		if (rdm_num < this.golden_coin_rate) {
-			show_tool = this.getGoldencoin()		
+			show_tool = this.getGoldencoin()	
 		} else if ( rdm_num < commom_speed_rate) {
 			show_tool = 'CommonSpeed()'
 		} else if ( rdm_num < double_coin_rate) {
@@ -275,6 +313,16 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		} else {
 			show_tool = this.getGoldencoin()
 		}
+		// let dmx = Math.random()
+		// if (dmx < 0.2) {
+		// 	show_tool = 'Shield()'
+		// } else if (dmx < 0.4) {
+		// 	show_tool = 'DoubleCoin()'
+		// } else if (dmx < 0.6) {
+		// 	show_tool = 'Lock()'
+		// } else if (dmx < 0.9) {
+		// 	// show_tool = 'Cleansing()'
+		// }
 		//todo负效果时，只出现金币和其它负效果
 
 
@@ -292,6 +340,11 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 
 		this.tool_icon.texture = RES.getRes(name)
 
+		if (this.positive_name == 'dj_double_png' || this.positive_name == 'dj_time88_png') {
+			this.onShield = false
+			this.common_speed_flag = false
+		}
+
 	}
 	public closePositive() {
 		this.group_tool.visible = true
@@ -300,19 +353,21 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		this.positive_status = false
 		this._positive_index = 0
 
-		if (this.positive_name == 'dj_time88_png')this.down_speed = this.current_speed
-		if (this.positive_name == 'dj_sh88_png')this.onShield = false
-		this.positive_name = 'none'
+		if (this.positive_name == 'dj_time88_png') {
+			this.common_speed_flag = false		
+		}
 
+		if (this.positive_name == 'dj_sh88_png')this.onShield = false
+
+		this.positive_name = 'none'
 		this.icon_progressbar.scaleX = 1
 
 	}
 	public cleanAllNagetive() {
 		console.log('使用了净化药水。。。')
 
-
-		//effected净化
-		this.down_speed = this.current_speed
+		//effected净化	
+		// this.common_speed_flag = false
 
 		//显示净化
 		this.nagetive_status.forEach((v,k)=>{
@@ -336,10 +391,58 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		}
 	}
 
+	
+	private level_seconds:number = 2 //每几秒一档
+	private temp_level:number = 0 //临时记档
+	//每秒一档速度
+	private setSpeed() {
+		this.speed_index += 1 		
 
-	private onEnterFrame(evt) {
+		this.temp_level  = Math.floor(this.speed_index/(30*this.level_seconds))
+		this.speed_level = this.temp_level
+
+		this.down_speed = 3 + this.speed_level
+		if (this.down_speed < 10) {
+			this.create_tool_speed = 30
+		} else if (this.down_speed < 20) {
+			this.create_tool_speed = 10
+		} else if (this.down_speed < 30) {
+			this.create_tool_speed = 4
+		} else if (this.down_speed < 40) {
+			this.create_tool_speed = 2
+		}  //50速判断不出hit事件
+		else {
+			this.down_speed = 40
+			this.create_tool_speed = 2
+		}
+	}
+
+
+	private onEnterFrame(evt) {	
+		// this.start_index += 1
+		// if (this.start_index < 10) {
+		// 	this.start_flag = true
+		// 	this.pre_start.visible = true
+		// } else if (this.start_index < 40) {
+		// 	this.pre_start.texture = RES.getRes("two_png")
+		// } else if (this.start_index < 70) {
+		// 	this.pre_start.texture = RES.getRes("one_png")
+		// } else if (this.start_index < 80) {
+		// 	this.pre_start.texture = RES.getRes("go_png")
+		// } else {
+		// 	this.start_flag = false
+		// 	this.pre_start.visible = false
+		// }
+
+		// if(this.start_flag)return
 		if(this.isPause)return
 		this._findex += 1
+
+		// console.log('档位：' + this.speed_level)
+		// console.log('速度：' + this.down_speed)
+		// console.log('间隔: ' + this.create_tool_speed)
+		
+		if (!this.common_speed_flag)this.setSpeed()
 
 		//增益道具的使用
 		if (this.positive_status) {
@@ -386,11 +489,11 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		
 
 		//创建道具
-		if (this._findex > this._create_tool_speed) {
+		if (this._findex > this.create_tool_speed) {
 			this._findex = 0
 			this.randomGetTool()
-			if (Math.random()>0.5)this._create_tool_speed = this._create_tool_base_speed + 5*Math.random()	
-			else this._create_tool_speed = this._create_tool_base_speed - 5*Math.random()
+			// if (Math.random()>0.5)this.create_tool_speed = this._create_tool_base_speed + 5*Math.random()	
+			// else this.create_tool_speed = this._create_tool_base_speed - 5*Math.random()
 		}
 		
 
@@ -463,8 +566,11 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 		let rdm_x = PlayScene.getRandomX()
 		if (rdm_x > SceneManager.instance._stage.stage.stageWidth-57)rdm_x=SceneManager.instance._stage.stage.stageWidth-57		
 
+		
+
 		bitmap.width = 57
 		bitmap.height = 57
+		// bitmap.x = SceneManager.instance._stage.stage.stageWidth/2
 		bitmap.x = rdm_x
 		bitmap.y = 0
 

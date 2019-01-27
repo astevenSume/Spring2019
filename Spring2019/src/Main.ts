@@ -71,9 +71,12 @@ class Main extends eui.UILayer {
 
     private async loadResource() {
         try {
-            const loadingView = new LoadingUI();
-            this.stage.addChild(loadingView);
             await RES.loadConfig("resource/default.res.json", "resource/");
+            await RES.loadGroup('loading')
+            const loadingView = new LoadingUI();
+            // const loadingView = new LoadingMe()
+            this.stage.addChild(loadingView);
+            
             await this.loadTheme();
             await RES.loadGroup("playing")
             await RES.loadGroup("preload", 0, loadingView);
@@ -104,11 +107,8 @@ class Main extends eui.UILayer {
     protected createGameScene(): void {
         SceneManager.instance.setStage(this)
         SceneManager.toMainScene()
-
         
         // SceneManager.toPlayScene()
-        // SceneManager.toMainScene()
-
 
         // let sky = this.createBitmapByName("bg_jpg");
         // this.addChild(sky);
@@ -157,7 +157,6 @@ class Main extends eui.UILayer {
             tw.to({ "alpha": 0 }, 200);
             tw.call(change, this);
         };
-
         change();
     }
 

@@ -26,7 +26,10 @@ var CommonSpeed = (function (_super) {
         ps.showPositiveBar("dj_time88_png");
     };
     CommonSpeed.prototype.skill = function (ps, emy) {
+        console.log('吃到 匀速');
         ps.down_speed = 3;
+        ps.create_tool_speed = 20;
+        ps.common_speed_flag = true;
     };
     return CommonSpeed;
 }(Enemy));
