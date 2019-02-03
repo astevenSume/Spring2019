@@ -28,6 +28,7 @@ var Shield = (function (_super) {
         console.log('吃到 护盾');
         ps.onShield = true;
         ps.img_light_shield.visible = true;
+        PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3');
     };
     return Shield;
 }(Enemy));

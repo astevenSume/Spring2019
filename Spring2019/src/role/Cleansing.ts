@@ -34,6 +34,7 @@ class Cleansing extends Enemy{
 
 	public skill(ps:PlayScene, emy:Enemy) {
 		console.log('吃到 净化')
+		PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3')
 	
 		
 	}

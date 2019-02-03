@@ -56,17 +56,6 @@ var Bomb = (function (_super) {
         this.btm_tool = PlayScene.getToolBitmap("dj_zd114_png");
         this.addChild(this.btm_tool);
     };
-    Bomb.prototype.btnAgainFunc = function (ps, res_score_label) {
-        console.log('再来一次..');
-        ps.over_group.visible = false;
-        ps.isPause = false;
-        ps.speed_index = 0;
-        ps.speed_level = 0;
-        res_score_label.text = '';
-        ps.constructor_init(false); //初始化游戏
-        ps.p_score.text = '0万';
-        ps.btn_again.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.againFunc, this);
-    };
     Bomb.prototype.isAgain = function (ps) {
         return __awaiter(this, void 0, void 0, function () {
             var current_times, uname, res_score, res_score_label;
@@ -77,6 +66,8 @@ var Bomb = (function (_super) {
                 // let now_times = await RequestData.canPlay()		
                 console.log('bomb now times : ' + current_times);
                 if (current_times > SceneManager.instance._max_play_times) {
+                    localStorage.setItem('current_tiems', current_times + '');
+                    RequestData.increasePlaytimes();
                     SceneManager.toMainScene();
                     SceneManager.instance.mainScene.cannotplayNow();
                     return [2 /*return*/];
@@ -106,7 +97,7 @@ var Bomb = (function (_super) {
                 res_score_label.y = 342;
                 ps.res_unit.x = res_score_label.x + res_score_label.width + 2;
                 ps.setChildIndex(ps.over_group, ps.numChildren);
-                this.againFunc = this.btnAgainFunc.bind(false, ps, res_score_label);
+                this.againFunc = this.btnAgainFunc.bind(false, ps, res_score_label, this);
                 ps.btn_again.addEventListener(egret.TouchEvent.TOUCH_TAP, this.againFunc, this);
                 ps.btn_buy_tool.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
                     SceneManager.toStoreScene();
@@ -122,7 +113,6 @@ var Bomb = (function (_super) {
         });
     };
     Bomb.prototype.onStatus = function (ps, emy) {
-        var _this = this;
         if (ps.onShield)
             return;
         ps.cleanAllNagetive();
@@ -139,9 +129,8 @@ var Bomb = (function (_super) {
             ps.setChildIndex(ps.relife_group, ps.numChildren);
             this.fun = this.reviveEventMethod.bind(false, ps, heart_num, this);
             ps.pbtn_relife.addEventListener(egret.TouchEvent.TOUCH_TAP, this.fun, this);
-            ps.pbtn_over_now.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-                _this.isAgain(ps);
-            }, this);
+            this.nofuc = this.norelife.bind(false, ps, this);
+            ps.pbtn_over_now.addEventListener(egret.TouchEvent.TOUCH_TAP, this.nofuc, this);
         }
         // egret.ticker.pause()
         // egret.lifecycle.onPause = () => {		
@@ -150,6 +139,7 @@ var Bomb = (function (_super) {
     };
     Bomb.prototype.skill = function (ps, emy) {
         console.log('吃到 炸弹');
+        PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3');
         if (!ps.onShield)
             ps.nagetive_status[Ns.Lock] = true;
     };
@@ -168,6 +158,18 @@ var Bomb = (function (_super) {
     Bomb.prototype.postComplete = function (data) {
         // console.log('data : ' + data)
     };
+    Bomb.prototype.btnAgainFunc = function (ps, res_score_label, that) {
+        console.log('再来一次..');
+        console.log(that);
+        ps.over_group.visible = false;
+        ps.isPause = false;
+        ps.speed_index = 0;
+        ps.speed_level = 0;
+        res_score_label.text = '';
+        ps.constructor_init(false); //初始化游戏
+        ps.p_score.text = '0万';
+        ps.btn_again.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.againFunc, that);
+    };
     Bomb.prototype.reviveEventMethod = function (ps, heart_num, that) {
         console.log('复活了..');
         ps.userDatabaseTool('revive');
@@ -177,7 +179,12 @@ var Bomb = (function (_super) {
         ps.relife_group.visible = false;
         ps.nagetive_status[Ns.Lock] = false;
         // localStorage.setItem('revive_num', now_heart_num)
-        ps.pbtn_relife.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.fun, that); //阻止多次绑定导致的多次执行
+        ps.pbtn_over_now.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.nofuc, that);
+        ps.pbtn_relife.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.fun, that);
+    };
+    Bomb.prototype.norelife = function (ps, that) {
+        that.isAgain(ps);
+        ps.pbtn_over_now.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.nofuc, that);
     };
     return Bomb;
 }(Enemy));

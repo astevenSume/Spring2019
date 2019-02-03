@@ -15,10 +15,10 @@ var SoundController = (function (_super) {
     }
     Object.defineProperty(SoundController, "instance", {
         get: function () {
-            if (!this._instance) {
-                this._instance = new SoundController();
+            if (!this.my_instance) {
+                this.my_instance = new SoundController();
             }
-            return this._instance;
+            return this.my_instance;
         },
         enumerable: true,
         configurable: true

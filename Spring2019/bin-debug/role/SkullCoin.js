@@ -34,6 +34,7 @@ var SkullCoin = (function (_super) {
     };
     SkullCoin.prototype.skill = function (ps, emy) {
         console.log('吃到 骷髅');
+        PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3');
     };
     return SkullCoin;
 }(Enemy));

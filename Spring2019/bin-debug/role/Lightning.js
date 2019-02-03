@@ -35,6 +35,7 @@ var Lightning = (function (_super) {
     Lightning.prototype.skill = function (ps, emy) {
         ps.current_speed = ps.down_speed;
         ps.down_speed += 6;
+        PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3');
     };
     return Lightning;
 }(Enemy));

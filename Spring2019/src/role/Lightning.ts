@@ -30,6 +30,7 @@ class Lightning extends Enemy{
 	public skill(ps:PlayScene, emy:Enemy) {
 		ps.current_speed = ps.down_speed
 		ps.down_speed += 6
+		PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3')
 
 	}
 }

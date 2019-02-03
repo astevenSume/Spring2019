@@ -121,27 +121,30 @@ var PlayScene = (function (_super) {
             SceneManager.toMainScene();
         }, this);
         this.group_tool.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickToolGroup, this);
-        this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this); //测试要关
-        this.randomGetTool();
+        // this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this)	//测试要关
+        // this.randomGetTool()
         //倒计时
-        // var timer: egret.Timer = new egret.Timer(1000,4)
-        // this.pre_start.visible = true
-        // timer.addEventListener(egret.TimerEvent.TIMER, () => {
-        // 	this.start_index++
-        // 	if (this.start_index == 2) {
-        // 		this.pre_start.texture = RES.getRes("two_png")
-        // 	} else if (this.start_index == 3) {
-        // 		this.pre_start.texture = RES.getRes("one_png")
-        // 	} else if (this.start_index == 4) {
-        // 		this.pre_start.texture = RES.getRes("go_png")
-        // 	} else if (this.start_index == 5) {
-        // 		this.pre_start.visible = false
-        // 		this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this)		
-        // 		//初始创建
-        // 		this.randomGetTool()
-        // 	}
-        // }, this)
-        // timer.start()
+        var timer = new egret.Timer(1000, 4);
+        this.pre_start.visible = true;
+        timer.addEventListener(egret.TimerEvent.TIMER, function () {
+            _this.start_index++;
+            if (_this.start_index == 2) {
+                _this.pre_start.texture = RES.getRes("two_png");
+            }
+            else if (_this.start_index == 3) {
+                _this.pre_start.texture = RES.getRes("one_png");
+            }
+            else if (_this.start_index == 4) {
+                _this.pre_start.texture = RES.getRes("go_png");
+            }
+            else if (_this.start_index == 5) {
+                _this.pre_start.visible = false;
+                _this.addEventListener(egret.Event.ENTER_FRAME, _this.onEnterFrame, _this);
+                //初始创建
+                _this.randomGetTool();
+            }
+        }, this);
+        timer.start();
     };
     PlayScene.prototype.partAdded = function (partName, instance) {
         _super.prototype.partAdded.call(this, partName, instance);

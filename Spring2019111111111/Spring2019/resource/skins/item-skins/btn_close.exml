@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin states="up,down,disabled" class="btn_close" width="33.3" height="33.3" xmlns:e="http://ns.egret.com/eui">
+	<e:Image width="90%" height="90%" width.down="100%" height.down="33.3" left="0" top="0" source="icon_close_png"/>
+</e:Skin>

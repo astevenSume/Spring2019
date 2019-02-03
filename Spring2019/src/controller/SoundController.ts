@@ -6,12 +6,12 @@ class SoundController extends egret.DisplayObjectContainer {
         super();      
     }
 
-    static _instance: SoundController
+    private static my_instance: SoundController
     static get instance() {
-        if (!this._instance) {
-            this._instance = new SoundController() 
+        if (!this.my_instance) {
+            this.my_instance = new SoundController() 
         } 
-        return this._instance
+        return this.my_instance
     }
 
     static startMuisc(url: string):void {        

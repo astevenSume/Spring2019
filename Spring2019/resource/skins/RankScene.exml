@@ -7,13 +7,13 @@
 		<e:Image width="330" height="60" source="bg_mine_png" left="0" top="0"/>
 		<e:Label id="my_index" text="99+" x="26" y="14" textColor="0x333333" size="14" fontFamily="Microsoft YaHei" textAlign="left" width="30"/>
 		<e:Label text="排名" x="26" textColor="0x666666" size="11" fontFamily="Microsoft YaHei" top="34"/>
-		<e:Label id="real_name" text="" x="120" textColor="0x333333" fontFamily="Microsoft YaHei" bold="true" size="14" height="14" top="12"/>
-		<e:Label id="cu_date" text="" x="121" y="35" textColor="0x666666" size="11" fontFamily="Microsoft YaHei"/>
+		<e:Label id="real_name" text="" textColor="0x333333" fontFamily="Microsoft YaHei" bold="true" size="14" height="14" top="12" left="87"/>
+		<e:Label id="cu_date" text="" y="35" textColor="0x666666" size="11" fontFamily="Microsoft YaHei" left="87"/>
 		<e:Image width="14" height="22" x="308" source="icon_enter_png" verticalCenter="0"/>
 		<e:Label id="rank_score" text="+0亿" x="99" textColor="0xe1b40e" fontFamily="Microsoft YaHei" size="15" bold="true" textAlign="right" width="160" top="34"/>
 		<e:Button label="" x="207" y="17" width="26" height="26" skinName="golden_coin" visible="false"/>
-		<e:Image id="rimg_avatar" width="40" height="40" anchorOffsetX="0" anchorOffsetY="0" left="72" top="10" source=""/>
-		<e:Label text="当日最高分数" x="196" size="12" top="12" textColor="0x999999"/>
+		<e:Image id="rimg_avatar" width="40" height="40" anchorOffsetX="0" anchorOffsetY="0" left="72" top="10" source="" visible="false"/>
+		<e:Label text="当日最高分数" x="202" size="12" top="12" textColor="0x999999"/>
 	</e:Group>
 	<e:Scroller id="group_score" width="329" height="309" x="23" anchorOffsetX="0" anchorOffsetY="0" verticalScrollBar="null" horizontalScrollBar="null" top="229">
 		<e:List id="records_list" itemRendererSkinName="records_item" scrollEnabled="true" anchorOffsetY="0" height="100%" width="100%">
@@ -22,7 +22,6 @@
 			</e:layout>
 		</e:List>
 	</e:Scroller>
-	<e:Button id="rbtn_close" label="" x="337" skinName="btn_close" top="148"/>
 	<e:Image id="title_img" width="261" height="39" source="title_list_png" horizontalCenter="0" top="26"/>
 	<e:Group id="no_data_group" width="100%" height="100%" left="0" top="9">
 		<e:Image width="175" height="175" source="default_ph_png" horizontalCenter="0" verticalCenter="-10" x="100" y="236" scaleX="1" scaleY="1"/>
@@ -36,38 +35,39 @@
 	<e:Group id="group_date" width="330" height="40" horizontalCenter="2.5" top="181">
 		<e:Group id="g_date_1" width="47" height="20" scaleX="1" scaleY="1" left="0" top="0">
 			<e:Rect width="100%" height="100%" fillColor="0xffffff" left="0" top="0"/>
-			<e:Label id="l_date_1" text="28日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
+			<e:Label id="l_date_1" text="4日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
 			<e:Rect width="100%" fillColor="0x0da3ff" left="0" top="20" height="2" visible="false"/>
 		</e:Group>
 		<e:Group id="g_date_2" width="47" height="20" left="46" top="0" x="41" y="10" scaleX="1" scaleY="1">
 			<e:Rect width="100%" height="100%" fillColor="0xffffff" left="0" top="0"/>
-			<e:Label id="l_date_2" text="29日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
+			<e:Label id="l_date_2" text="5日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
 			<e:Rect width="100%" fillColor="0x0da3ff" left="0" top="20" height="2" visible="false"/>
 		</e:Group>
 		<e:Group id="g_date_3" width="47" height="20" left="92" top="0" x="87" y="10" scaleX="1" scaleY="1">
 			<e:Rect width="100%" height="100%" fillColor="0xffffff" left="0" top="0"/>
-			<e:Label id="l_date_3" text="30日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
+			<e:Label id="l_date_3" text="6日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
 			<e:Rect width="100%" fillColor="0x0da3ff" left="0" top="20" height="2" visible="false"/>
 		</e:Group>
 		<e:Group id="g_date_4" width="47" height="20" left="138" x="133" scaleX="1" scaleY="1" top="0">
 			<e:Rect width="100%" height="100%" fillColor="0xffffff" left="0" top="0"/>
-			<e:Label id="l_date_4" text="31日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
+			<e:Label id="l_date_4" text="7日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
 			<e:Rect width="100%" fillColor="0x0da3ff" left="0" top="20" height="2" visible="false"/>
 		</e:Group>
 		<e:Group id="g_date_5" width="47" height="20" left="187" x="182" scaleX="1" scaleY="1" top="0">
 			<e:Rect width="100%" height="100%" fillColor="0xffffff" left="0" top="0"/>
-			<e:Label id="l_date_5" text="1日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
+			<e:Label id="l_date_5" text="8日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
 			<e:Rect width="100%" fillColor="0x0da3ff" left="0" top="20" height="2" visible="false"/>
 		</e:Group>
 		<e:Group id="g_date_6" width="47" height="20" left="234" x="229" scaleX="1" scaleY="1" top="0">
 			<e:Rect width="100%" height="100%" fillColor="0xffffff" left="0" top="0"/>
-			<e:Label id="l_date_6" text="2日" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
+			<e:Label id="l_date_6" text="9日" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" height="20" name="label"/>
 			<e:Rect width="100%" fillColor="0x0da3ff" left="0" top="20" height="2" visible="false"/>
 		</e:Group>
 		<e:Group id="g_date_7" width="47" height="20" left="281" x="276" scaleX="1" scaleY="1" top="0">
 			<e:Rect width="100%" height="100%" fillColor="0xffffff" left="0" top="0"/>
-			<e:Label id="l_date_7" text="3日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" name="label"/>
+			<e:Label id="l_date_7" text="10日" x="9" y="1" textColor="0x999999" size="12" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" horizontalCenter="0" name="label"/>
 			<e:Rect width="100%" fillColor="0x0da3ff" left="0" top="20" height="2" visible="false"/>
 		</e:Group>
 	</e:Group>
+	<e:Button id="rbtn_close" label="" x="337" skinName="btn_close" top="148"/>
 </e:Skin>

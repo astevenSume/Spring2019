@@ -22,5 +22,6 @@ class DoubleCoin extends Enemy{
 
 	public skill(ps:PlayScene, emy:Enemy) {
 		console.log('吃到 双倍')
+		PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3')
 	}
 }

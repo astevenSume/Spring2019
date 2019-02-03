@@ -47,7 +47,7 @@ var SceneManager = (function (_super) {
     __extends(SceneManager, _super);
     function SceneManager() {
         var _this = _super.call(this) || this;
-        _this._max_play_times = 6;
+        _this._max_play_times = 20;
         _this.mainScene = new MainScene();
         _this.playScene = new PlayScene();
         _this.ruleScene = new RuleScene();
@@ -71,10 +71,11 @@ var SceneManager = (function (_super) {
     };
     SceneManager.toMainScene = function () {
         //播放音乐
-        // if (SoundController.cu_scene == 'playScene') {
-        //     SoundController.stopNow()
-        //     SoundController.startMuisc('resource/act/media/paopaokdc.mp3')
-        // }        
+        if (SoundController.cu_scene == 'playScene') {
+            SoundController.stopNow();
+            SoundController.startMuisc('resource/act/media/ppkdc.mp3');
+            SoundController.cu_scene = 'mainScene';
+        }
         var mainScene = this.instance.mainScene;
         if (!mainScene.parent) {
             this.instance._stage.addChild(mainScene);
@@ -100,12 +101,11 @@ var SceneManager = (function (_super) {
                             return [2 /*return*/];
                         }
                         //播放音乐
-                        // SoundController.cu_scene = 'playScene'
-                        // SoundController.stopNow()
-                        // SoundController.startMuisc('resource/act/media/haizeiwang.mp3')
+                        SoundController.cu_scene = 'playScene';
+                        SoundController.stopNow();
+                        SoundController.startMuisc('resource/act/media/mali.mp3');
                         this.instance.playScene = new PlayScene();
                         playScene = this.instance.playScene;
-                        // this.instance._stage.addChild(playScene)
                         this.instance.mainScene.addChild(playScene);
                         return [2 /*return*/];
                 }
@@ -121,6 +121,7 @@ var SceneManager = (function (_super) {
     SceneManager.toStoreScene = function () {
         this.instance.storeScene = new StoreScene;
         var storeScene = this.instance.storeScene;
+        console.log('-1-');
         this.instance.removeOther(storeScene);
         this.instance.mainScene.addChild(storeScene);
     };

@@ -26,6 +26,7 @@ var DoubleCoin = (function (_super) {
     };
     DoubleCoin.prototype.skill = function (ps, emy) {
         console.log('吃到 双倍');
+        PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3');
     };
     return DoubleCoin;
 }(Enemy));

@@ -25,6 +25,7 @@ var Heart = (function (_super) {
     };
     Heart.prototype.skill = function (ps, emy) {
         console.log('吃到 复活');
+        PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3');
         // ps.p_heart_num.text = 'x' + (parseInt(ps.p_heart_num.text.slice(1)) + 1)
     };
     return Heart;

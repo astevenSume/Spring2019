@@ -178,28 +178,28 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 
 		this.group_tool.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickToolGroup, this)
 
-		this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this)	//测试要关
-		this.randomGetTool()
+		// this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this)	//测试要关
+		// this.randomGetTool()
 		
 		//倒计时
-		// var timer: egret.Timer = new egret.Timer(1000,4)
-		// this.pre_start.visible = true
-		// timer.addEventListener(egret.TimerEvent.TIMER, () => {
-		// 	this.start_index++
-		// 	if (this.start_index == 2) {
-		// 		this.pre_start.texture = RES.getRes("two_png")
-		// 	} else if (this.start_index == 3) {
-		// 		this.pre_start.texture = RES.getRes("one_png")
-		// 	} else if (this.start_index == 4) {
-		// 		this.pre_start.texture = RES.getRes("go_png")
-		// 	} else if (this.start_index == 5) {
-		// 		this.pre_start.visible = false
-		// 		this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this)		
-		// 		//初始创建
-		// 		this.randomGetTool()
-		// 	}
-		// }, this)
-		// timer.start()
+		var timer: egret.Timer = new egret.Timer(1000,4)
+		this.pre_start.visible = true
+		timer.addEventListener(egret.TimerEvent.TIMER, () => {
+			this.start_index++
+			if (this.start_index == 2) {
+				this.pre_start.texture = RES.getRes("two_png")
+			} else if (this.start_index == 3) {
+				this.pre_start.texture = RES.getRes("one_png")
+			} else if (this.start_index == 4) {
+				this.pre_start.texture = RES.getRes("go_png")
+			} else if (this.start_index == 5) {
+				this.pre_start.visible = false
+				this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this)		
+				//初始创建
+				this.randomGetTool()
+			}
+		}, this)
+		timer.start()
 	}
 
 	protected partAdded(partName:string,instance:any):void

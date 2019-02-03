@@ -104,8 +104,9 @@ var LoadingUI = (function (_super) {
         // }, event)        
         // imageLoader.load(bg_img)
         //播放音乐
-        // let sound =  SoundController.instance
-        // SoundController.startMuisc('resource/act/media/paopaokdc.mp3')
+        SoundController.instance;
+        PlaySceneSoundController.instance;
+        SoundController.startMuisc('resource/act/media/ppkdc.mp3');
         //初始个人信息
         var uid = localStorage.getItem('uid');
         if (!uid)

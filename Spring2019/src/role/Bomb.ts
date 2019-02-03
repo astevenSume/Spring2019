@@ -18,20 +18,6 @@ class Bomb extends Enemy{
 
 	private againFunc: Function
 
-	public btnAgainFunc(ps, res_score_label) {
-		console.log('再来一次..')		
-		ps.over_group.visible = false
-		ps.isPause = false
-		ps.speed_index = 0
-		ps.speed_level = 0
-		res_score_label.text = ''
-		
-		ps.constructor_init(false) //初始化游戏
-		ps.p_score.text = '0万'
-
-		ps.btn_again.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.againFunc, this)
-	}
-
 	public async isAgain(ps: PlayScene) {
 		this.settleAccounts(ps)
 		ps.over_group.visible = true		
@@ -40,6 +26,8 @@ class Bomb extends Enemy{
 		// let now_times = await RequestData.canPlay()		
 		console.log('bomb now times : '  + current_times)
 		if (current_times > SceneManager.instance._max_play_times) {
+			localStorage.setItem('current_tiems', current_times + '')	
+			RequestData.increasePlaytimes()
 			SceneManager.toMainScene()
             SceneManager.instance.mainScene.cannotplayNow()
             return
@@ -74,11 +62,14 @@ class Bomb extends Enemy{
 
 		ps.setChildIndex(ps.over_group, ps.numChildren)
 
-		this.againFunc = this.btnAgainFunc.bind(false, ps, res_score_label)
+		this.againFunc = this.btnAgainFunc.bind(false, ps, res_score_label, this)
 		ps.btn_again.addEventListener(egret.TouchEvent.TOUCH_TAP, this.againFunc, this)
-		ps.btn_buy_tool.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{			
+
+		ps.btn_buy_tool.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{	
+				
 			SceneManager.toStoreScene()
-			SceneManager.instance.mainScene.toggleBtn(0)			
+			SceneManager.instance.mainScene.toggleBtn(0)	
+						
 		}, this)
 
 		ps.icon_endclose.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
@@ -89,9 +80,11 @@ class Bomb extends Enemy{
 	}
 
 	private fun: Function
+	private nofuc: Function
 	public onStatus(ps:PlayScene, emy:Enemy) {
 		if (ps.onShield)return
 
+		
 		ps.cleanAllNagetive()
 		ps.closePositive()
 		ps.isPause = true
@@ -108,10 +101,8 @@ class Bomb extends Enemy{
 			this.fun = this.reviveEventMethod.bind(false, ps, heart_num, this)
 			ps.pbtn_relife.addEventListener(egret.TouchEvent.TOUCH_TAP, this.fun, this)
 
-			ps.pbtn_over_now.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-							
-				this.isAgain(ps)
-			}, this)
+			this.nofuc = this.norelife.bind(false,ps,this)
+			ps.pbtn_over_now.addEventListener(egret.TouchEvent.TOUCH_TAP, this.nofuc, this)
 		}		
 
 		
@@ -123,6 +114,7 @@ class Bomb extends Enemy{
 
 	public skill(ps:PlayScene, emy:Enemy) {
 		console.log('吃到 炸弹')
+		PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3')
 		if(!ps.onShield)ps.nagetive_status[Ns.Lock]=true
 	}
 
@@ -142,6 +134,22 @@ class Bomb extends Enemy{
 	private postComplete(data) {
 		// console.log('data : ' + data)
 	}
+
+	public btnAgainFunc(ps, res_score_label, that) {
+		console.log('再来一次..')
+		console.log(that)		
+		ps.over_group.visible = false
+		ps.isPause = false
+		ps.speed_index = 0
+		ps.speed_level = 0
+		res_score_label.text = ''
+		
+		ps.constructor_init(false) //初始化游戏
+		ps.p_score.text = '0万'
+
+		ps.btn_again.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.againFunc, that)
+	}
+
 	private reviveEventMethod(ps, heart_num, that) {
 		console.log('复活了..')	
 
@@ -153,6 +161,13 @@ class Bomb extends Enemy{
 		ps.nagetive_status[Ns.Lock] = false
 
 		// localStorage.setItem('revive_num', now_heart_num)
-		ps.pbtn_relife.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.fun, that) //阻止多次绑定导致的多次执行
+		ps.pbtn_over_now.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.nofuc, that)
+		ps.pbtn_relife.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.fun, that) 
 	} 
+	private norelife(ps, that) {
+		that.isAgain(ps)
+		
+
+		ps.pbtn_over_now.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.nofuc, that)
+	}
 }

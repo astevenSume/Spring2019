@@ -23,6 +23,26 @@ var PlaySceneSoundController = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    PlaySceneSoundController.startMuisc = function (url) {
+        //创建 Sound 对象
+        var sound = new egret.Sound();
+        var url = url;
+        //添加加载完成侦听
+        sound.addEventListener(egret.Event.COMPLETE, this.onLoadComplete, this);
+        //开始加载
+        sound.load(url);
+    };
+    PlaySceneSoundController.onLoadComplete = function (event) {
+        //获取加载到的 Sound 对象
+        var sound = event.target;
+        //播放音乐
+        this.soundChannel = sound.play(0, 1);
+        console.log('播放');
+        // channel.addEventListener(egret.Event.SOUND_COMPLETE, this.onSoundComplete, this);
+    };
+    PlaySceneSoundController.stopNow = function () {
+        this.soundChannel.stop();
+    };
     return PlaySceneSoundController;
 }(egret.DisplayObjectContainer));
 __reflect(PlaySceneSoundController.prototype, "PlaySceneSoundController");

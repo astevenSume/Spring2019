@@ -8,7 +8,7 @@ class SceneManager extends eui.UILayer {
     public recordScene: RecordScene
     public static _width: number
     public static _height: number
-	public _max_play_times: number = 6
+	public _max_play_times: number = 20
 
     public constructor() {
         super()
@@ -35,10 +35,11 @@ class SceneManager extends eui.UILayer {
 
     static toMainScene() {
         //播放音乐
-        // if (SoundController.cu_scene == 'playScene') {
-        //     SoundController.stopNow()
-		//     SoundController.startMuisc('resource/act/media/paopaokdc.mp3')
-        // }        
+        if (SoundController.cu_scene == 'playScene') {
+            SoundController.stopNow()
+		    SoundController.startMuisc('resource/act/media/ppkdc.mp3')
+            SoundController.cu_scene = 'mainScene'
+        }
 
         let mainScene = this.instance.mainScene
         if (!mainScene.parent) {
@@ -62,18 +63,13 @@ class SceneManager extends eui.UILayer {
 
      
         //播放音乐
-        // SoundController.cu_scene = 'playScene'
-        // SoundController.stopNow()
-        // SoundController.startMuisc('resource/act/media/haizeiwang.mp3')
+        SoundController.cu_scene = 'playScene'
+        SoundController.stopNow()
+        SoundController.startMuisc('resource/act/media/mali.mp3')
         
         this.instance.playScene = new PlayScene()
-        // console.log('start times : ' + localStorage.getItem('current_tiems'))
         let playScene = this.instance.playScene
-        // this.instance._stage.addChild(playScene)
         this.instance.mainScene.addChild(playScene)
-      
-        
-
         
     }
     static toRuleScene() {
@@ -85,6 +81,7 @@ class SceneManager extends eui.UILayer {
     static toStoreScene() {
         this.instance.storeScene = new StoreScene
         let storeScene = this.instance.storeScene
+        console.log('-1-');
         this.instance.removeOther(storeScene)
         this.instance.mainScene.addChild(storeScene)
     }

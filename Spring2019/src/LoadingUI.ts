@@ -122,17 +122,19 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
 		// imageLoader.load(bg_img)
 
         //播放音乐
-        // let sound =  SoundController.instance
-        // SoundController.startMuisc('resource/act/media/paopaokdc.mp3')
+        SoundController.instance
+        PlaySceneSoundController.instance
+        SoundController.startMuisc('resource/act/media/ppkdc.mp3')
         
 
         
 
         //初始个人信息
         let uid = localStorage.getItem('uid')
+        
         if (!uid)location.href = localStorage.getItem('entry_url')
 
-
+     
         HttpServerSo.requestPost(`way=re_user&uid=${uid}`,(data: string)=>{
         //    console.log('data ks : ' + data)
            if (data == '') {
@@ -145,8 +147,6 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
         HttpServerSo.requestPost(`way=init&uid=${uid}`,(data: string)=>{
             // console.log(data)
             if (data == 'ok') {
-
-                
 
             } else if (data == 'no_user') {
                 location.href = localStorage.getItem('entry_url')

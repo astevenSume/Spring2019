@@ -34,6 +34,7 @@ var Lock = (function (_super) {
     };
     Lock.prototype.skill = function (ps, emy) {
         console.log('吃到 锁');
+        PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3');
     };
     return Lock;
 }(Enemy));

@@ -23,6 +23,7 @@ class CommonSpeed extends Enemy{
 
 	public skill(ps:PlayScene, emy:Enemy) {
 		console.log('吃到 匀速')
+		PlaySceneSoundController.startMuisc('resource/act/media/xiaochu.mp3')
 		ps.down_speed = 5
 		ps.create_tool_speed = 20
 		ps.common_speed_flag = true

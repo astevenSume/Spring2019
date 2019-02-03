@@ -66,6 +66,7 @@ var GoldenCoin = (function (_super) {
     };
     GoldenCoin.prototype.skill = function (ps, emy) {
         console.log('吃到 金币');
+        PlaySceneSoundController.startMuisc('resource/act/media/jinbi.mp3');
         var score = emy.val;
         //增益效果 
         if (ps.positive_status == true) {
