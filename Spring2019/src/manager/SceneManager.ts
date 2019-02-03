@@ -8,6 +8,7 @@ class SceneManager extends eui.UILayer {
     public recordScene: RecordScene
     public static _width: number
     public static _height: number
+	public _max_play_times: number = 6
 
     public constructor() {
         super()
@@ -16,7 +17,7 @@ class SceneManager extends eui.UILayer {
         this.ruleScene = new RuleScene()
         this.storeScene = new StoreScene()
         this.rankScene = new RankScene()
-        this.recordScene = new RecordScene()  
+        this.recordScene = new RecordScene()   
 
     }
 
@@ -33,18 +34,47 @@ class SceneManager extends eui.UILayer {
     }
 
     static toMainScene() {
+        //播放音乐
+        // if (SoundController.cu_scene == 'playScene') {
+        //     SoundController.stopNow()
+		//     SoundController.startMuisc('resource/act/media/paopaokdc.mp3')
+        // }        
+
         let mainScene = this.instance.mainScene
         if (!mainScene.parent) {
             this.instance._stage.addChild(mainScene);
         }
-        
+        mainScene.showStatus()
         SceneManager.instance.removeOther(mainScene)
     }
-    static toPlayScene() {
+    static async toPlayScene() {
+        let now_times = await RequestData.canPlay()
+        if (parseInt(now_times) > SceneManager.instance._max_play_times) {
+            this.instance.mainScene.cannotplayNow()
+            return
+        }
+        //判断是否是同名用户 
+        let re_uname = localStorage.getItem('re_uname');
+        if (re_uname != '') {
+            this.instance.mainScene.showRename(re_uname);
+            return
+        }
+
+     
+        //播放音乐
+        // SoundController.cu_scene = 'playScene'
+        // SoundController.stopNow()
+        // SoundController.startMuisc('resource/act/media/haizeiwang.mp3')
+        
         this.instance.playScene = new PlayScene()
+        // console.log('start times : ' + localStorage.getItem('current_tiems'))
         let playScene = this.instance.playScene
-        this.instance._stage.addChild(playScene)
+        // this.instance._stage.addChild(playScene)
         this.instance.mainScene.addChild(playScene)
+      
+        
+
+        
     }
     static toRuleScene() {
         this.instance.ruleScene = new RuleScene

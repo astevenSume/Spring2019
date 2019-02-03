@@ -29,15 +29,43 @@ var PlayScene = (function (_super) {
         _this.enemy_list = [];
         _this._PI = Math.PI;
         _this._oneDegree = Math.PI / 180;
+        _this.surpass_flag_one = false;
+        _this.surpass_flag_two = false;
+        _this.surpass_flag_three = false;
+        _this.surpass_flag_four = false;
+        _this.surpass_flag_five = false;
+        _this.surpass_flag_six = false;
+        _this.surpass_flag_seven = false;
+        _this.surpass_flag_eight = false;
+        _this.surpass_flag_nine = false;
+        _this.surpass_flag_ten = false;
         _this.common_speed_flag = false; //true时为正常流速
-        _this.golden_coin_rate = 0;
+        _this.golden_coin_rate = 10;
+        _this.commom_speed_rate = 0;
+        _this.double_coin_rate = 0;
+        _this.heart_rate = 0;
+        _this.lightning_rate = 0;
+        _this.skull_coin_rate = 0;
+        _this.lock_rate = 0;
+        _this.shield_rate = 0;
+        _this.bomb_rate = 0;
+        _this.cleansing = 0;
         _this.eatedFlag = false;
         _this.level_seconds = 2; //每几秒一档
+        _this.thirty_seconds_level_seconds = 3; //30秒的几秒一档
         _this.temp_level = 0; //临时记档
-        _this.game_init(true);
+        _this.constructor_init(true);
         return _this;
     }
-    PlayScene.prototype.game_init = function (first) {
+    //初始化道具
+    PlayScene.prototype.initData = function () {
+        this.p_heart_num.text = 'x' + localStorage.getItem('revive_num');
+        this.cleansing_num.text = 'x' + localStorage.getItem('clean_num');
+        this.shield_num.text = 'x' + localStorage.getItem('shield_num');
+        this.double_num.text = 'x' + localStorage.getItem('double_num');
+        this.common_num.text = 'x' + localStorage.getItem('speed_num');
+    };
+    PlayScene.prototype.constructor_init = function (first) {
         var _this = this;
         this._findex = 0;
         console.log(this.enemy_list);
@@ -69,6 +97,8 @@ var PlayScene = (function (_super) {
             if (this.relife_group.visible)
                 this.relife_group.visible = false;
         }
+        this.light_rotation_angle = 0;
+        this.add_coin_arr = [];
     };
     Object.defineProperty(PlayScene.prototype, "score", {
         get: function () {
@@ -83,34 +113,35 @@ var PlayScene = (function (_super) {
     PlayScene.prototype.childrenCreated = function () {
         var _this = this;
         _super.prototype.childrenCreated.call(this);
-        this.init_me();
+        this.initData();
+        this.init_me(); //对主角金猪的初始化
+        this.lbl_times.text = localStorage.getItem('current_tiems') + '/20';
         this.pbtn_return.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.isPause = true;
             SceneManager.toMainScene();
         }, this);
         this.group_tool.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickToolGroup, this);
+        this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this); //测试要关
+        this.randomGetTool();
         //倒计时
-        var timer = new egret.Timer(1000, 4);
-        this.pre_start.visible = true;
-        timer.addEventListener(egret.TimerEvent.TIMER, function () {
-            _this.start_index++;
-            if (_this.start_index == 2) {
-                _this.pre_start.texture = RES.getRes("two_png");
-            }
-            else if (_this.start_index == 3) {
-                _this.pre_start.texture = RES.getRes("one_png");
-            }
-            else if (_this.start_index == 4) {
-                _this.pre_start.texture = RES.getRes("go_png");
-            }
-            else if (_this.start_index == 5) {
-                _this.pre_start.visible = false;
-                _this.addEventListener(egret.Event.ENTER_FRAME, _this.onEnterFrame, _this);
-                //初始创建
-                _this.randomGetTool();
-            }
-        }, this);
-        timer.start();
+        // var timer: egret.Timer = new egret.Timer(1000,4)
+        // this.pre_start.visible = true
+        // timer.addEventListener(egret.TimerEvent.TIMER, () => {
+        // 	this.start_index++
+        // 	if (this.start_index == 2) {
+        // 		this.pre_start.texture = RES.getRes("two_png")
+        // 	} else if (this.start_index == 3) {
+        // 		this.pre_start.texture = RES.getRes("one_png")
+        // 	} else if (this.start_index == 4) {
+        // 		this.pre_start.texture = RES.getRes("go_png")
+        // 	} else if (this.start_index == 5) {
+        // 		this.pre_start.visible = false
+        // 		this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this)		
+        // 		//初始创建
+        // 		this.randomGetTool()
+        // 	}
+        // }, this)
+        // timer.start()
     };
     PlayScene.prototype.partAdded = function (partName, instance) {
         _super.prototype.partAdded.call(this, partName, instance);
@@ -118,7 +149,7 @@ var PlayScene = (function (_super) {
     PlayScene.prototype.init_me = function () {
         var _this = this;
         this.gold_pig = new GoldPig(this.pig);
-        this.per_name.text = localStorage.getItem('uname');
+        this.per_name.text = localStorage.getItem('username');
         this.nagetive_icons = [this.nicon_skullcoin, this.nicon_lightning, this.nicon_lock];
         this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, function (evt) {
             _this.gold_pig.init_x = evt.stageX;
@@ -130,6 +161,7 @@ var PlayScene = (function (_super) {
         }, this);
         this._progress_bar_width = this.icon_progressbar.width;
     };
+    //是否能用并减1
     PlayScene.prototype.enoughPositive = function (tool_name) {
         var label_tool;
         if (tool_name == 'yaoshui') {
@@ -160,23 +192,61 @@ var PlayScene = (function (_super) {
         var enoughNum = this.enoughPositive(evt.target.name);
         if (!enoughNum)
             return;
+        //初始状态
+        this.closePositive();
+        this.userDatabaseTool(evt.target.name);
         if (evt.target.name == 'yaoshui') {
+            console.log('使用了净化药水。。。');
             this.cleanAllNagetive();
             return;
         }
         this.showPositiveBar(evt.target.name);
         if (evt.target.name == 'dj_sh88_png') {
+            this.img_light_shield.visible = true;
             this.onShield = true;
         }
         else {
+            this.img_light_shield.visible = false;
             this.onShield = false;
         }
         if (evt.target.name == 'dj_time88_png') {
             console.log('匀速药水...');
-            this.down_speed = 3;
+            this.down_speed = 5;
             this.create_tool_speed = 30;
             this.common_speed_flag = true;
         }
+    };
+    PlayScene.prototype.userDatabaseTool = function (tname) {
+        //本地数据减少
+        var now_num = '';
+        switch (tname) {
+            case 'revive':
+                now_num = (parseInt(localStorage.getItem('revive_num')) - 1) + '';
+                localStorage.setItem('revive_num', now_num);
+                break;
+            case 'yaoshui':
+                now_num = (parseInt(localStorage.getItem('clean_num')) - 1) + '';
+                localStorage.setItem('clean_num', now_num);
+                break;
+            case 'dj_double_png':
+                now_num = (parseInt(localStorage.getItem('double_num')) - 1) + '';
+                localStorage.setItem('double_num', now_num);
+                break;
+            case 'dj_sh88_png':
+                now_num = (parseInt(localStorage.getItem('shield_num')) - 1) + '';
+                localStorage.setItem('shield_num', now_num);
+                break;
+            case 'dj_time88_png':
+                now_num = (parseInt(localStorage.getItem('speed_num')) - 1) + '';
+                localStorage.setItem('speed_num', now_num);
+                break;
+        }
+        //
+        console.log('到数据库减数据。。。' + tname);
+        var uid = localStorage.getItem('uid');
+        HttpServerSo.requestPost("way=use_tool&uid=" + uid + "&tname=" + tname, function (data) {
+            // console.log(data)
+        });
     };
     //删除
     PlayScene.prototype.removeEnemy = function (emy) {
@@ -192,31 +262,34 @@ var PlayScene = (function (_super) {
     PlayScene.prototype.getGoldencoin = function () {
         var coin = '';
         var rdm = Math.random();
-        if (rdm < 0.6) {
-            coin = 'GoldenCoin(10)';
-        }
-        else if (rdm < 0.8) {
+        // if (rdm < 0.6) {
+        // 	coin = 'GoldenCoin(10)'
+        // } else 
+        if (rdm < 0.5) {
             coin = 'GoldenCoin(100)';
         }
-        else if (rdm < 0.88) {
+        else if (rdm < 0.85) {
             coin = 'GoldenCoin(1000)';
         }
-        else if (rdm < 1) {
+        else if (rdm < 0.95) {
             coin = 'GoldenCoin(10000)';
+        }
+        else {
+            coin = 'GoldenCoin(100000)';
         }
         return coin;
     };
     PlayScene.prototype.randomGetTool = function (rate) {
         var show_tool;
-        var commom_speed_rate = this.golden_coin_rate + 6;
-        var double_coin_rate = commom_speed_rate + 3;
-        var heart_rate = double_coin_rate + 1;
-        var lightning_rate = heart_rate + 4;
-        var skull_coin_rate = lightning_rate + 5;
-        var lock_rate = skull_coin_rate + 10;
-        var shield_rate = lock_rate + 4;
-        var bomb_rate = shield_rate + 12;
-        var cleansing = bomb_rate + 1;
+        this.commom_speed_rate = this.golden_coin_rate + 6;
+        this.double_coin_rate = this.commom_speed_rate + 3;
+        this.heart_rate = this.double_coin_rate + 1;
+        this.lightning_rate = this.heart_rate + 4;
+        this.skull_coin_rate = this.lightning_rate + 5;
+        this.lock_rate = this.skull_coin_rate + 10;
+        this.shield_rate = this.lock_rate + 4;
+        this.bomb_rate = this.shield_rate + 12;
+        this.cleansing = this.bomb_rate + 1;
         // console.log(commom_speed_rate)
         // console.log(double_coin_rate)
         // console.log(heart_rate)
@@ -232,32 +305,32 @@ var PlayScene = (function (_super) {
         if (rdm_num < this.golden_coin_rate) {
             show_tool = this.getGoldencoin();
         }
-        else if (rdm_num < commom_speed_rate) {
+        else if (rdm_num < this.commom_speed_rate) {
             show_tool = 'CommonSpeed()';
         }
-        else if (rdm_num < double_coin_rate) {
+        else if (rdm_num < this.double_coin_rate) {
             show_tool = 'DoubleCoin()';
         }
-        else if (rdm_num < heart_rate) {
+        else if (rdm_num < this.heart_rate) {
             show_tool = this.getGoldencoin();
             // show_tool = 'Heart()' //不再掉心
         }
-        else if (rdm_num < lightning_rate) {
+        else if (rdm_num < this.lightning_rate) {
             show_tool = 'Lightning()';
         }
-        else if (rdm_num < skull_coin_rate) {
+        else if (rdm_num < this.skull_coin_rate) {
             show_tool = 'SkullCoin()';
         }
-        else if (rdm_num < lock_rate) {
+        else if (rdm_num < this.lock_rate) {
             show_tool = 'Lock()';
         }
-        else if (rdm_num < shield_rate) {
+        else if (rdm_num < this.shield_rate) {
             show_tool = 'Shield()';
         }
-        else if (rdm_num < bomb_rate) {
+        else if (rdm_num < this.bomb_rate) {
             show_tool = 'Bomb()';
         }
-        else if (rdm_num < cleansing) {
+        else if (rdm_num < this.cleansing) {
             show_tool = 'Cleansing()';
         }
         else {
@@ -279,13 +352,23 @@ var PlayScene = (function (_super) {
         this.addChild(tool);
     };
     PlayScene.prototype.showPositiveBar = function (name) {
+        this._positive_index = 0;
+        this.icon_progressbar.scaleX = 1;
         this.group_tool.visible = false;
         this.positive_group.visible = true;
         this.positive_status = true;
         this.positive_name = name;
         this.tool_icon.texture = RES.getRes(name);
-        if (this.positive_name == 'dj_double_png' || this.positive_name == 'dj_time88_png') {
+        if (this.positive_name == 'dj_double_png') {
+            this.img_light_shield.visible = false;
             this.onShield = false;
+            this.common_speed_flag = false;
+        }
+        if (this.positive_name == 'dj_time88_png') {
+            this.img_light_shield.visible = false;
+            this.onShield = false;
+        }
+        if (this.positive_name == 'dj_sh88_png') {
             this.common_speed_flag = false;
         }
     };
@@ -294,19 +377,20 @@ var PlayScene = (function (_super) {
         this.positive_group.visible = false;
         this.positive_status = false;
         this._positive_index = 0;
-        if (this.positive_name == 'dj_time88_png') {
-            this.common_speed_flag = false;
-        }
-        if (this.positive_name == 'dj_sh88_png')
-            this.onShield = false;
-        this.positive_name = 'none';
         this.icon_progressbar.scaleX = 1;
+        // if (this.positive_name == 'dj_time88_png') {
+        this.common_speed_flag = false;
+        // }
+        // if (this.positive_name == 'dj_sh88_png') {
+        this.img_light_shield.visible = false;
+        this.onShield = false;
+        // }
+        this.positive_name = 'none';
     };
     PlayScene.prototype.cleanAllNagetive = function () {
-        var _this = this;
-        console.log('使用了净化药水。。。');
         //effected净化	
         // this.common_speed_flag = false
+        var _this = this;
         //显示净化
         this.nagetive_status.forEach(function (v, k) {
             _this.nagetive_status[k] = false;
@@ -331,6 +415,8 @@ var PlayScene = (function (_super) {
     };
     //每秒一档速度
     PlayScene.prototype.setSpeed = function () {
+        if (this.down_speed - this.current_speed == 6)
+            return;
         this.speed_index += 1;
         this.temp_level = Math.floor(this.speed_index / (30 * this.level_seconds));
         this.speed_level = this.temp_level;
@@ -339,6 +425,8 @@ var PlayScene = (function (_super) {
             this.create_tool_speed = 30;
         }
         else if (this.down_speed < 20) {
+            if (this.down_speed == 15)
+                this.level_seconds = this.thirty_seconds_level_seconds;
             this.create_tool_speed = 10;
         }
         else if (this.down_speed < 30) {
@@ -352,37 +440,46 @@ var PlayScene = (function (_super) {
             this.create_tool_speed = 2;
         }
     };
+    //负面道具样式的显示与消失
+    // private nagetiveShowHide(instance_time: number){
+    // }
     PlayScene.prototype.onEnterFrame = function (evt) {
-        // this.start_index += 1
-        // if (this.start_index < 10) {
-        // 	this.start_flag = true
-        // 	this.pre_start.visible = true
-        // } else if (this.start_index < 40) {
-        // 	this.pre_start.texture = RES.getRes("two_png")
-        // } else if (this.start_index < 70) {
-        // 	this.pre_start.texture = RES.getRes("one_png")
-        // } else if (this.start_index < 80) {
-        // 	this.pre_start.texture = RES.getRes("go_png")
-        // } else {
-        // 	this.start_flag = false
-        // 	this.pre_start.visible = false
-        // }
         var _this = this;
-        // if(this.start_flag)return
         if (this.isPause)
             return;
         this._findex += 1;
-        // console.log('档位：' + this.speed_level)
+        // // console.log('档位：' + this.speed_level)
         // console.log('速度：' + this.down_speed)
         // console.log('间隔: ' + this.create_tool_speed)
         if (!this.common_speed_flag)
             this.setSpeed();
+        //上跳金币效果
+        if (this.add_coin_arr.length > 0) {
+            this.add_coin_arr.forEach(function (gold_label) {
+                if (gold_label.alpha > 0) {
+                    gold_label.alpha -= 0.1;
+                    gold_label.y -= 1;
+                }
+                else {
+                    var start_index = _this.add_coin_arr.indexOf(gold_label);
+                    _this.add_coin_arr.splice(start_index, 1);
+                    _this.p_role.addChild(gold_label);
+                }
+            });
+        }
         //增益道具的使用
         if (this.positive_status) {
             this._positive_index++;
             if (this.positive_name != 'none') {
-                this.icon_progressbar.scaleX -= 1 / this._positive_time;
-                if (this._positive_index >= this._positive_time) {
+                var positive_instance_time = void 0;
+                if (this.positive_name == 'dj_double_png') {
+                    positive_instance_time = this._positive_time + 60;
+                }
+                else {
+                    positive_instance_time = this._positive_time;
+                }
+                this.icon_progressbar.scaleX -= 1 / positive_instance_time;
+                if (this._positive_index >= positive_instance_time) {
                     this.closePositive();
                 }
             }
@@ -391,12 +488,20 @@ var PlayScene = (function (_super) {
         if (!this.onShield) {
             this.nagetive_status.forEach(function (data, key) {
                 if (data == true) {
+                    var instance_time = void 0;
+                    if (key == 2) {
+                        instance_time = _this._nagetive_time - 60;
+                    }
+                    else {
+                        instance_time = _this._nagetive_time;
+                    }
                     _this.nagetive_index[key]++;
                     _this.nagetive_shapes[key].graphics.clear();
                     _this.nagetive_shapes[key].graphics.lineStyle(2, 0xff0000);
-                    _this.nagetive_shapes[key].graphics.drawArc((key * 2 + 1) * _this._nagetive_radius, _this._nagetive_radius, _this._nagetive_radius, -90 * _this._oneDegree, (270 - 360 / _this._nagetive_time * _this.nagetive_index[key]) * _this._oneDegree - _this._oneDegree);
-                    if (_this.nagetive_index[key] >= _this._nagetive_time) {
+                    _this.nagetive_shapes[key].graphics.drawArc((key * 2 + 1) * _this._nagetive_radius, _this._nagetive_radius, _this._nagetive_radius, -90 * _this._oneDegree, (270 - 360 / instance_time * _this.nagetive_index[key]) * _this._oneDegree - _this._oneDegree);
+                    if (_this.nagetive_index[key] >= instance_time) {
                         //解除状态
+                        console.log('负面道具解除状态');
                         _this.nagetive_status[key] = false;
                         _this.nagetive_index[key] = 0;
                         _this.nagetive_group.removeChild(_this.nagetive_shapes[key]);
@@ -415,12 +520,19 @@ var PlayScene = (function (_super) {
                 }
             });
         }
+        else {
+            if (this.img_light_shield) {
+                //旋转光盾
+                this.light_rotation_angle += 12;
+                if (this.light_rotation_angle >= 360)
+                    this.light_rotation_angle = 0;
+                this.img_light_shield.rotation = this.light_rotation_angle;
+            }
+        }
         //创建道具
         if (this._findex > this.create_tool_speed) {
             this._findex = 0;
             this.randomGetTool();
-            // if (Math.random()>0.5)this.create_tool_speed = this._create_tool_base_speed + 5*Math.random()	
-            // else this.create_tool_speed = this._create_tool_base_speed - 5*Math.random()
         }
         //判断是否吃到道具		
         this.enemy_list.forEach(function (emy) {

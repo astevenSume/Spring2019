@@ -23,5 +23,6 @@ class Shield extends Enemy{
 	public skill(ps:PlayScene, emy:Enemy) {
 		console.log('吃到 护盾')
 		ps.onShield = true
+		ps.img_light_shield.visible = true
 	}
 }

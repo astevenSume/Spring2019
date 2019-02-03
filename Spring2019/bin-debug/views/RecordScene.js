@@ -19,11 +19,21 @@ var RecordScene = (function (_super) {
     RecordScene.prototype.childrenCreated = function () {
         var _this = this;
         _super.prototype.childrenCreated.call(this);
+        this.rcd_scroll.verticalScrollBar.autoVisibility = false;
         this.sbtn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            SceneManager.toRankScene();
             SceneManager.instance.mainScene.toggleBtn(0);
-            SceneManager.toMainScene();
         }, this);
-        var avatar = 'http://thirdwx.qlogo.cn/mmopen/vi_32/jXMuUZyWicI88gYicC9E32bagIQT0fPzVzXWFn8biaMWmSQWIh19FSXHRXpwVYxFhuhvYvxazLITGNyjYbSA7SBMA/132';
+        var avatar = localStorage.getItem('avatar');
+        var name = '';
+        var real_name = localStorage.getItem('realName');
+        if (real_name.length > 0) {
+            name = real_name;
+        }
+        else {
+            name = localStorage.getItem('username');
+        }
+        this.rcd_uname.text = name;
         var imageLoader = new egret.ImageLoader();
         imageLoader.addEventListener(egret.Event.COMPLETE, function (evt) {
             var loader = evt.currentTarget;
@@ -38,6 +48,19 @@ var RecordScene = (function (_super) {
             _this.rcd_ava.mask = circle;
         }, this);
         imageLoader.load(avatar);
+        var uid = localStorage.getItem('uid');
+        //获取最高记录
+        HttpServerSo.requestPost("way=getSelfRecords&uid=" + uid, function (res, that) {
+            var data = JSON.parse(res);
+            var list_arr = [];
+            // let lb:eui.Label = <eui.Label>that.rcd_scores 
+            // lb.text = data.max_score + '亿'
+            that.rcd_scores.text = data.max_score / 10000 + '亿';
+            data.data.forEach(function (item, k) {
+                list_arr.push({ score: '+' + item.max_score / 10000, the_date: item.overtime });
+            });
+            _this.rcd_list.dataProvider = new eui.ArrayCollection(list_arr);
+        }, this);
     };
     return RecordScene;
 }(eui.Component));

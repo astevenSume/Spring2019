@@ -1,4 +1,8 @@
 class RuleScene extends eui.Component implements  eui.UIComponent {
+
+	public scr_now: eui.Scroller
+	public btn_close: eui.Label
+
 	public constructor() {
 		super();
 	}
@@ -12,6 +16,13 @@ class RuleScene extends eui.Component implements  eui.UIComponent {
 	protected childrenCreated():void
 	{
 		super.childrenCreated();
+		this.scr_now.verticalScrollBar.autoVisibility = false
+
+		this.btn_close.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=> {
+			SceneManager.instance.mainScene.toggleBtn(0)
+			SceneManager.toMainScene()			
+		}, this)
+
 	}
 	
 }

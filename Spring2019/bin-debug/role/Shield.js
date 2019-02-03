@@ -27,6 +27,7 @@ var Shield = (function (_super) {
     Shield.prototype.skill = function (ps, emy) {
         console.log('吃到 护盾');
         ps.onShield = true;
+        ps.img_light_shield.visible = true;
     };
     return Shield;
 }(Enemy));

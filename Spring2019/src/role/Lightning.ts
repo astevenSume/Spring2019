@@ -23,13 +23,13 @@ class Lightning extends Enemy{
 		ps.nagetive_group.addChild(ps.nagetive_shapes[Ns.Lightning])
 		if(!ps.nicon_lightning.visible)ps.nicon_lightning.visible = true
 		if(ps.per_name.visible)ps.per_name.visible = false
-
-		ps.current_speed = ps.down_speed
+		
 
 	}
 	
 	public skill(ps:PlayScene, emy:Enemy) {
-		console.log('吃到 闪电')
-		ps.down_speed = ps.current_speed + 6
+		ps.current_speed = ps.down_speed
+		ps.down_speed += 6
+
 	}
 }

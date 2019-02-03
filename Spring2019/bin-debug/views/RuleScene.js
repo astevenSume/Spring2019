@@ -18,6 +18,11 @@ var RuleScene = (function (_super) {
     };
     RuleScene.prototype.childrenCreated = function () {
         _super.prototype.childrenCreated.call(this);
+        this.scr_now.verticalScrollBar.autoVisibility = false;
+        this.btn_close.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            SceneManager.instance.mainScene.toggleBtn(0);
+            SceneManager.toMainScene();
+        }, this);
     };
     return RuleScene;
 }(eui.Component));

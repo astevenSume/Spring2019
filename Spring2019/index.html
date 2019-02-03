@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>幸运小猪</title>
+    <title>幸运小猪-公测版</title>
     <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="full-screen" content="true" />
@@ -35,9 +35,14 @@
          data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
 <script>
-    localStorage.setItem('uname', 'opps')
-    localStorage.setItem('uid', 24576)
-    localStorage.setItem('us', 6666)
+    var now_url = location.href
+    if (now_url.indexOf('le626') > 0 ) {
+
+    } else {
+        localStorage.setItem('uid','24576')
+    }
+    localStorage.setItem('entry_url', 'http://www.le626.com/index.st/User/login?frompage=http://www.le626.com/game/s2/index.html')
+    localStorage.setItem('recharge_url', 'http://www.le626.com/index.st/Vendor/recharge?frompage=http://www.le626.com/game/s2/index.html')
 </script>
 <script>
     var loadScript = function (list, callback) {

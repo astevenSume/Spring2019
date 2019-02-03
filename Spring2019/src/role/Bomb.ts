@@ -16,25 +16,69 @@ class Bomb extends Enemy{
 		this.addChild(this.btm_tool)	
 	}
 
-	public isAgain(ps: PlayScene) {
-		ps.over_group.visible = true
-				
-		ps.res_unit.text = ps.p_score.text.slice(ps.p_score.text.length-1)
-		let score = ps.p_score.text.slice(0, ps.p_score.text.length-1)
-		ps.res_score.text = score	
+	private againFunc: Function
+
+	public btnAgainFunc(ps, res_score_label) {
+		console.log('再来一次..')		
+		ps.over_group.visible = false
+		ps.isPause = false
+		ps.speed_index = 0
+		ps.speed_level = 0
+		res_score_label.text = ''
+		
+		ps.constructor_init(false) //初始化游戏
 		ps.p_score.text = '0万'
+
+		ps.btn_again.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.againFunc, this)
+	}
+
+	public async isAgain(ps: PlayScene) {
+		this.settleAccounts(ps)
+		ps.over_group.visible = true		
+		
+		let current_times = parseInt(localStorage.getItem('current_tiems'))+1
+		// let now_times = await RequestData.canPlay()		
+		console.log('bomb now times : '  + current_times)
+		if (current_times > SceneManager.instance._max_play_times) {
+			SceneManager.toMainScene()
+            SceneManager.instance.mainScene.cannotplayNow()
+            return
+        } else {
+			
+			localStorage.setItem('current_tiems', current_times + '')	
+			ps.lbl_times.text = current_times + '/20'			
+			RequestData.increasePlaytimes()
+		}			
+	
+		
+
+		let uname = localStorage.getItem('uname')
+		ps.congratulation_labe.text = `恭喜您，${uname}`
+		let res_score = 0
+		if (ps.score>9999) {
+			res_score = ps.score/10000
+			ps.res_unit.text = '亿'
+		} else {
+			res_score = ps.score
+			ps.res_unit.text = '万'
+		}	
+		let res_score_label = new eui.Label()
+		ps.over_group.addChild(res_score_label)
+
+		res_score_label.size = 42
+		res_score_label.textColor = 0xFFFF00
+		res_score_label.text = res_score + ''
+		res_score_label.x = ps.over_group.width/2 - res_score_label.width/2
+		res_score_label.y = 342
+		ps.res_unit.x = res_score_label.x + res_score_label.width+2
 
 		ps.setChildIndex(ps.over_group, ps.numChildren)
 
-		ps.btn_again.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{	
-			console.log('再来一次..')		
-			ps.over_group.visible = false
-			ps.isPause = false
-			ps.speed_index = 0
-			ps.speed_level = 0			
-
-			
-			ps.game_init(false) //初始化游戏
+		this.againFunc = this.btnAgainFunc.bind(false, ps, res_score_label)
+		ps.btn_again.addEventListener(egret.TouchEvent.TOUCH_TAP, this.againFunc, this)
+		ps.btn_buy_tool.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{			
+			SceneManager.toStoreScene()
+			SceneManager.instance.mainScene.toggleBtn(0)			
 		}, this)
 
 		ps.icon_endclose.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
@@ -44,10 +88,12 @@ class Bomb extends Enemy{
 		}, this)
 	}
 
-	public async onStatus(ps:PlayScene, emy:Enemy) {
+	private fun: Function
+	public onStatus(ps:PlayScene, emy:Enemy) {
 		if (ps.onShield)return
 
 		ps.cleanAllNagetive()
+		ps.closePositive()
 		ps.isPause = true
 		//是否复活
 		let heart_num_str = ps.p_heart_num.text 
@@ -58,16 +104,12 @@ class Bomb extends Enemy{
 			
 			ps.relife_group.visible = true
 			ps.setChildIndex(ps.relife_group, ps.numChildren)
-			ps.pbtn_relife.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-				console.log('复活了..')
-				ps.p_heart_num.text = 'x' + (heart_num-1)
-				ps.isPause = false
-				ps.relife_group.visible = false
-				ps.nagetive_status[Ns.Lock] = false
-			}, this)
+					
+			this.fun = this.reviveEventMethod.bind(false, ps, heart_num, this)
+			ps.pbtn_relife.addEventListener(egret.TouchEvent.TOUCH_TAP, this.fun, this)
 
 			ps.pbtn_over_now.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-				this.settleAccounts(ps)
+							
 				this.isAgain(ps)
 			}, this)
 		}		
@@ -98,6 +140,19 @@ class Bomb extends Enemy{
 		HttpServerSo.requestPost(params, this.postComplete)
 	}
 	private postComplete(data) {
-		console.log('data : ' + data)
+		// console.log('data : ' + data)
 	}
+	private reviveEventMethod(ps, heart_num, that) {
+		console.log('复活了..')	
+
+		ps.userDatabaseTool('revive')
+		// let now_heart_num = (parseInt(heart_num)-1) + ''
+		ps.p_heart_num.text = 'x' + (parseInt(heart_num)-1)
+		ps.isPause = false
+		ps.relife_group.visible = false
+		ps.nagetive_status[Ns.Lock] = false
+
+		// localStorage.setItem('revive_num', now_heart_num)
+		ps.pbtn_relife.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.fun, that) //阻止多次绑定导致的多次执行
+	} 
 }

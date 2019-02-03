@@ -13,7 +13,7 @@ class DoubleCoin extends Enemy{
 
 	public creatShape() {
 		this.btm_tool = PlayScene.getToolBitmap("dj_gold_double_png")
-		this.addChild(this.btm_tool)	
+		this.addChild(this.btm_tool)
 	}
 
 	public onStatus(ps:PlayScene, emy:Enemy) {

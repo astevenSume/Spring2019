@@ -39,5 +39,18 @@
 		</e:skinName>
 		</e:ToggleButton>
 	</e:Group>
+	<e:Group id="group_line" width="220" height="84" anchorOffsetX="0" horizontalCenter="0.5" verticalCenter="-10.5" anchorOffsetY="0" visible="false">
+		<e:Rect id="bg_font" width="220" height="84" fillAlpha="0.7" scaleX="1" scaleY="1" left="0" top="0"/>
+		<e:Label id="font_one" text="亲，您已经成功购买了" size="14" fontFamily="Microsoft YaHei" horizontalCenter="0" verticalCenter="-15"/>
+		<e:Label id="font_two" text="“双倍金币”一份~" y="47" size="14" fontFamily="Microsoft YaHei" horizontalCenter="-3.5"/>
+	</e:Group>
+	<e:Group id="alert_not_enough" width="100%" height="44" y="256" left="0" visible="false">
+		<e:Rect width="100%" height="44" fillAlpha="0.7" anchorOffsetY="0" scaleX="1" scaleY="1" left="0" top="0"/>
+		<e:Label text="韶泰祝您春节快乐，游戏好玩不要沉迷" scaleX="1" scaleY="1" size="16" bold="true" verticalCenter="0" horizontalCenter="0" fontFamily="Microsoft YaHei"/>
+	</e:Group>
+	<e:Group id="group_reuser" width="100%" height="39" horizontalCenter="0" verticalCenter="-44" anchorOffsetY="0" visible="false">
+		<e:Rect width="100%" height="100%" fillColor="0x000000" fillAlpha="0.7" left="0" top="0"/>
+		<e:Label id="label_reuser" text="请使用帐户游戏~" textColor="0xffffff" size="16" fontFamily="Microsoft YaHei" verticalCenter="0" horizontalCenter="0"/>
+	</e:Group>
 
 </e:Skin>

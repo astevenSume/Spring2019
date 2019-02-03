@@ -6,7 +6,7 @@
 		<e:Image id="rcd_ava" width="55" height="55" x="20" y="22"/>
 		<e:Label id="rcd_uname" text="张三李四" x="83" y="26" size="20" fontFamily="Microsoft YaHei"/>
 		<e:Label text="最高记录：" x="86" y="60" size="12" fontFamily="Microsoft YaHei"/>
-		<e:Label id="rcd_scores" text="2301亿" x="146" y="60" size="12" fontFamily="Microsoft YaHei" textColor="0xfff100"/>
+		<e:Label id="rcd_scores" text="0亿" x="146" y="60" size="12" fontFamily="Microsoft YaHei" textColor="0xfff100"/>
 		<e:Label text="猪年行大运，财源滚滚来" x="20" y="92" size="12" fontFamily="Microsoft YaHei"/>
 	</e:Group>
 	<e:Button id="sbtn_back" label="" x="20" y="11" skinName="btn_return"/>

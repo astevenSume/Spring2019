@@ -7,7 +7,7 @@ var HttpServerSo = (function () {
     HttpServerSo.requestPost = function (params, callbackNow, obj) {
         var request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
-        request.open("http://localhost:9090/index.st/User/vgame", egret.HttpMethod.POST);
+        request.open("http://www.le626.com/index.st/Game/vgame", egret.HttpMethod.POST);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.send(params);
         request.addEventListener(egret.Event.COMPLETE, function (event) {
