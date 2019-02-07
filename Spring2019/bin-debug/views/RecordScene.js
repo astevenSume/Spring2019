@@ -34,6 +34,7 @@ var RecordScene = (function (_super) {
             name = localStorage.getItem('username');
         }
         this.rcd_uname.text = name;
+        console.log(avatar);
         var imageLoader = new egret.ImageLoader();
         imageLoader.addEventListener(egret.Event.COMPLETE, function (evt) {
             var loader = evt.currentTarget;
@@ -55,7 +56,9 @@ var RecordScene = (function (_super) {
             var list_arr = [];
             // let lb:eui.Label = <eui.Label>that.rcd_scores 
             // lb.text = data.max_score + '亿'
-            that.rcd_scores.text = data.max_score / 10000 + '亿';
+            if (data.max_score != undefined && data.max_score != null) {
+                that.rcd_scores.text = data.max_score / 10000 + '亿';
+            }
             data.data.forEach(function (item, k) {
                 list_arr.push({ score: '+' + item.max_score / 10000, the_date: item.overtime });
             });

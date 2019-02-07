@@ -43,6 +43,12 @@
     }
     localStorage.setItem('entry_url', 'http://www.le626.com/index.st/User/login?frompage=http://www.le626.com/game/s6/index.html')
     localStorage.setItem('recharge_url', 'http://www.le626.com/index.st/Vendor/recharge?frompage=http://www.le626.com/game/s6/index.html')
+
+    let uid = localStorage.getItem('uid')
+    if (uid===undefined && uid==null) {
+        location.href = localStorage.getItem('entry_url')
+    } 
+
 </script>
 <script>
     var loadScript = function (list, callback) {

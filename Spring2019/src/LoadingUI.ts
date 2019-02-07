@@ -38,10 +38,6 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
     private btn: eui.Button
 
     private createView(): void {
-        
-        // this.btn = new eui.Button()
-        // this.btn.skinName = "resource/skins/LoadingMe.exml"
-        // this.addChild(this.btn)
 
         let texture1 = RES.getRes('bg_home_light_jpg')           
         let bg_bitmap = new egret.Bitmap()
@@ -73,6 +69,8 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
 
 
 
+            
+
             this.textField = new egret.TextField()
             this.addChild(this.textField)
             this.textField.width = 300
@@ -84,59 +82,21 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
             this.textField.size = 18
             
             this.textField.textAlign = "center"
-
-
-        
-
-        // let bg_img = "resource/act/home/bg_home.jpg"
-        // let imageLoader: egret.ImageLoader = new egret.ImageLoader()
-		// imageLoader.addEventListener(egret.Event.COMPLETE, (evt:egret.Event) => {
-
-		// 	let loader:egret.ImageLoader = <egret.ImageLoader>evt.target
-        //     var bitmapData: egret.BitmapData = loader.data
-
-		// 	let texture = new egret.Texture()
-        //     texture.bitmapData = bitmapData    
             
-        //     let bg_bitmap = new egret.Bitmap(texture)
-		// 	this.addChild(bg_bitmap)
-        //     bg_bitmap.x=0
-        //     bg_bitmap.y=0
-        //     bg_bitmap.width = 375
-        //     bg_bitmap.height = 667
-
-
-        //     this.textField = new egret.TextField()
-        //     this.addChild(this.textField)
-        //     this.textField.width = 300
-        //     this.textField.height = 50
-        //     // console.log('width ' + this.width)
-        //     // console.log('textField.width ' + this.textField.width)
-        //     this.textField.x = 375/2-this.textField.width/2
-        //     this.textField.y = 667 * 0.8
-        //     this.textField.size = 18
-        //     this.textField.size = 60        
             
-        //     this.textField.textAlign = "center"            
-		// }, event)        
-		// imageLoader.load(bg_img)
 
-        //播放音乐
         SoundController.instance
         PlaySceneSoundController.instance
-        SoundController.startMuisc('resource/act/media/ppkdc.mp3')
-        
+        SoundController.startMuisc('resource/act/media/ppkdc.mp3')        
 
         
 
         //初始个人信息
-        let uid = localStorage.getItem('uid')
-        
+        let uid = localStorage.getItem('uid')        
         if (!uid)location.href = localStorage.getItem('entry_url')
 
      
         HttpServerSo.requestPost(`way=re_user&uid=${uid}`,(data: string)=>{
-        //    console.log('data ks : ' + data)
            if (data == '') {
                localStorage.setItem('re_uname', '');
            } else {
@@ -154,6 +114,10 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
                 let dd = JSON.parse(data)
                 let uname = dd.username
                 if (dd.realName.length > 0)uname = dd.realName
+
+                if (dd.tool_revive === null || dd.tool_shield === undefined ) {
+                    location.href = localStorage.getItem('entry_url')
+                }
 
                 localStorage.setItem('uname', uname)
                 localStorage.setItem('username', dd.username)

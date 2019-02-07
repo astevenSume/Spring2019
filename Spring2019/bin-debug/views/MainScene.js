@@ -11,9 +11,8 @@ r.prototype = e.prototype, t.prototype = new r();
 var MainScene = (function (_super) {
     __extends(MainScene, _super);
     function MainScene() {
-        var _this = _super.call(this) || this;
-        console.log(SoundController.soundChannel);
-        return _this;
+        return _super.call(this) || this;
+        // console.log(SoundController.soundChannel)
     }
     MainScene.prototype.partAdded = function (partName, instance) {
         _super.prototype.partAdded.call(this, partName, instance);

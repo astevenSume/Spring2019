@@ -2,7 +2,7 @@ class SoundController extends egret.DisplayObjectContainer {
 
     static cu_scene:string
 
-    public constructor() {
+    private constructor() {
         super();      
     }
 
@@ -13,6 +13,8 @@ class SoundController extends egret.DisplayObjectContainer {
         } 
         return this.my_instance
     }
+
+    
 
     static startMuisc(url: string):void {        
         //创建 Sound 对象

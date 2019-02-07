@@ -25,9 +25,6 @@ class RequestData {
 			this.userFunc = this.getTimesComplete.bind(false, resolve)
 			HttpServerSo.requestPost(params, this.userFunc)		
 		})
-	
-
-
 		
 	}
 

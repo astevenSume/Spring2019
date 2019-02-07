@@ -68,7 +68,7 @@ class Bomb extends Enemy{
 		ps.btn_buy_tool.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{	
 				
 			SceneManager.toStoreScene()
-			SceneManager.instance.mainScene.toggleBtn(0)	
+			SceneManager.instance.mainScene.toggleBtn(0)
 						
 		}, this)
 
@@ -153,6 +153,13 @@ class Bomb extends Enemy{
 	private reviveEventMethod(ps, heart_num, that) {
 		console.log('复活了..')	
 
+		let my_tool = localStorage.getItem('revive_num')
+		if (my_tool === null || my_tool === undefined ) {
+
+             location.href = localStorage.getItem('entry_url')
+        }
+
+		
 		ps.userDatabaseTool('revive')
 		// let now_heart_num = (parseInt(heart_num)-1) + ''
 		ps.p_heart_num.text = 'x' + (parseInt(heart_num)-1)

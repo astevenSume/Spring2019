@@ -121,7 +121,6 @@ var SceneManager = (function (_super) {
     SceneManager.toStoreScene = function () {
         this.instance.storeScene = new StoreScene;
         var storeScene = this.instance.storeScene;
-        console.log('-1-');
         this.instance.removeOther(storeScene);
         this.instance.mainScene.addChild(storeScene);
     };

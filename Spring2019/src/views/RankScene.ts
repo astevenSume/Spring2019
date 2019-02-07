@@ -74,32 +74,33 @@ class RankScene extends eui.Component implements  eui.UIComponent {
 			this.currectIndexShow(str_date)
 			if (str_date == this.today_date)str_date=''	
 			
+			console.log(str_date)
 			switch(str_date) {
-				case '28':		
+				case '4':		
 					tmp_data = this.list_arr1			
 					this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr1)					
 				break;
-				case '29':
+				case '5':
 					tmp_data = this.list_arr2
 					this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr2)
 				break;
-				case '30':
+				case '6':
 					tmp_data = this.list_arr3
 					this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr3)
 				break;
-				case '31':
+				case '7':
 					tmp_data = this.list_arr4
 					this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr4)
 				break;
-				case '1':
+				case '8':
 					tmp_data = this.list_arr5
 					this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr5)
 				break;
-				case '2':
+				case '9':
 					tmp_data = this.list_arr6
 					this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr6)
 				break;
-				case '3':
+				case '10':
 					tmp_data = this.list_arr7
 					this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr7)
 				break;	
@@ -128,9 +129,10 @@ class RankScene extends eui.Component implements  eui.UIComponent {
 			// return
 
 			let res = JSON.parse(data)
-			console.log('myIdex : ' + res.my_index)
+			console.log(res)
+			// console.log('myIdex : ' + res.my_index)
 			if (res.my_index === undefined) {
-				that.my_index.text = '99+'
+				that.my_index.text = '10+'
 			} else {
 				that.my_index.text = res.my_index
 			}
@@ -150,6 +152,15 @@ class RankScene extends eui.Component implements  eui.UIComponent {
 			if (res.perday[0] != null) {	
 				let list_arr: any[] = []		
 
+				let today_arr = res.perday.pop()
+				today_arr.forEach((item, k)=>{
+					let uname = item.username
+					if (item.realName.length > 0)uname=item.realName
+					that.list_arr0.push({id: k , order_num:item.order_num, img_order:item.img_name,uname: uname, udate: item.overtime, uscore: item.max_score/10000+'亿', award_word: item.award_word})
+				})
+				
+				
+
 				res.perday.forEach((sub_data, sub_k)=>{
 					sub_data.forEach((item, k)=>{						
 						let uname = item.username
@@ -159,12 +170,9 @@ class RankScene extends eui.Component implements  eui.UIComponent {
 					})
 				})
 
-				res.today_scores.forEach((item, k)=>{
-					let uname = item.username
-					if (item.realName.length > 0)uname=item.realName
-					that.list_arr0.push({id: k , order_num:item.order_num, img_order:item.img_name,uname: uname, udate: item.overtime, uscore: item.max_score/10000+'亿', award_word: item.award_word})
-				})
+				
 		
+				
 
 				this.records_list.dataProvider = new eui.ArrayCollection(that.list_arr0)
 				this.records_list.itemRenderer = RecordsItem
@@ -204,7 +212,6 @@ class RankScene extends eui.Component implements  eui.UIComponent {
 		let uid = localStorage.getItem('uid')
 		
 		this.rbtn_close.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
-			console.log('aaaaaaaaaaa')
 			SceneManager.toMainScene()
 			SceneManager.instance.mainScene.toggleBtn(0)
 		}, this)
@@ -288,9 +295,7 @@ class RankScene extends eui.Component implements  eui.UIComponent {
 
 	private getDateOrderIndex(the_day: string):number {
 		let rtn_index
-		switch(the_day) {
-			case '3': //要删除
-				rtn_index = 1
+		switch(the_day) {			
 			case '4':
 				rtn_index = 1
 			break

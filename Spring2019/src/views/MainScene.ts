@@ -15,7 +15,7 @@ class MainScene extends eui.Component implements  eui.UIComponent {
 
 	public constructor() {
 		super()
-		console.log(SoundController.soundChannel)
+		// console.log(SoundController.soundChannel)
 	}
 
 	protected partAdded(partName:string,instance:any):void
@@ -25,8 +25,7 @@ class MainScene extends eui.Component implements  eui.UIComponent {
 
 	protected childrenCreated():void
 	{
-		super.childrenCreated();
-		
+		super.childrenCreated();		
 
 		this.group_mbtn.addEventListener(egret.TouchEvent.TOUCH_TAP, (e)=>{
 			if (e.target.numElements) {
@@ -42,11 +41,10 @@ class MainScene extends eui.Component implements  eui.UIComponent {
 			}
 		}, this)
 
-		this.mbtn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
+		this.mbtn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{			
 			SceneManager.toPlayScene()
 		}, this)
-	}
-	
+	}	
 
 	private restoreStatus() {
 		localStorage.setItem('main_status', 'false')

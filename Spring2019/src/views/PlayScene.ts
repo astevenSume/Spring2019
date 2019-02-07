@@ -101,6 +101,10 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
  
 	public constructor() {
 		super();		
+		// let my_tool = localStorage.getItem('tool_revive')
+		// if (my_tool === null || my_tool === undefined ) {
+        //      location.href = localStorage.getItem('entry_url')
+        // }
 		
 		this.constructor_init(true)		
 	}
@@ -166,9 +170,16 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 	protected childrenCreated():void
 	{
 		super.childrenCreated();
+
+		let my_tool = localStorage.getItem('revive_num')
+		if (my_tool === null || my_tool === undefined ) {
+
+             location.href = localStorage.getItem('entry_url')
+        }
+
 		this.initData()
 		this.init_me()	//对主角金猪的初始化
-		this.lbl_times.text = localStorage.getItem('current_tiems') + '/20'
+		this.lbl_times.text = localStorage.getItem('current_tiems') + '/20'		
 		
 
 		this.pbtn_return.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=> {
@@ -256,6 +267,12 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 			return
 		}
 
+		let my_tool = localStorage.getItem('revive_num')
+		if (my_tool === null || my_tool === undefined ) {
+
+             location.href = localStorage.getItem('entry_url')
+        }
+
 		let enoughNum = this.enoughPositive(evt.target.name)
 		if(!enoughNum)return
 		//初始状态
@@ -289,6 +306,9 @@ class PlayScene extends eui.Component implements  eui.UIComponent {
 	public userDatabaseTool(tname: string){
 		//本地数据减少
 		let now_num = ''
+
+
+
 		switch(tname) {
 				case 'revive':
 					now_num = (parseInt(localStorage.getItem('revive_num'))-1) + ''

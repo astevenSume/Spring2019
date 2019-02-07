@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="scores" width="320" height="48" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Rect width="320" height="48" fillColor="0xffffff" strokeColor="0xffffff" left="0" top="0"/>
-	<e:Button label="" x="17" skinName="golden_coin" verticalCenter="-1"/>
-	<e:Label x="48" textColor="0xe1b40e" size="16" fontFamily="Microsoft YaHei" bold="true" y="15" text="{data.score}"/>
-	<e:Label text="{data.the_date}" x="200" textColor="0x333333" fontFamily="Microsoft YaHei" size="12" verticalCenter="0"/>
-</e:Skin>

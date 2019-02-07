@@ -33,7 +33,7 @@ class SceneManager extends eui.UILayer {
         this._stage = s
     }
 
-    static toMainScene() {
+    static toMainScene() {        
         //播放音乐
         if (SoundController.cu_scene == 'playScene') {
             SoundController.stopNow()
@@ -81,7 +81,6 @@ class SceneManager extends eui.UILayer {
     static toStoreScene() {
         this.instance.storeScene = new StoreScene
         let storeScene = this.instance.storeScene
-        console.log('-1-');
         this.instance.removeOther(storeScene)
         this.instance.mainScene.addChild(storeScene)
     }

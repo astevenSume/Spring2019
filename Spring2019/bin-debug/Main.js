@@ -98,21 +98,12 @@ var Main = (function (_super) {
     };
     Main.prototype.runGame = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadResource()];
                     case 1:
                         _a.sent();
                         this.createGameScene();
-                        return [4 /*yield*/, RES.getResAsync("description_json")
-                            // this.startAnimation(result);
-                            // await platform.login();
-                            // const userInfo = await platform.getUserInfo();
-                            // console.log(userInfo);
-                        ];
-                    case 2:
-                        result = _a.sent();
                         return [2 /*return*/];
                 }
             });

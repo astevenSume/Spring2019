@@ -41,7 +41,7 @@ class RecordScene extends eui.Component implements  eui.UIComponent {
 			name = localStorage.getItem('username')
 		}
 		this.rcd_uname.text = name
-
+		console.log(avatar)
 		let imageLoader: egret.ImageLoader = new egret.ImageLoader()
 		imageLoader.addEventListener(egret.Event.COMPLETE, (evt) => {
 			let loader:egret.ImageLoader = evt.currentTarget
@@ -67,7 +67,10 @@ class RecordScene extends eui.Component implements  eui.UIComponent {
 			let list_arr: Object[] = []
 			// let lb:eui.Label = <eui.Label>that.rcd_scores 
 			// lb.text = data.max_score + '亿'
-			that.rcd_scores.text = data.max_score/10000 + '亿'
+			if (data.max_score != undefined && data.max_score != null)  {
+				that.rcd_scores.text = data.max_score/10000 + '亿'
+			} 
+			
 			
 		
 

@@ -47,32 +47,33 @@ var RankScene = (function (_super) {
             this.currectIndexShow(str_date);
             if (str_date == this.today_date)
                 str_date = '';
+            console.log(str_date);
             switch (str_date) {
-                case '28':
+                case '4':
                     tmp_data = this.list_arr1;
                     this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr1);
                     break;
-                case '29':
+                case '5':
                     tmp_data = this.list_arr2;
                     this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr2);
                     break;
-                case '30':
+                case '6':
                     tmp_data = this.list_arr3;
                     this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr3);
                     break;
-                case '31':
+                case '7':
                     tmp_data = this.list_arr4;
                     this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr4);
                     break;
-                case '1':
+                case '8':
                     tmp_data = this.list_arr5;
                     this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr5);
                     break;
-                case '2':
+                case '9':
                     tmp_data = this.list_arr6;
                     this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr6);
                     break;
-                case '3':
+                case '10':
                     tmp_data = this.list_arr7;
                     this.records_list.dataProvider = new eui.ArrayCollection(this.list_arr7);
                     break;
@@ -94,9 +95,10 @@ var RankScene = (function (_super) {
             // console.log('----')
             // return
             var res = JSON.parse(data);
-            console.log('myIdex : ' + res.my_index);
+            console.log(res);
+            // console.log('myIdex : ' + res.my_index)
             if (res.my_index === undefined) {
-                that.my_index.text = '99+';
+                that.my_index.text = '10+';
             }
             else {
                 that.my_index.text = res.my_index;
@@ -114,6 +116,13 @@ var RankScene = (function (_super) {
             }
             if (res.perday[0] != null) {
                 var list_arr = [];
+                var today_arr = res.perday.pop();
+                today_arr.forEach(function (item, k) {
+                    var uname = item.username;
+                    if (item.realName.length > 0)
+                        uname = item.realName;
+                    that.list_arr0.push({ id: k, order_num: item.order_num, img_order: item.img_name, uname: uname, udate: item.overtime, uscore: item.max_score / 10000 + '亿', award_word: item.award_word });
+                });
                 res.perday.forEach(function (sub_data, sub_k) {
                     sub_data.forEach(function (item, k) {
                         var uname = item.username;
@@ -122,12 +131,6 @@ var RankScene = (function (_super) {
                         var now_arr = eval("that.list_arr" + (sub_k + 1));
                         now_arr.push({ id: k, order_num: item.order_num, img_order: item.img_name, uname: uname, udate: item.overtime, uscore: item.max_score / 10000 + '亿', award_word: item.award_word });
                     });
-                });
-                res.today_scores.forEach(function (item, k) {
-                    var uname = item.username;
-                    if (item.realName.length > 0)
-                        uname = item.realName;
-                    that.list_arr0.push({ id: k, order_num: item.order_num, img_order: item.img_name, uname: uname, udate: item.overtime, uscore: item.max_score / 10000 + '亿', award_word: item.award_word });
                 });
                 _this.records_list.dataProvider = new eui.ArrayCollection(that.list_arr0);
                 _this.records_list.itemRenderer = RecordsItem;
@@ -152,7 +155,6 @@ var RankScene = (function (_super) {
         today_obj.parent.getChildAt(2).visible = true;
         var uid = localStorage.getItem('uid');
         this.rbtn_close.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            console.log('aaaaaaaaaaa');
             SceneManager.toMainScene();
             SceneManager.instance.mainScene.toggleBtn(0);
         }, this);
@@ -224,8 +226,6 @@ var RankScene = (function (_super) {
     RankScene.prototype.getDateOrderIndex = function (the_day) {
         var rtn_index;
         switch (the_day) {
-            case '3'://要删除
-                rtn_index = 1;
             case '4':
                 rtn_index = 1;
                 break;

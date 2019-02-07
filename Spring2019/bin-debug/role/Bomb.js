@@ -172,6 +172,10 @@ var Bomb = (function (_super) {
     };
     Bomb.prototype.reviveEventMethod = function (ps, heart_num, that) {
         console.log('复活了..');
+        var my_tool = localStorage.getItem('revive_num');
+        if (my_tool === null || my_tool === undefined) {
+            location.href = localStorage.getItem('entry_url');
+        }
         ps.userDatabaseTool('revive');
         // let now_heart_num = (parseInt(heart_num)-1) + ''
         ps.p_heart_num.text = 'x' + (parseInt(heart_num) - 1);

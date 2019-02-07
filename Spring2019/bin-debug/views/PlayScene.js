@@ -54,6 +54,10 @@ var PlayScene = (function (_super) {
         _this.level_seconds = 2; //每几秒一档
         _this.thirty_seconds_level_seconds = 3; //30秒的几秒一档
         _this.temp_level = 0; //临时记档
+        // let my_tool = localStorage.getItem('tool_revive')
+        // if (my_tool === null || my_tool === undefined ) {
+        //      location.href = localStorage.getItem('entry_url')
+        // }
         _this.constructor_init(true);
         return _this;
     }
@@ -113,6 +117,10 @@ var PlayScene = (function (_super) {
     PlayScene.prototype.childrenCreated = function () {
         var _this = this;
         _super.prototype.childrenCreated.call(this);
+        var my_tool = localStorage.getItem('revive_num');
+        if (my_tool === null || my_tool === undefined) {
+            location.href = localStorage.getItem('entry_url');
+        }
         this.initData();
         this.init_me(); //对主角金猪的初始化
         this.lbl_times.text = localStorage.getItem('current_tiems') + '/20';
@@ -191,6 +199,10 @@ var PlayScene = (function (_super) {
         if (evt.target.numElements) {
             console.log('点到空白处...');
             return;
+        }
+        var my_tool = localStorage.getItem('revive_num');
+        if (my_tool === null || my_tool === undefined) {
+            location.href = localStorage.getItem('entry_url');
         }
         var enoughNum = this.enoughPositive(evt.target.name);
         if (!enoughNum)
